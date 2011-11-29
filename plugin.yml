@@ -1,7 +1,0 @@
-name: Clear
-main: com.wwsean08.clear.Clear
-version: 1
-commands:
-   clear:
-      description: This will clear or selectively clear your inventory
-      usage: /<command> [item]...
