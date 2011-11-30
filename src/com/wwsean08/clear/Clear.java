@@ -550,8 +550,7 @@ public class Clear extends JavaPlugin {
 						for(int k = 0; k<pi.getSize(); k++){
 							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
 								if(checkData(pi.getItem(k).getData().getData(), items.get(j).getDamage())){
-									clear.remove(k);
-									sender.sendMessage("not clearing " + k);
+									clear.remove((Integer)k);
 									if(!successful.contains(items.get(j).getOutput())){
 										successful.add(items.get(j).getOutput());
 									}
@@ -561,8 +560,7 @@ public class Clear extends JavaPlugin {
 					}else{
 						for(int k = 0; k<pi.getSize();k++){
 							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
-								clear.remove(k);
-								sender.sendMessage("not clearing " + k);
+								clear.remove((Integer)k);
 								if(!successful.contains(items.get(j).getOutput())){
 									successful.add(items.get(j).getOutput());
 								}
@@ -574,8 +572,8 @@ public class Clear extends JavaPlugin {
 			}
 		}
 
-		for(Integer i : clear){
-			pi.clear(i);
+		for(Integer slot : clear){
+			pi.clear(slot);
 		}
 		StringBuilder output = new StringBuilder();
 		if(successful.size() != 1){
