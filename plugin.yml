@@ -1,6 +1,10 @@
 name: ClearInv
 main: com.wwsean08.clear.Clear
+<<<<<<< HEAD
 version: 1.8.6
+=======
+version: 1.8.4
+>>>>>>> 3233e291748aefed433b8418ebb06bf5162d1b65
 commands:
    clear:
       description: This will clear or selectively clear your inventory
