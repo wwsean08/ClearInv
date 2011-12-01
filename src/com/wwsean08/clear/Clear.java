@@ -820,7 +820,7 @@ public class Clear extends JavaPlugin {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch(NumberFormatException e){
-			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error at line " + i);
+			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error at line " + i+1);
 		}
 	}
 	/*
