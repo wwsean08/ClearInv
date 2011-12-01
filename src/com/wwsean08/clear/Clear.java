@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -32,8 +35,8 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
-	public final String VERSION = "1.8.5";
-	public final String DBV = "1.1.0";
+	public final String VERSION = "1.8.6";
+	public String DBV = "1.1.2";
 	private final String NAME = "ClearInv New";
 	private final String PREFIX = "[ClearInv]";
 	private File itemFile = null;
@@ -45,15 +48,16 @@ public class Clear extends JavaPlugin {
 	private PluginManager pm;
 	private ClearPlayerListener pl;
 	private LinkedList<ClearItemHolder> items;
-	private boolean usesSP = false;
+	private boolean usesSP = true;
 
 	public void onEnable() {
-		pl = new ClearPlayerListener(this);
-		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
 		configFile = new File(this.getDataFolder() + File.separator + "config.yml");
+		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
+		pl = new ClearPlayerListener(this);
 		originalInventory = new HashMap<Player, ItemStack[]>();
 		server = Bukkit.getServer();
 		pm = server.getPluginManager();
+		getDBV();
 		createConfig();
 		if(config.getBoolean("autoupdate", true)){
 			String name = NAME;
@@ -64,11 +68,22 @@ public class Clear extends JavaPlugin {
 			OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
 
 			//check for items.csv update because they don't mind checking
-			name = "items";
+			name = "items new";
 			version = DBV;
-			OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
-		} if(config.getBoolean("superperm", false) == true)
-			usesSP = true;
+			File updatedFile = OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
+			if(updatedFile != null){
+				Path currentPath = updatedFile.toPath();
+				Path newPath = itemFile.toPath();
+				try {
+					System.gc();		//hate doing that but it prevents the file being in use and causing exceptions to be thrown
+					Files.move(currentPath, newPath, REPLACE_EXISTING);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				updatedFile.delete();
+			}
+		} if(config.getBoolean("superperm", true) != true)
+			usesSP = false;
 		getPerm();
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
@@ -775,11 +790,21 @@ public class Clear extends JavaPlugin {
 			}
 		}
 	}
+	private void getDBV(){
+		try {
+			FileReader reader = new FileReader(itemFile);
+			BufferedReader in = new BufferedReader(reader);
+			String line = in.readLine();
+			DBV = line;
+		}catch(Exception e){
+		}
+	}
 	private void loadItems(){
 		int i=1;
 		try {
 			FileReader reader = new FileReader(itemFile);
 			BufferedReader in = new BufferedReader(reader);
+			in.readLine();	//version line
 			String line = in.readLine();
 			while(line != null){
 				String[] args = line.split(",");
@@ -809,13 +834,14 @@ public class Clear extends JavaPlugin {
 				if(!config.contains("autoupdate"))
 					config.set("autoupdate", true);
 				if(!config.contains("superPerms"))
-					config.set("superPerms", false);
+					config.set("superPerms", true);
 				config.save(configFile);
 			}else{
 				if(configFile.createNewFile()){
 					config = YamlConfiguration.loadConfiguration(configFile);
 					config.set("autoupdate", true);
-					config.set("superPerms", false);
+					config.set("superPerms", true);
+					config.save(configFile);
 				}
 			}
 		} catch (IOException e) {
