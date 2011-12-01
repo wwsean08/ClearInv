@@ -36,7 +36,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
 	public final String VERSION = "1.8.6";
-	public String DBV = "1.1.2";
+	public String DBV = "1.1.3";
 	private final String NAME = "ClearInv New";
 	private final String PREFIX = "[ClearInv]";
 	private File itemFile = null;
