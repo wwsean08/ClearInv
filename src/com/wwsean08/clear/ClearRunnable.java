@@ -9,7 +9,7 @@ public class ClearRunnable implements Runnable{
 		plugin = instance;
 		affected = player;
 	}
-	
+
 	@Override
 	public void run() {
 		plugin.unpreview(affected);

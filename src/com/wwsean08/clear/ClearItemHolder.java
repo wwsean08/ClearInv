@@ -5,7 +5,7 @@ public class ClearItemHolder {
 	private int itemNumber;
 	private int damage;
 	private String output;
-	
+
 	public ClearItemHolder(String in, int item, int meta, String out){
 		input = in;
 		itemNumber = item;

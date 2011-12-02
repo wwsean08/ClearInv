@@ -35,7 +35,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
-	public final String VERSION = "1.8.6";
+	public final String VERSION = "1.8.7";
 	public String DBV = "1.1.3";
 	private final String NAME = "ClearInv New";
 	private final String PREFIX = "[ClearInv]";
@@ -431,29 +431,7 @@ public class Clear extends JavaPlugin {
 			if (args[0].equalsIgnoreCase("help")){
 				consoleHelp(sender);
 				return;
-			}
-			Player player = server.getPlayer(args[0]);
-			if (args.length == 1)
-				clearAllRemote(sender, player);
-			else if (args[1].equalsIgnoreCase("except"))
-				clearExceptRemote(sender, player, args);
-			else if(args[1].equalsIgnoreCase("armor"))
-				clearArmorRemote(sender, player);
-			else if(args[1].equalsIgnoreCase("boots") || args[1].equalsIgnoreCase("boot")){
-				player.getInventory().setBoots(null);
-				sender.sendMessage("Boots removed from " + player.getDisplayName());
-			}else if(args[1].equalsIgnoreCase("helmet") || args[1].equalsIgnoreCase("helm")){
-				player.getInventory().setHelmet(null);
-				sender.sendMessage("Helmet removed from " + player.getDisplayName());
-			}else if(args[1].equalsIgnoreCase("pants") || args[1].equalsIgnoreCase("leggings")){
-				player.getInventory().setLeggings(null);
-				sender.sendMessage("Leggings removed from " + player.getDisplayName());
-			}else if(args[1].equalsIgnoreCase("shirt") || args[1].equalsIgnoreCase("chestplate") || args[1].equalsIgnoreCase("chest")){
-				player.getInventory().setChestplate(null);
-				sender.sendMessage("Chestplate removed from " + player.getDisplayName());
-			}
-
-			else if(args[1].equalsIgnoreCase("*")){
+			}else if(args[0].equalsIgnoreCase("*")){
 				Player[] online = server.getOnlinePlayers();
 				if(args.length == 1){
 					for(Player p : online)
@@ -471,9 +449,38 @@ public class Clear extends JavaPlugin {
 					for(Player p : online)
 						clearItemRemote(sender, p, args);
 				}
+			}else if (args.length == 1){
+				Player player = server.getPlayer(args[0]);
+				clearAllRemote(sender, player);
 			}
-			else 
+			else if (args[1].equalsIgnoreCase("except")){
+				Player player = server.getPlayer(args[0]);
+				clearExceptRemote(sender, player, args);
+			}
+			else if(args[1].equalsIgnoreCase("armor")){
+				Player player = server.getPlayer(args[0]);
+				clearArmorRemote(sender, player);
+			}
+			else if(args[1].equalsIgnoreCase("boots") || args[1].equalsIgnoreCase("boot")){
+				Player player = server.getPlayer(args[0]);
+				player.getInventory().setBoots(null);
+				sender.sendMessage("Boots removed from " + player.getDisplayName());
+			}else if(args[1].equalsIgnoreCase("helmet") || args[1].equalsIgnoreCase("helm")){
+				Player player = server.getPlayer(args[0]);
+				player.getInventory().setHelmet(null);
+				sender.sendMessage("Helmet removed from " + player.getDisplayName());
+			}else if(args[1].equalsIgnoreCase("pants") || args[1].equalsIgnoreCase("leggings")){
+				Player player = server.getPlayer(args[0]);
+				player.getInventory().setLeggings(null);
+				sender.sendMessage("Leggings removed from " + player.getDisplayName());
+			}else if(args[1].equalsIgnoreCase("shirt") || args[1].equalsIgnoreCase("chestplate") || args[1].equalsIgnoreCase("chest")){
+				Player player = server.getPlayer(args[0]);
+				player.getInventory().setChestplate(null);
+				sender.sendMessage("Chestplate removed from " + player.getDisplayName());
+			}else {
+				Player player = server.getPlayer(args[0]);
 				clearItemRemote(sender, player, args);
+			}
 		}
 	}
 	/*
@@ -541,10 +548,8 @@ public class Clear extends JavaPlugin {
 	 * @param affected is the player who's inventory gets cleared.
 	 */
 	public void clearAllRemote(CommandSender sender, Player affected) {
-		if(affected != null){
-			affected.getInventory().clear();
-			sender.sendMessage(affected.getDisplayName() + "'s inventory has been cleared.");
-		}
+		affected.getInventory().clear();
+		sender.sendMessage(affected.getDisplayName() + "'s inventory has been cleared.");
 	}
 
 	/*
