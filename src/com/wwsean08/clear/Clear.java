@@ -50,6 +50,7 @@ public class Clear extends JavaPlugin {
 	private LinkedList<ClearItemHolder> items;
 	private boolean usesSP = true;
 
+	@Override
 	public void onEnable() {
 		configFile = new File(this.getDataFolder() + File.separator + "config.yml");
 		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
@@ -92,6 +93,7 @@ public class Clear extends JavaPlugin {
 		log.info(PREFIX + " clear inventory version " + VERSION + " enabled");
 	}
 
+	@Override
 	public void onDisable() {
 		Player[] player = server.getOnlinePlayers();
 		for(Player p : player){
