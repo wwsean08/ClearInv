@@ -169,12 +169,15 @@ public class Clear extends JavaPlugin {
 			if(sender instanceof Player){
 				Player player = (Player) sender;
 				unpreview(player);
-			}else{
 			}
 		}
 		return true;
 	}
-
+	/**
+	 * is used to display a players inventory from the server console
+	 * @param player the player whose inventory is being previewed
+	 * @return a list of items to display to the server console
+	 */
 	private ArrayList<String> preview(Player player) {
 		ArrayList<String> inventoryList = new ArrayList<String>();
 		ArrayList<Integer> itemNumbers = new ArrayList<Integer>();
@@ -208,7 +211,7 @@ public class Clear extends JavaPlugin {
 		return inventoryList;
 	}
 
-	/*
+	/**
 	 * used if the server uses superperm (aka bukkit perms)
 	 * @param sender is the player who sends the command
 	 * @param args is the arguments of the command
@@ -278,7 +281,7 @@ public class Clear extends JavaPlugin {
 		}
 	}
 
-	/*
+	/**
 	 * takes care of commands if permissions system is detected
 	 * @param sender is the player who sent the command
 	 * @param args are the arguments for the command
@@ -348,7 +351,7 @@ public class Clear extends JavaPlugin {
 		}
 	}
 
-	/*
+	/**
 	 * takes care of commands if no permissions system is detected
 	 * @param sender is the player who sent the command
 	 * @param args are the arguments for the command
@@ -423,7 +426,7 @@ public class Clear extends JavaPlugin {
 			clearItem(player, args);
 	}
 
-	/*
+	/**
 	 * takse care of commands sent by the console
 	 * @param sender is the console which sent the command
 	 * @param args are the arguments for the command
@@ -485,8 +488,9 @@ public class Clear extends JavaPlugin {
 			}
 		}
 	}
-	/*
+	/**
 	 * displays the help text if the console sent the command
+	 * @param sender is the person who sent the command
 	 */
 	private void consoleHelp(CommandSender sender){
 		sender.sendMessage(ChatColor.BLUE + "Because you are the server console, you don't have an inventory, however you can clear other players inventories");
@@ -498,8 +502,9 @@ public class Clear extends JavaPlugin {
 		sender.sendMessage(ChatColor.RED + "/clear <player> except <item1> [item2] [item3]...");
 		sender.sendMessage(ChatColor.GOLD + "Thank you for using wwsean08's inventory clearing plugin");
 	}
-	/*
+	/**
 	 * displays the help text if the player sent the command
+	 * @param sender Is the person who sent the command
 	 */
 	private void playerHelp(CommandSender sender){
 		sender.sendMessage(ChatColor.AQUA + "you can clear your inventory of everything like this:");
@@ -516,7 +521,11 @@ public class Clear extends JavaPlugin {
 			sender.sendMessage(ChatColor.RED + "/unpreview to restore your inventory");
 		}
 	}
-
+	/**
+	 * Allows an admin to preview a players inventory
+	 * @param previewer The admin that will be previewing the inventory
+	 * @param previewee The player whose inventory is being previewed
+	 */
 	private void preview(Player previewer, Player previewee){
 		ItemStack[] preview = previewee.getInventory().getContents();
 		if(!originalInventory.containsKey(previewer))
@@ -527,6 +536,10 @@ public class Clear extends JavaPlugin {
 
 	}
 
+	/**
+	 * Restores the content of an admins inventory if they are previewing one
+	 * @param previewer
+	 */
 	public void unpreview(Player previewer){
 		if(originalInventory.containsKey(previewer)){
 			previewer.getInventory().clear();
@@ -535,7 +548,7 @@ public class Clear extends JavaPlugin {
 		}
 	}
 
-	/*
+	/**
 	 * Clears all the items out of the players inventory
 	 * @param sender is the player who sent the command
 	 */
@@ -544,7 +557,7 @@ public class Clear extends JavaPlugin {
 		sender.sendMessage("Inventory Cleared");
 	}
 
-	/*
+	/**
 	 * Clears all the items out of another user's inventory
 	 * @param sender is the player who sent the command.
 	 * @param affected is the player who's inventory gets cleared.
@@ -554,7 +567,7 @@ public class Clear extends JavaPlugin {
 		sender.sendMessage(affected.getDisplayName() + "'s inventory has been cleared.");
 	}
 
-	/*
+	/**
 	 * clears all the items except for the ones specified by the player.
 	 * @param sender is the player who sent the command
 	 * @param args the list of items to exclude (either in number of name form).
@@ -609,11 +622,9 @@ public class Clear extends JavaPlugin {
 		sender.sendMessage("Successfully removed everything except " + output);
 	}
 
-	/*
+	/**
 	 * clears all the items except for the ones specified by the player.
-	 * 
 	 * @param sender is the player who sent the command
-	 * 
 	 * @param args the list of items to exclude (either in number of name form).
 	 */
 	public void clearExceptRemote(CommandSender sender, Player affected, String[] args) {
@@ -670,11 +681,10 @@ public class Clear extends JavaPlugin {
 		sender.sendMessage("Successfully removed everything except " + output);
 	}
 
-	/*
+	/**
 	 * clears all of the selected items by the player
 	 * @param Sender the player who sent the command
-	 * @param args is the list or item(s) that the user wants to delete from
-	 * their inventory
+	 * @param args is the list or item(s) that the user wants to delete from their inventory
 	 */
 	public void clearItem(Player sender, String[] args) {
 		PlayerInventory pi = sender.getInventory();
@@ -700,16 +710,12 @@ public class Clear extends JavaPlugin {
 		}
 	}
 
-	/*
-	 * clears all of the selected items by the player
-	 * 
-	 * @param Sender is the player who sent the command.
-	 * 
-	 * @param affected is the player who's items are being removed
-	 * 
-	 * @param args is the list or item(s) that the user wants to delete from
-	 * their inventory
-	 */
+	/**
+	 ** clears all of the selected items by the player
+	 ** @param Sender is the player who sent the command.
+	 ** @param affected is the player who's items are being removed
+	 ** @param args is the list or item(s) that the user wants to delete from their inventory
+	 **/
 	public void clearItemRemote(CommandSender sender, Player affected, String[] args) {
 		PlayerInventory pi;
 		if(affected != null)
@@ -756,7 +762,7 @@ public class Clear extends JavaPlugin {
 		sender.sendMessage(affected.getName() + " has had his armor removed by you");
 	}
 
-	/*
+	/**
 	 * Checks the data to see if the two pieces of data given are the same
 	 * @param data is the data of the item from the inventory
 	 * @param damage is the data we want it to be
@@ -765,7 +771,7 @@ public class Clear extends JavaPlugin {
 		Byte testByte = data;
 		return testByte.intValue() == damage;
 	}
-	/*
+	/**
 	 * checks against known items which have data
 	 * @param the item ID used to determine if it has data (or can have data).
 	 */
@@ -786,6 +792,9 @@ public class Clear extends JavaPlugin {
 		return false;
 	}
 
+	/**
+	 * A method for getting the old permissions handler for the permissions plugin, its in here for legacy support
+	 */
 	private void getPerm() {
 		Plugin perm = server.getPluginManager().getPlugin("Permissions");
 		if (ph == null) {
@@ -797,6 +806,10 @@ public class Clear extends JavaPlugin {
 			}
 		}
 	}
+
+	/** 
+	 * A method for getting the version of the items.csv file.
+	 */
 	private void getDBV(){
 		try {
 			FileReader reader = new FileReader(itemFile);
@@ -806,6 +819,10 @@ public class Clear extends JavaPlugin {
 		}catch(Exception e){
 		}
 	}
+
+	/**
+	 * This method loads the csv into the ClearItemHolder object
+	 */
 	private void loadItems(){
 		int i=1;
 		try {
@@ -830,7 +847,7 @@ public class Clear extends JavaPlugin {
 			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error at line " + i+1);
 		}
 	}
-	/*
+	/**
 	 * creates the config.yml if one doesn't exist or is outdated
 	 * 
 	 */
