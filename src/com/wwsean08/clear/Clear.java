@@ -711,11 +711,11 @@ public class Clear extends JavaPlugin {
 	}
 
 	/**
-	 ** clears all of the selected items by the player
-	 ** @param Sender is the player who sent the command.
-	 ** @param affected is the player who's items are being removed
-	 ** @param args is the list or item(s) that the user wants to delete from their inventory
-	 **/
+	 * clears all of the selected items by the player
+	 * @param Sender is the player who sent the command.
+	 * @param affected is the player who's items are being removed
+	 * @param args is the list or item(s) that the user wants to delete from their inventory
+	 */
 	public void clearItemRemote(CommandSender sender, Player affected, String[] args) {
 		PlayerInventory pi;
 		if(affected != null)
