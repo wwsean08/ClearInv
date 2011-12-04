@@ -26,12 +26,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.nijiko.permissions.PermissionHandler;
-import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
@@ -42,7 +38,6 @@ public class Clear extends JavaPlugin {
 	private File itemFile = null;
 	private File configFile = null;
 	private Server server;
-	public PermissionHandler ph;
 	private YamlConfiguration config;
 	private HashMap<Player, ItemStack[]> originalInventory;
 	private PluginManager pm;
@@ -59,7 +54,6 @@ public class Clear extends JavaPlugin {
 			autoUpdate();
 		if(config.getBoolean("superperm", true) != true)
 			usesSP = false;
-		getPerm();
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
 		items = new LinkedList<ClearItemHolder>();
@@ -81,13 +75,10 @@ public class Clear extends JavaPlugin {
 		if (commandLabel.equalsIgnoreCase("clear")) {
 			if (sender instanceof Player) {
 				if(usesSP)
-					superPerm(sender, args);
-				else if (ph != null) 
-					playerPerm(sender, args);
-
+					Perm(sender, args);
 				// if no permissions set up
 				else 
-					playerNoPerm(sender, args);
+					NoPerm(sender, args);
 
 			} else if (sender instanceof ConsoleCommandSender) 
 				consoleClear(sender, args);
@@ -108,18 +99,11 @@ public class Clear extends JavaPlugin {
 								ClearRunnable run = new ClearRunnable(this, player);
 								server.getScheduler().scheduleSyncDelayedTask(this, run, 6000);
 							}
-						}
-						else if(ph != null && ph.has(player, "clear.other")){
+						}else if(player.isOp()){
 							preview(player, affected);
 							ClearRunnable run = new ClearRunnable(this, player);
 							server.getScheduler().scheduleSyncDelayedTask(this, run, 6000);
-						}
-						else if(player.isOp()){
-							preview(player, affected);
-							ClearRunnable run = new ClearRunnable(this, player);
-							server.getScheduler().scheduleSyncDelayedTask(this, run, 6000);
-						}
-						else{
+						}else{
 							sender.sendMessage("You do not have permission to use this command");
 							log.warning(PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
 						}
@@ -192,7 +176,7 @@ public class Clear extends JavaPlugin {
 	 * 
 	 */
 
-	private void superPerm(CommandSender sender, String[] args) {
+	private void Perm(CommandSender sender, String[] args) {
 		Player player = (Player) sender;
 		if (player.hasPermission("clear.self") || player.hasPermission("clear.other")) {
 			if (args.length == 0)
@@ -256,82 +240,12 @@ public class Clear extends JavaPlugin {
 	}
 
 	/**
-	 * takes care of commands if permissions system is detected
-	 * @param sender is the player who sent the command
-	 * @param args are the arguments for the command
-	 * 
-	 */
-	private void playerPerm(CommandSender sender, String[] args){
-		Player player = (Player) sender;
-		if (ph.has(player, "clear.self") || ph.has(player, "clear.other") || ph.has(player, "clear.admin")) {
-			if (args.length == 0)
-				clearAll(player);
-			else if(args[0].trim().equals("*")){
-				if(ph.has(player, "clear.admin")){
-					Player[] online = server.getOnlinePlayers();
-					if(args.length == 1){
-						for(Player p : online)
-							clearAllRemote(sender, p);
-					}
-					else if(args[1].trim().equalsIgnoreCase("except")){
-						for(Player p : online)
-							clearExceptRemote(sender, p, args);
-					}
-					else if(args[1].equalsIgnoreCase("armor")){
-						for(Player p : online)
-							clearArmorRemote(sender, p);
-					}
-					else{
-						for(Player p : online)
-							clearItemRemote(sender, p, args);
-					}
-				}
-			}
-			else if (args[0].equalsIgnoreCase("except")) {
-				clearExcept(player, args);
-			}
-			else if (args[0].equalsIgnoreCase("armor"))
-				clearArmor(player);
-			else if(args[0].equalsIgnoreCase("boots") || args[0].equalsIgnoreCase("boot")){
-				player.getInventory().setBoots(null);
-				player.sendMessage("Boots removed");
-			}else if(args[0].equalsIgnoreCase("helmet") || args[0].equalsIgnoreCase("helm")){
-				player.getInventory().setHelmet(null);
-				player.sendMessage("Helmet removed");
-			}else if(args[0].equalsIgnoreCase("pants") || args[0].equalsIgnoreCase("leggings")){
-				player.getInventory().setLeggings(null);
-				player.sendMessage("Leggings removed");
-			}else if(args[0].equalsIgnoreCase("shirt") || args[0].equalsIgnoreCase("chestplate") || args[0].equalsIgnoreCase("chest")){
-				player.getInventory().setChestplate(null);
-				player.sendMessage("Chestplate removed");
-			}else if (args[0].equalsIgnoreCase("help")) {
-				playerHelp(sender);
-			} else if ((server.getPlayer(args[0]) != null) && (ph.has(player, "clear.other") || sender.isOp())) {
-				Player affectedPlayer = server.matchPlayer(args[0]).get(0);
-				if (args.length == 1) {
-					clearAllRemote(player, affectedPlayer);
-				} else if (args[1].equalsIgnoreCase("except")) {
-					clearExceptRemote(player, affectedPlayer, args);
-				} else if(args[1].equalsIgnoreCase("armor")){
-					clearArmorRemote(player, affectedPlayer);
-				} else
-					clearItemRemote(player, affectedPlayer, args);
-			} else if ((server.getPlayer(args[0]) != null) && !((ph.has(player, "clear.other") || !sender.isOp()))) {
-				sender.sendMessage("You do not have permission to use that command");
-				log.warning(PREFIX + player.getDisplayName() + " tried to clear another players inventory without the necessary permissions");
-			} else if (args.length >= 1 && (ph.has(player, "clear.self") || ph.has(player, "clear.other"))) {
-				clearItem(player, args);
-			}
-		}
-	}
-
-	/**
 	 * takes care of commands if no permissions system is detected
 	 * @param sender is the player who sent the command
 	 * @param args are the arguments for the command
 	 * 
 	 */
-	private void playerNoPerm(CommandSender sender, String[] args){
+	private void NoPerm(CommandSender sender, String[] args){
 		Player player = (Player) sender;
 		if (args.length == 0) 
 			clearAll(player);
@@ -481,13 +395,14 @@ public class Clear extends JavaPlugin {
 	 * @param sender Is the person who sent the command
 	 */
 	private void playerHelp(CommandSender sender){
+		Player player = (Player) sender;
 		sender.sendMessage(ChatColor.AQUA + "you can clear your inventory of everything like this:");
 		sender.sendMessage(ChatColor.RED + "/clear");
 		sender.sendMessage(ChatColor.AQUA + "You can exclude items using the except keyword as the first argument like this:");
 		sender.sendMessage(ChatColor.RED + "/clear except sand");
 		sender.sendMessage(ChatColor.AQUA + "You can delete select items by naming them as arguments like this:");
 		sender.sendMessage(ChatColor.RED + "/clear sand gravel");
-		if (sender.isOp() || ph.has((Player) sender, "clear.other")) {
+		if (sender.isOp() || player.hasPermission("clear.other")) {
 			sender.sendMessage(ChatColor.AQUA + "And you have permission to clear other peoples invetories, and view them");
 			sender.sendMessage(ChatColor.RED + "/clear name item1 item2...");
 			sender.sendMessage(ChatColor.AQUA + "Tp view them the command is preview and to unview them its unpreview");
@@ -780,21 +695,6 @@ public class Clear extends JavaPlugin {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * A method for getting the old permissions handler for the permissions plugin, its in here for legacy support
-	 */
-	private void getPerm() {
-		Plugin perm = server.getPluginManager().getPlugin("Permissions");
-		if (ph == null) {
-			if (perm != null) {
-				ph = ((Permissions) perm).getHandler();
-				log.info(PREFIX + " Permission system detected");
-			} else {
-				log.warning(PREFIX + " No permissions system detected, elevated commands dafaulting to OP");
-			}
-		}
 	}
 
 	/** 
