@@ -507,18 +507,19 @@ public class Clear extends JavaPlugin {
 		previewer.getInventory().setContents(preview);
 		ClearRunnable runner = new ClearRunnable(this, previewer);
 		server.getScheduler().scheduleSyncDelayedTask(this, runner, 6000);
-
+		previewer.sendMessage("You are now previewing " + previewee.getDisplayName());
 	}
 
 	/**
 	 * Restores the content of an admins inventory if they are previewing one
-	 * @param previewer
+	 * @param previewer the player who is previewing an inventory
 	 */
 	public void unpreview(Player previewer){
 		if(originalInventory.containsKey(previewer)){
 			previewer.getInventory().clear();
 			previewer.getInventory().setContents(originalInventory.get(previewer));
 			originalInventory.remove(previewer);
+			previewer.sendMessage("Your inventory has been restored");
 		}
 	}
 
