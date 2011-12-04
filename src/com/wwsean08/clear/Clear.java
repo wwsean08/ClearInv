@@ -31,7 +31,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
-	public final String VERSION = "1.8.7";
+	public final String VERSION = "1.8.8";
 	public String DBV = "1.1.3";
 	private final String NAME = "ClearInv New";
 	private final String PREFIX = "[ClearInv]";
