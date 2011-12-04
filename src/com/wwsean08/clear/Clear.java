@@ -585,16 +585,24 @@ public class Clear extends JavaPlugin {
 			pi.clear(slot);
 		}
 		StringBuilder output = new StringBuilder();
-		if(successful.size() != 1){
+		if(successful.size() >= 3){
 			for(int i = 0; i<successful.size()-1; i++){
 				output.append(successful.get(i) + ", ");
 			}
 			output.append("and " + successful.get(successful.size()-1));
-		}else{
+		}else if(successful.size() == 2){
 			output.append(successful.get(0));
+			output.append(" and ");
+			output.append(successful.get(1));
+		}else if(successful.size() == 1){
+			output.append(successful.get(0));
+		}else{
+			sender.sendMessage("Clear except command failed or you didn't have that to start out with");
+			return;
 		}
 		sender.sendMessage("Successfully removed everything except " + output);
 	}
+
 
 	/**
 	 * clears all the items except for the ones specified by the player.
@@ -644,13 +652,20 @@ public class Clear extends JavaPlugin {
 				pi.clear(i);
 		}
 		StringBuilder output = new StringBuilder();
-		if(successful.size() != 1){
+		if(successful.size() >= 3){
 			for(int i = 0; i<successful.size()-1; i++){
 				output.append(successful.get(i) + ", ");
 			}
 			output.append("and " + successful.get(successful.size()-1));
-		}else{
+		}else if(successful.size() == 2){
 			output.append(successful.get(0));
+			output.append(" and ");
+			output.append(successful.get(1));
+		}else if(successful.size() == 1){
+			output.append(successful.get(0));
+		}else{
+			sender.sendMessage("Clear except command failed or they didn't have that to start out with");
+			return;
 		}
 		sender.sendMessage("Successfully removed everything except " + output);
 	}
