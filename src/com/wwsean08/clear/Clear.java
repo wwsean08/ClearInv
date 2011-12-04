@@ -52,38 +52,12 @@ public class Clear extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		configFile = new File(this.getDataFolder() + File.separator + "config.yml");
-		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
-		pl = new ClearPlayerListener(this);
-		originalInventory = new HashMap<Player, ItemStack[]>();
-		server = Bukkit.getServer();
-		pm = server.getPluginManager();
+		initVariables();
 		getDBV();
 		createConfig();
-		if(config.getBoolean("autoupdate", true)){
-			String name = NAME;
-			String version = VERSION;
-			String checklocation = "http://dcp.wwsean08.com/check.php";
-			String downloadlocation = "http://dcp.wwsean08.com/dl.php";
-			String logprefix = PREFIX;
-			OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
-
-			//check for items.csv update because they don't mind checking
-			name = "items new";
-			version = DBV;
-			File updatedFile = OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
-			if(updatedFile != null){
-				Path currentPath = updatedFile.toPath();
-				Path newPath = itemFile.toPath();
-				try {
-					System.gc();		//hate doing that but it prevents the file being in use and causing exceptions to be thrown
-					Files.move(currentPath, newPath, REPLACE_EXISTING);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				updatedFile.delete();
-			}
-		} if(config.getBoolean("superperm", true) != true)
+		if(config.getBoolean("autoupdate", true))
+			autoUpdate();
+		if(config.getBoolean("superperm", true) != true)
 			usesSP = false;
 		getPerm();
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
@@ -871,5 +845,44 @@ public class Clear extends JavaPlugin {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * This initializes the instnace variables in order to clean up the onEnable method
+	 */
+	private void initVariables() {
+		configFile = new File(this.getDataFolder() + File.separator + "config.yml");
+		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
+		pl = new ClearPlayerListener(this);
+		originalInventory = new HashMap<Player, ItemStack[]>();
+		server = Bukkit.getServer();
+		pm = server.getPluginManager();
+	}
+
+	/**
+	 * This method runs the auto-updater, seperated it from the onEnable as part of code cleanup
+	 */
+	private void autoUpdate() {
+		String name = NAME;
+		String version = VERSION;
+		String checklocation = "http://dcp.wwsean08.com/check.php";
+		String downloadlocation = "http://dcp.wwsean08.com/dl.php";
+		String logprefix = PREFIX;
+		OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
+		//check for items.csv update because they don't mind checking
+		name = "items new";
+		version = DBV;
+		File updatedFile = OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
+		if(updatedFile != null){
+			Path currentPath = updatedFile.toPath();
+			Path newPath = itemFile.toPath();
+			try {
+				System.gc();		//hate doing that but it prevents the file being in use and causing exceptions to be thrown
+				Files.move(currentPath, newPath, REPLACE_EXISTING);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			updatedFile.delete();
+		}		
 	}
 }
