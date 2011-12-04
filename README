@@ -2,6 +2,7 @@ This is the bukkit ClearInv plugin, which allows you to selectively clear a play
 
 Change Log:
 
+* V 1.8.8 Removed support for th epermissions plugin, the choices are either bukkits built in permission system or none at all. I also fixed a couple of rare null pointer exceptions and adjusted/added some outputs
 * V 1.8.7 Fixed the console clear all players command (/clear *).  Also some minor code cleanup.
 * V 1.8.6 Fixed the bug in /clear except.  Also adjusted the autoupdate so that when it updates the items.csv it will automatically overwrite the old one which required some minor adjustments and a new branch for the item list. 
 * V 1.8.5 Made it so you can preview an inventory from the server console
