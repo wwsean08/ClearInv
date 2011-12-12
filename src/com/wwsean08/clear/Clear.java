@@ -74,8 +74,9 @@ public class Clear extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("clear")) {
 			if (sender instanceof Player) {
-				if(usesSP)
+				if(usesSP){
 					Perm(sender, args);
+				}
 				// if no permissions set up
 				else 
 					NoPerm(sender, args);
@@ -514,7 +515,6 @@ public class Clear extends JavaPlugin {
 			output.append(successful.get(0));
 		}else{
 			sender.sendMessage("Clear except command failed or you didn't have that to start out with");
-			return;
 		}
 		sender.sendMessage("Successfully removed everything except " + output);
 	}
@@ -591,19 +591,22 @@ public class Clear extends JavaPlugin {
 	 * @param Sender the player who sent the command
 	 * @param args is the list or item(s) that the user wants to delete from their inventory
 	 */
-	public void clearItem(Player sender, String[] args) {
+	public boolean clearItem(Player sender, String[] args) {
+		boolean result = false;
 		PlayerInventory pi = sender.getInventory();
 		for(String a : args){
 			for(int i = 0; i<items.size(); i++){
 				if(a.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
 						pi.remove(items.get(i).getItem());
+						result = true;
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
 							if(hasData(IS.getTypeId())){
 								if(checkData(IS.getData().getData(), items.get(i).getDamage())){
 									pi.clear(j);
+									result = true;
 								}
 							}
 						}
@@ -613,6 +616,7 @@ public class Clear extends JavaPlugin {
 				}
 			}
 		}
+		return result;
 	}
 
 	/**
@@ -651,12 +655,13 @@ public class Clear extends JavaPlugin {
 		}
 	}
 
-	private void clearArmor(Player sender){
+	private boolean clearArmor(Player sender){
 		sender.getInventory().setBoots(null);
 		sender.getInventory().setChestplate(null);
 		sender.getInventory().setHelmet(null);
 		sender.getInventory().setLeggings(null);
 		sender.sendMessage("Armor removed");
+		return true;
 	}
 
 	private void clearArmorRemote(CommandSender sender, Player affected){
@@ -743,18 +748,27 @@ public class Clear extends JavaPlugin {
 	 */
 	private void createConfig(){
 		try{
+			//takes care of people who are coming from an old version which may not have the default valuse
 			if(configFile.exists()){
 				config = YamlConfiguration.loadConfiguration(configFile);
 				if(!config.contains("autoupdate"))
 					config.set("autoupdate", true);
 				if(!config.contains("superPerms"))
 					config.set("superPerms", true);
+				if(!config.contains("usesEconomy"))
+					config.set("usesEconomy", false);
+				if(!config.contains("clearPrice"))
+					config.set("clearCost", 0);
 				config.save(configFile);
-			}else{
+			}
+			//for people who don't have the config.yml
+			else{
 				if(configFile.createNewFile()){
 					config = YamlConfiguration.loadConfiguration(configFile);
 					config.set("autoupdate", true);
 					config.set("superPerms", true);
+					config.set("usesEconomy", false);
+					config.set("clearCost", 0);
 					config.save(configFile);
 				}
 			}
