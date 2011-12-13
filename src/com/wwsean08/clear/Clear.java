@@ -21,7 +21,7 @@ import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
@@ -31,14 +31,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
-	public final String VERSION = "1.8.8";
+	public final String VERSION = "1.9.1";
 	public String DBV = "1.1.3";
 	private final String NAME = "ClearInv New";
 	private final String PREFIX = "[ClearInv]";
 	private File itemFile = null;
-	private File configFile = null;
 	private Server server;
-	private YamlConfiguration config;
+	private FileConfiguration config;
 	private HashMap<Player, ItemStack[]> originalInventory;
 	private PluginManager pm;
 	private ClearPlayerListener pl;
@@ -52,7 +51,7 @@ public class Clear extends JavaPlugin {
 		createConfig();
 		if(config.getBoolean("autoupdate", true))
 			autoUpdate();
-		if(config.getBoolean("superperm", true) != true)
+		if(!config.getBoolean("superperm", true))
 			usesSP = false;
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
@@ -747,41 +746,15 @@ public class Clear extends JavaPlugin {
 	 * 
 	 */
 	private void createConfig(){
-		try{
-			//takes care of people who are coming from an old version which may not have the default valuse
-			if(configFile.exists()){
-				config = YamlConfiguration.loadConfiguration(configFile);
-				if(!config.contains("autoupdate"))
-					config.set("autoupdate", true);
-				if(!config.contains("superPerms"))
-					config.set("superPerms", true);
-				if(!config.contains("usesEconomy"))
-					config.set("usesEconomy", false);
-				if(!config.contains("clearPrice"))
-					config.set("clearCost", 0);
-				config.save(configFile);
-			}
-			//for people who don't have the config.yml
-			else{
-				if(configFile.createNewFile()){
-					config = YamlConfiguration.loadConfiguration(configFile);
-					config.set("autoupdate", true);
-					config.set("superPerms", true);
-					config.set("usesEconomy", false);
-					config.set("clearCost", 0);
-					config.save(configFile);
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		config = this.getConfig();
+		config.options().copyDefaults(true);
+		this.saveConfig();
 	}
 
 	/**
-	 * This initializes the instnace variables in order to clean up the onEnable method
+	 * This initializes the instance variables in order to clean up the onEnable method
 	 */
 	private void initVariables() {
-		configFile = new File(this.getDataFolder() + File.separator + "config.yml");
 		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
 		pl = new ClearPlayerListener(this);
 		originalInventory = new HashMap<Player, ItemStack[]>();
