@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 public class OKUpdater{
 
+	@SuppressWarnings("unused")
 	public static File update(String name, String ver, String checkloc, String dlloc, Logger log, String prefix){
 		try {
 			String latestver = null;
