@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.logging.Logger;
 
 import me.kalmanolah.extras.OKUpdater;
@@ -55,7 +54,6 @@ public class Clear extends JavaPlugin {
 			usesSP = false;
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
-		items;
 		loadItems();
 		log.info(PREFIX + " clear inventory version " + VERSION + " enabled");
 	}
