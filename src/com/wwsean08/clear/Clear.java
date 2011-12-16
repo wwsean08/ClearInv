@@ -41,7 +41,7 @@ public class Clear extends JavaPlugin {
 	private HashMap<Player, ItemStack[]> originalInventory;
 	private PluginManager pm;
 	private ClearPlayerListener pl;
-	private LinkedList<ClearItemHolder> items;
+	private ArrayList<ClearItemHolder> items;
 	private boolean usesSP = true;
 
 	@Override
@@ -55,7 +55,7 @@ public class Clear extends JavaPlugin {
 			usesSP = false;
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
-		items = new LinkedList<ClearItemHolder>();
+		items;
 		loadItems();
 		log.info(PREFIX + " clear inventory version " + VERSION + " enabled");
 	}
@@ -202,6 +202,12 @@ public class Clear extends JavaPlugin {
 					}
 				}
 			}
+			else if (args[0].equalsIgnoreCase("reload")){
+				if(player.hasPermission("clear.admin")){
+					loadItems();
+					sender.sendMessage("Reloaded items");
+				}
+			}
 			else if (args[0].equalsIgnoreCase("except")){
 				clearExcept(player, args);
 			}
@@ -278,6 +284,12 @@ public class Clear extends JavaPlugin {
 		}
 		else if (args[0].equalsIgnoreCase("help")) 
 			playerHelp(sender);
+		else if (args[0].equalsIgnoreCase("reload")){
+			if(player.isOp()){
+				loadItems();
+				sender.sendMessage("Reloaded items");
+			}
+		}
 		//begin armor removal
 		else if(args[0].equalsIgnoreCase("armor"))
 			clearArmor(player);
@@ -345,6 +357,9 @@ public class Clear extends JavaPlugin {
 			}else if (args.length == 1){
 				Player player = server.getPlayer(args[0]);
 				clearAllRemote(sender, player);
+			}else if (args[0].equalsIgnoreCase("reload")){
+				loadItems();
+				sender.sendMessage("Reloaded items");
 			}
 			else if (args[1].equalsIgnoreCase("except")){
 				Player player = server.getPlayer(args[0]);
@@ -718,6 +733,7 @@ public class Clear extends JavaPlugin {
 	 * This method loads the csv into the ClearItemHolder object
 	 */
 	private void loadItems(){
+		items = new ArrayList<ClearItemHolder>();
 		int i=1;
 		try {
 			FileReader reader = new FileReader(itemFile);
