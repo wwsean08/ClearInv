@@ -30,7 +30,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
-	public final String VERSION = "1.9.1";
+	public final String VERSION = "1.9.2";
 	public String DBV = "1.1.3";
 	private final String NAME = "ClearInv New";
 	private final String PREFIX = "[ClearInv]";
@@ -334,6 +334,10 @@ public class Clear extends JavaPlugin {
 			if (args[0].equalsIgnoreCase("help")){
 				consoleHelp(sender);
 				return;
+
+			}else if (args[0].equalsIgnoreCase("reload")){
+				loadItems();
+				sender.sendMessage("Reloaded items");
 			}else if(args[0].equalsIgnoreCase("*")){
 				Player[] online = server.getOnlinePlayers();
 				if(args.length == 1){
@@ -355,9 +359,6 @@ public class Clear extends JavaPlugin {
 			}else if (args.length == 1){
 				Player player = server.getPlayer(args[0]);
 				clearAllRemote(sender, player);
-			}else if (args[0].equalsIgnoreCase("reload")){
-				loadItems();
-				sender.sendMessage("Reloaded items");
 			}
 			else if (args[1].equalsIgnoreCase("except")){
 				Player player = server.getPlayer(args[0]);
