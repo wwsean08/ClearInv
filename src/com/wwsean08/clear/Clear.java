@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import me.kalmanolah.extras.OKUpdater;
@@ -29,18 +30,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
-	public final String VERSION = "1.9.2";
+	ArrayList<ClearItemHolder> items;
+	PreviewCommand preview;
+	final String PREFIX = "[ClearInv]";
+	boolean usesSP = true;
+	public final String VERSION = "1.9.3";
 	public String DBV = "1.1.3";
 	private final String NAME = "ClearInv New";
-	final String PREFIX = "[ClearInv]";
 	private File itemFile = null;
 	private Server server;
 	private FileConfiguration config;
 	private PluginManager pm;
 	private ClearPlayerListener pl;
-	ArrayList<ClearItemHolder> items;
-	PreviewCommand preview;
-	boolean usesSP = true;
+	private HashMap<String, ClearUndoHolder> undo;
+
 
 	@Override
 	public void onEnable() {
@@ -127,6 +130,9 @@ public class Clear extends JavaPlugin {
 			else if (args[0].equalsIgnoreCase("except")){
 				clearExcept(player, args);
 			}
+			else if (args[0].equalsIgnoreCase("undo")){
+				clearUndo(player);
+			}
 			else if (args[0].equalsIgnoreCase("armor"))
 				clearArmor(player);
 			else if(args[0].equalsIgnoreCase("boots") || args[0].equalsIgnoreCase("boot")){
@@ -206,6 +212,9 @@ public class Clear extends JavaPlugin {
 				sender.sendMessage("Reloaded items");
 			}
 		}
+		else if (args[0].equalsIgnoreCase("undo")){
+			clearUndo(player);
+		}
 		//begin armor removal
 		else if(args[0].equalsIgnoreCase("armor"))
 			clearArmor(player);
@@ -252,11 +261,13 @@ public class Clear extends JavaPlugin {
 			if (args[0].equalsIgnoreCase("help")){
 				consoleHelp(sender);
 				return;
-
 			}else if (args[0].equalsIgnoreCase("reload")){
 				loadItems();
 				sender.sendMessage("Reloaded items");
-			}else if(args[0].equalsIgnoreCase("*")){
+			}else if (args[0].equalsIgnoreCase("undo")){
+				clearUndo(sender);
+			}
+			else if(args[0].equalsIgnoreCase("*")){
 				Player[] online = server.getOnlinePlayers();
 				if(args.length == 1){
 					for(Player p : online)
@@ -348,6 +359,8 @@ public class Clear extends JavaPlugin {
 	 * @param sender is the player who sent the command
 	 */
 	public void clearAll(Player sender) {
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), sender.getInventory().getContents());
+		undo.put(sender.getName(), holder);
 		sender.getInventory().clear();
 		sender.sendMessage("Inventory Cleared");
 	}
@@ -358,6 +371,8 @@ public class Clear extends JavaPlugin {
 	 * @param affected is the player who's inventory gets cleared.
 	 */
 	public void clearAllRemote(CommandSender sender, Player affected) {
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), affected.getInventory().getContents());
+		undo.put(sender.getName(), holder);
 		affected.getInventory().clear();
 		sender.sendMessage(affected.getDisplayName() + "'s inventory has been cleared.");
 	}
@@ -368,6 +383,8 @@ public class Clear extends JavaPlugin {
 	 * @param args the list of items to exclude (either in number of name form).
 	 */
 	public void clearExcept(Player sender, String[] args) {
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), sender.getInventory().getContents());
+		undo.put(sender.getName(), holder);
 		PlayerInventory pi = sender.getInventory();
 		ArrayList<Integer> clear = new ArrayList<Integer>();
 		ArrayList<String> successful = new ArrayList<String>();
@@ -437,6 +454,8 @@ public class Clear extends JavaPlugin {
 			sender.sendMessage(PREFIX + " Error: player variable was null!");
 			return;
 		}
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), pi.getContents());
+		undo.put(sender.getName(), holder);
 		ArrayList<Integer> clear = new ArrayList<Integer>();
 		ArrayList<String> successful = new ArrayList<String>();
 		for(int i = 0; i<pi.getSize(); i++){
@@ -495,22 +514,21 @@ public class Clear extends JavaPlugin {
 	 * @param Sender the player who sent the command
 	 * @param args is the list or item(s) that the user wants to delete from their inventory
 	 */
-	public boolean clearItem(Player sender, String[] args) {
-		boolean result = false;
+	public void clearItem(Player sender, String[] args) {
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), sender.getInventory().getContents());
+		undo.put(sender.getName(), holder);
 		PlayerInventory pi = sender.getInventory();
 		for(String a : args){
 			for(int i = 0; i<items.size(); i++){
 				if(a.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
 						pi.remove(items.get(i).getItem());
-						result = true;
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
 							if(hasData(IS.getTypeId())){
 								if(checkData(IS.getData().getData(), items.get(i).getDamage())){
 									pi.clear(j);
-									result = true;
 								}
 							}
 						}
@@ -520,7 +538,6 @@ public class Clear extends JavaPlugin {
 				}
 			}
 		}
-		return result;
 	}
 
 	/**
@@ -537,6 +554,8 @@ public class Clear extends JavaPlugin {
 			sender.sendMessage(PREFIX + " Error: player variable was null!");
 			return;
 		}
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), pi.getContents());
+		undo.put(sender.getName(), holder);
 		for(String a : args){
 			for(int i = 0; i<items.size(); i++){
 				if(a.equalsIgnoreCase(items.get(i).getInput())){
@@ -558,14 +577,27 @@ public class Clear extends JavaPlugin {
 			}
 		}
 	}
+	
+	public void clearUndo(Player player){
+		ClearUndoHolder holder = undo.get(player.getName());
+		Player affected = server.getPlayer(holder.getPlayer());
+		affected.getInventory().setContents(holder.getOldInventory());
+		undo.remove(player.getName());
+	}
+	
+	public void clearUndo(CommandSender sender){
+		ClearUndoHolder holder = undo.get(sender.getName());
+		Player affected = server.getPlayer(holder.getPlayer());
+		affected.getInventory().setContents(holder.getOldInventory());
+		undo.remove(sender.getName());
+	}
 
-	private boolean clearArmor(Player sender){
+	private void clearArmor(Player sender){
 		sender.getInventory().setBoots(null);
 		sender.getInventory().setChestplate(null);
 		sender.getInventory().setHelmet(null);
 		sender.getInventory().setLeggings(null);
 		sender.sendMessage("Armor removed");
-		return true;
 	}
 
 	private void clearArmorRemote(CommandSender sender, Player affected){
@@ -666,6 +698,7 @@ public class Clear extends JavaPlugin {
 		server = Bukkit.getServer();
 		pm = server.getPluginManager();
 		preview = new PreviewCommand(this);
+		undo = new HashMap<String, ClearUndoHolder>();
 	}
 
 	/**
