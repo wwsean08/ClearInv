@@ -3,9 +3,9 @@ package com.wwsean08.clear;
 import org.bukkit.entity.Player;
 
 public class ClearRunnable implements Runnable{
-	Clear plugin;
+	PreviewCommand plugin;
 	Player affected;
-	public ClearRunnable(Clear instance, Player player){
+	public ClearRunnable(PreviewCommand instance, Player player){
 		plugin = instance;
 		affected = player;
 	}

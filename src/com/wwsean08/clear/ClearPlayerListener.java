@@ -11,10 +11,10 @@ public class ClearPlayerListener extends PlayerListener{
 	}
 	@Override
 	public void onPlayerQuit(PlayerQuitEvent event){
-		plugin.unpreview(event.getPlayer());
+		plugin.preview.unpreview(event.getPlayer());
 	}
 	@Override
 	public void onPlayerKick(PlayerKickEvent event){
-		plugin.unpreview(event.getPlayer());
+		plugin.preview.unpreview(event.getPlayer());
 	}
 }

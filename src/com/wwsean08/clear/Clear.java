@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 import me.kalmanolah.extras.OKUpdater;
@@ -33,15 +32,15 @@ public class Clear extends JavaPlugin {
 	public final String VERSION = "1.9.2";
 	public String DBV = "1.1.3";
 	private final String NAME = "ClearInv New";
-	private final String PREFIX = "[ClearInv]";
+	final String PREFIX = "[ClearInv]";
 	private File itemFile = null;
 	private Server server;
 	private FileConfiguration config;
-	private HashMap<Player, ItemStack[]> originalInventory;
 	private PluginManager pm;
 	private ClearPlayerListener pl;
-	private ArrayList<ClearItemHolder> items;
-	private boolean usesSP = true;
+	ArrayList<ClearItemHolder> items;
+	PreviewCommand preview;
+	boolean usesSP = true;
 
 	@Override
 	public void onEnable() {
@@ -55,6 +54,8 @@ public class Clear extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
 		loadItems();
+		getCommand("preview").setExecutor(preview);
+		getCommand("unpreview").setExecutor(preview);
 		log.info(PREFIX + " clear inventory version " + VERSION + " enabled");
 	}
 
@@ -62,7 +63,7 @@ public class Clear extends JavaPlugin {
 	public void onDisable() {
 		Player[] player = server.getOnlinePlayers();
 		for(Player p : player){
-			unpreview(p);
+			preview.unpreview(p);
 		}
 		log.info(PREFIX + " clear inventory version " + VERSION + " disabled");
 	}
@@ -81,90 +82,7 @@ public class Clear extends JavaPlugin {
 			} else if (sender instanceof ConsoleCommandSender) 
 				consoleClear(sender, args);
 		}
-		if(commandLabel.equalsIgnoreCase("preview")){
-			if(sender instanceof Player){
-				if(args.length == 0){
-					Player player = (Player) sender;
-					unpreview(player);
-				}
-				if(args.length == 1){
-					Player player = (Player) sender;
-					Player affected = server.matchPlayer(args[0]).get(0);
-					if(affected!=null){
-						if(usesSP){
-							if(player.hasPermission("clear.other")){
-								preview(player, affected);
-								ClearRunnable run = new ClearRunnable(this, player);
-								server.getScheduler().scheduleSyncDelayedTask(this, run, 6000);
-							}
-						}else if(player.isOp()){
-							preview(player, affected);
-							ClearRunnable run = new ClearRunnable(this, player);
-							server.getScheduler().scheduleSyncDelayedTask(this, run, 6000);
-						}else{
-							sender.sendMessage("You do not have permission to use this command");
-							log.warning(PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
-						}
-					}
-				}
-			}
-			else{
-				if(args.length == 0){
-					sender.sendMessage("Error: I need a name of who to preview");
-				}else{
-					Player player = server.getPlayer(args[0]);
-					ArrayList<String> contains = preview(player);
-					sender.sendMessage("Here is the inventory of " + player.getDisplayName());
-					for(String s : contains){
-						sender.sendMessage(s);
-					}
-				}
-			}
-		}
-		if(commandLabel.equalsIgnoreCase("unpreview") || commandLabel.equalsIgnoreCase("revert")){
-			if(sender instanceof Player){
-				Player player = (Player) sender;
-				unpreview(player);
-			}
-		}
 		return true;
-	}
-	/**
-	 * is used to display a players inventory from the server console
-	 * @param player the player whose inventory is being previewed
-	 * @return a list of items to display to the server console
-	 */
-	private ArrayList<String> preview(Player player) {
-		ArrayList<String> inventoryList = new ArrayList<String>();
-		ArrayList<Integer> itemNumbers = new ArrayList<Integer>();
-		HashMap<Integer, Integer> ammount = new HashMap<Integer, Integer>();
-		PlayerInventory inv = player.getInventory();
-		ItemStack[] contents = inv.getContents();
-		for(ItemStack a : contents){
-			if(a != null){
-				Integer value = a.getTypeId();
-				if(itemNumbers.contains(Integer.valueOf(value))){
-					int i = ammount.get(value);
-					i += a.getAmount();
-					ammount.put(value, i);
-				}else{
-					itemNumbers.add(value);
-					ammount.put(value, a.getAmount());
-				}
-			}
-		}
-		for(Integer i : itemNumbers){
-			StringBuilder out = new StringBuilder();
-			out.append(ammount.get(i) + "x ");
-			for(int j = 0; j < items.size(); j++){
-				if(items.get(j).getItem() == i.intValue()){
-					out.append(items.get(j).getOutput());
-					break;
-				}
-			}
-			inventoryList.add(out.toString());
-		}
-		return inventoryList;
 	}
 
 	/**
@@ -422,33 +340,6 @@ public class Clear extends JavaPlugin {
 			sender.sendMessage(ChatColor.AQUA + "Tp view them the command is preview and to unview them its unpreview");
 			sender.sendMessage(ChatColor.RED + "/preview <user> to put the players inventory in yours");
 			sender.sendMessage(ChatColor.RED + "/unpreview to restore your inventory");
-		}
-	}
-	/**
-	 * Allows an admin to preview a players inventory
-	 * @param previewer The admin that will be previewing the inventory
-	 * @param previewee The player whose inventory is being previewed
-	 */
-	private void preview(Player previewer, Player previewee){
-		ItemStack[] preview = previewee.getInventory().getContents();
-		if(!originalInventory.containsKey(previewer))
-			originalInventory.put(previewer, previewer.getInventory().getContents());
-		previewer.getInventory().setContents(preview);
-		ClearRunnable runner = new ClearRunnable(this, previewer);
-		server.getScheduler().scheduleSyncDelayedTask(this, runner, 6000);
-		previewer.sendMessage("You are now previewing " + previewee.getDisplayName());
-	}
-
-	/**
-	 * Restores the content of an admins inventory if they are previewing one
-	 * @param previewer the player who is previewing an inventory
-	 */
-	public void unpreview(Player previewer){
-		if(originalInventory.containsKey(previewer)){
-			previewer.getInventory().clear();
-			previewer.getInventory().setContents(originalInventory.get(previewer));
-			originalInventory.remove(previewer);
-			previewer.sendMessage("Your inventory has been restored");
 		}
 	}
 
@@ -772,9 +663,9 @@ public class Clear extends JavaPlugin {
 	private void initVariables() {
 		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
 		pl = new ClearPlayerListener(this);
-		originalInventory = new HashMap<Player, ItemStack[]>();
 		server = Bukkit.getServer();
 		pm = server.getPluginManager();
+		preview = new PreviewCommand(this);
 	}
 
 	/**

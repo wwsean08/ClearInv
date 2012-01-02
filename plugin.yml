@@ -16,9 +16,7 @@ commands:
    unpreview:
        description: This will restore your inventory to it's original state
        usage: /<command>
-   revert:
-       description: This will restore your inventory to it's original state
-       usage: /<command>
+       aliases: [revert]
 permissions:
     clear.self:
         description: Allows you to clear stuff from your own inventory
