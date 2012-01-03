@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -359,7 +360,7 @@ public class Clear extends JavaPlugin {
 	 * @param sender is the player who sent the command
 	 */
 	public void clearAll(Player sender) {
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), sender.getInventory().getContents());
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), new ArrayList<ItemStack>(Arrays.asList(sender.getInventory().getContents())));
 		undo.put(sender.getName(), holder);
 		sender.getInventory().clear();
 		sender.sendMessage("Inventory Cleared");
@@ -371,7 +372,7 @@ public class Clear extends JavaPlugin {
 	 * @param affected is the player who's inventory gets cleared.
 	 */
 	public void clearAllRemote(CommandSender sender, Player affected) {
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), affected.getInventory().getContents());
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), new ArrayList<ItemStack>(Arrays.asList(affected.getInventory().getContents())));
 		undo.put(sender.getName(), holder);
 		affected.getInventory().clear();
 		sender.sendMessage(affected.getDisplayName() + "'s inventory has been cleared.");
@@ -383,8 +384,7 @@ public class Clear extends JavaPlugin {
 	 * @param args the list of items to exclude (either in number of name form).
 	 */
 	public void clearExcept(Player sender, String[] args) {
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), sender.getInventory().getContents());
-		undo.put(sender.getName(), holder);
+		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
 		PlayerInventory pi = sender.getInventory();
 		ArrayList<Integer> clear = new ArrayList<Integer>();
 		ArrayList<String> successful = new ArrayList<String>();
@@ -420,6 +420,7 @@ public class Clear extends JavaPlugin {
 		}
 
 		for(Integer slot : clear){
+			removed.add(pi.getItem(slot).clone());
 			pi.clear(slot);
 		}
 		StringBuilder output = new StringBuilder();
@@ -438,6 +439,8 @@ public class Clear extends JavaPlugin {
 			sender.sendMessage("Clear except command failed or you didn't have that to start out with");
 		}
 		sender.sendMessage("Successfully removed everything except " + output);
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
+		undo.put(sender.getName(), holder);
 	}
 
 
@@ -447,6 +450,7 @@ public class Clear extends JavaPlugin {
 	 * @param args the list of items to exclude (either in number of name form).
 	 */
 	public void clearExceptRemote(CommandSender sender, Player affected, String[] args) {
+		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
 		PlayerInventory pi;
 		if(affected != null)
 			pi = affected.getInventory();
@@ -454,8 +458,6 @@ public class Clear extends JavaPlugin {
 			sender.sendMessage(PREFIX + " Error: player variable was null!");
 			return;
 		}
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), pi.getContents());
-		undo.put(sender.getName(), holder);
 		ArrayList<Integer> clear = new ArrayList<Integer>();
 		ArrayList<String> successful = new ArrayList<String>();
 		for(int i = 0; i<pi.getSize(); i++){
@@ -486,9 +488,11 @@ public class Clear extends JavaPlugin {
 				}
 			}
 		}
-		for(Integer i : clear){
-			if(pi != null)
-				pi.clear(i);
+		for(Integer slot : clear){
+			if(pi != null){
+				removed.add(pi.getItem(slot).clone());
+				pi.clear(slot);
+			}
 		}
 		StringBuilder output = new StringBuilder();
 		if(successful.size() >= 3){
@@ -507,6 +511,8 @@ public class Clear extends JavaPlugin {
 			return;
 		}
 		sender.sendMessage("Successfully removed everything except " + output);
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
+		undo.put(sender.getName(), holder);
 	}
 
 	/**
@@ -515,19 +521,22 @@ public class Clear extends JavaPlugin {
 	 * @param args is the list or item(s) that the user wants to delete from their inventory
 	 */
 	public void clearItem(Player sender, String[] args) {
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), sender.getInventory().getContents());
-		undo.put(sender.getName(), holder);
+		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
 		PlayerInventory pi = sender.getInventory();
 		for(String a : args){
 			for(int i = 0; i<items.size(); i++){
 				if(a.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
+						removed.add(pi.getItem(i).clone());
 						pi.remove(items.get(i).getItem());
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
+							if(IS == null)
+								continue;
 							if(hasData(IS.getTypeId())){
 								if(checkData(IS.getData().getData(), items.get(i).getDamage())){
+									removed.add(IS.clone());
 									pi.clear(j);
 								}
 							}
@@ -538,6 +547,8 @@ public class Clear extends JavaPlugin {
 				}
 			}
 		}
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
+		undo.put(sender.getName(), holder);
 	}
 
 	/**
@@ -547,6 +558,7 @@ public class Clear extends JavaPlugin {
 	 * @param args is the list or item(s) that the user wants to delete from their inventory
 	 */
 	public void clearItemRemote(CommandSender sender, Player affected, String[] args) {
+		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
 		PlayerInventory pi;
 		if(affected != null)
 			pi = affected.getInventory();
@@ -554,18 +566,18 @@ public class Clear extends JavaPlugin {
 			sender.sendMessage(PREFIX + " Error: player variable was null!");
 			return;
 		}
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), pi.getContents());
-		undo.put(sender.getName(), holder);
 		for(String a : args){
 			for(int i = 0; i<items.size(); i++){
 				if(a.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
+						removed.add(pi.getItem(i).clone());
 						pi.remove(items.get(i).getItem());
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
 							if(hasData(IS.getTypeId())){
 								if(checkData(IS.getData().getData(), items.get(i).getDamage())){
+									removed.add(IS.clone());
 									pi.clear(j);
 								}
 							}
@@ -576,20 +588,47 @@ public class Clear extends JavaPlugin {
 				}
 			}
 		}
+		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
+		undo.put(sender.getName(), holder);
 	}
-	
+	/**
+	 * allows a player to undo the last clearing of an inventory they did.  This will not fix a clearing of all players.
+	 * @param player
+	 */
 	public void clearUndo(Player player){
 		ClearUndoHolder holder = undo.get(player.getName());
-		Player affected = server.getPlayer(holder.getPlayer());
-		affected.getInventory().setContents(holder.getOldInventory());
-		undo.remove(player.getName());
+		if(holder != null){
+			Player affected = server.getPlayer(holder.getPlayer());
+			PlayerInventory pi = affected.getInventory();
+			for(ItemStack IS : holder.getOldInventory()){
+				if(IS == null)
+					continue;
+				pi.addItem(IS);
+			}
+			undo.remove(player.getName());
+		}else{
+			player.sendMessage("Nothing to undo");
+		}
 	}
-	
+	/**
+	 * allows a command sender (the console specifically) to undo the last clearing of an inventory they did. 
+	 * This will not fix a clearing of all players.
+	 * @param sender
+	 */
 	public void clearUndo(CommandSender sender){
 		ClearUndoHolder holder = undo.get(sender.getName());
-		Player affected = server.getPlayer(holder.getPlayer());
-		affected.getInventory().setContents(holder.getOldInventory());
-		undo.remove(sender.getName());
+		if(holder != null){
+			Player affected = server.getPlayer(holder.getPlayer());
+			PlayerInventory pi = affected.getInventory();
+			for(ItemStack IS : holder.getOldInventory()){
+				if(IS == null)
+					continue;
+				pi.addItem(IS);
+			}
+			undo.remove(sender.getName());
+		}else{
+			sender.sendMessage("Nothing to undo");
+		}
 	}
 
 	private void clearArmor(Player sender){
