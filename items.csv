@@ -1,0 +1,2159 @@
+1.1.3
+1,1,0,stone
+1:0,1,0,stone
+stone,1,0,stone
+stones,1,0,stone
+stne,1,0,stone
+2,2,0,grass
+2:0,2,0,grass
+grass,2,0,grass
+grasss,2,0,grass
+grss,2,0,grass
+turf,2,0,grass
+field,2,0,grass
+3,3,0,dirt
+3:0,3,0,dirt
+dirt,3,0,dirt
+drt,3,0,dirt
+dirts,3,0,dirt
+4,4,0,cobble stone
+4:0,4,0,cobble stone
+cobblestone,4,0,cobble stone
+coblestone,4,0,cobble stone
+cstone,4,0,cobble stone
+cblstone,4,0,cobble stone
+cobble,4,0,cobble stone
+coble,4,0,cobble stone
+5,5,0,plank
+5:0,5,0,plank
+wood,5,0,wood
+woodenplank,5,0,plank
+woodplank,5,0,plank
+woodplanks,5,0,planks
+woodenplanks,5,0,planks
+wod,5,0,wood
+plank,5,0,plank
+plnk,5,0,plank
+planks,5,0,planks
+6:0,6,0,sapling
+6,6,0,sapling
+sapling,6,0,sapling
+saplin,6,0,sapling
+saplings,6,0,sapling
+spling,6,0,sapling
+splin,6,0,sapling
+6:1,6,1,spruce sapling
+sprucesapling,6,1,spruce sapling
+spsapling,6,1,spruce sapling
+sprsapling,6,1,spruce sapling
+sprcsapling,6,1,spruce sapling
+sprcesapling,6,1,spruce sapling
+sprucesaplings,6,1,spruce sapling
+spsaplings,6,1,spruce sapling
+sprsaplings,6,1,spruce sapling
+sprcsaplings,6,1,spruce sapling
+sprcesaplings,6,1,spruce sapling
+6:2,6,2,birch sapling
+birchsapling,6,2,birch sapling
+bsapling,6,2,birch sapling
+brchsapling,6,2,birch sapling
+bircsapling,6,2,birch sapling
+birchsaplings,6,2,birch sapling
+bsaplings,6,2,birch sapling
+brchsaplings,6,2,birch sapling
+bircsaplings,6,2,birch sapling
+7,7,0,bedrock
+7:0,7,0,bedrock
+bedrock,7,0,bedrock
+bdrock,7,0,bedrock
+adminrock,7,0,bedrock
+adminite,7,0,bedrock
+admintite,7,0,bedrock
+adminium,7,0,bedrock
+8,8,0,water
+8:0,8,0,water
+water,8,0,water
+wter,8,0,water
+waer,8,0,water
+watr,8,0,water
+9,9,0,stationary water
+9:0,9,0,stationary water
+stationarywater,9,0,stationary water
+stationwater,9,0,stationary water
+stoppedwater,9,0,stationary water
+10,10,0,lava
+10:0,10,0,lava
+lava,10,0,lava
+lva,10,0,lava
+lav,10,0,lava
+11,11,0,stationary lava
+11:0,11,0,stationary lava
+stationarylava,11,0,stationary lava
+stationlava,11,0,stationary lava
+stoppedlava,11,0,stationarylava
+12,12,0,sand
+12:0,12,0,sand
+sand,12,0,sand
+snd,12,0,sand
+san,12,0,sand
+13,13,0,gravel
+13:0,13,0,gravel
+gravel,13,0,gravel
+grvel,13,0,gravel
+gravl,13,0,gravel
+14,14,0,gold ore
+14:0,14,0,gold ore
+goldore,14,0,gold ore
+gldore,14,0,gold ore
+gore,14,0,gold ore
+15,15,0,iron ore
+15:0,15,0,iron ore
+ironore,15,0,iron ore
+irnore,15,0,iron ore
+iore,15,0,iron ore
+16,16,0,coal ore
+16:0,16,0,coal ore
+coalore,16,0,coal ore
+core,16,0,coal ore
+17,17,0,log
+17:0,17,0,log
+log,17,0,log
+lg,17,0,log
+logs,17,0,logs
+lgs,17,0,logs
+17:1,17,1,spruce log
+sprucelog,17,1,spruce log
+spruclog,17,1,spruce log
+sprucelogs,17,1,spruce logs
+spruclogs,17,1,spruce logs
+slog,17,1,spruce log
+slogs,17,1,spruce logs
+17:2,17,2,birch log
+birchlog,17,2,birch log
+birchlogs,17,2,birch logs
+brchlog,17,2,birch log
+brchlogs,17,2,birch logs
+blog,17,2,birch log
+blogs,17,2,birch logs
+18,18,0,leaves
+18:0,18,0,leaves
+leaves,18,0,leaves
+leaf,18,0,leaves
+leave,18,0,leaves
+leafs,18,0,leaves
+18:1,18,1,spruce leaves
+spruceleaves,18,1,spruce leaves
+spruceleave,18,1,spruce leaves
+spruceleaf,18,1,spruce leaves
+sprceleaves,18,1,spruce leaves
+sprceleave,18,1,spruce leaves
+sprceleaf,18,1,spruce leaves
+sleaves,18,1,spruce leaves
+sleaf,18,1,spruce leaves
+18:2,18,2,birch leaves
+birchleaves,18,2,birch leaves
+birchleave,18,2,birch leaves
+birchleaf,18,2,birch leaves
+brcleaves,18,2,birch leaves
+brcleave,18,2,birch leaves
+brcleaf,18,2,birch leaves
+bleaves,18,2,birch leaves
+bleave,18,2,birch leaves
+bleaf,18,2,birch leaves
+19,19,0,sponge
+19:0,19,0,sponge
+sponge,19,0,sponge
+spnge,19,0,sponge
+spong,19,0,sponge
+spng,19,0,sponge
+20,20,0,glass
+20:0,20,0,glass
+glass,20,0,glass
+glas,20,0,glass
+glss,20,0,glass
+21,21,0,lapis lazuli ore
+21:0,21,0,lapis lazuli ore
+lapisore,21,0,lapis lazuli ore
+lores,21,0,lapis lazuli ore
+lore,21,0,lapis lazuli ore
+lapislazuliore,21,0,lapis lazuli ore
+lapislazulore,21,0,lapis lazuli ore
+lapisores,21,0,lapis lazuli ore
+lapislazuliores,21,0,lapis lazuli ore
+lapislazulores,21,0,lapis lazuli ore
+22,22,0,lapis lazuli block
+22:0,22,0,lapis lazuli block
+laipslazuliblock,22,0,lapis lazuli block
+lapislazuliblocks,22,0,lapis lazuli block
+lapisblock,22,0,lapis lazuli block
+lapisblocks,22,0,lapis lazuli block
+lapisb,22,0,lapis lazuli block
+lapisblck,22,0,lapis lazuli block
+23,23,0,dispenser
+23:0,23,0,dispenser
+dispenser,23,0,dispenser
+dispensr,23,0,dispenser
+dispensers,23,0,dispenser
+24,24,0,sandstone
+24:0,24,0,sandstone
+sandstone,24,0,sandstone
+sandstne,24,0,sandstone
+sndstone,24,0,sandstone
+sndstne,24,0,sandstone
+25,25,0,noteblock
+25:0,25,0,noteblock
+noteblock,25,0,noteblock
+noteblck,25,0,noteblock
+notblock,25,0,noteblock
+nteblock,25,0,noteblock
+nblock,25,0,noteblock
+26,26,0,bed
+26:0,26,0,bed
+bed,26,0,bed
+bd,26,0,bed
+27,27,0,powered rail
+27:0,27,0,powered rail
+poweredrail,27,0,powered rail
+poweredrails,27,0,powered rail
+powerrail,27,0,powered rail
+powerrails,27 ,0,powered rail
+pwrrail,27,0,powered rail
+pwrrails,27,0,powered rail
+prail,27,0,powered rail
+prails,27,0,powered rail
+28,28,0,detector rail
+28:0,28,0,detector rail
+detectorrail,28,0,detector rail
+detectorrails,28,0,detector rail
+detectrrail,28,0,detector rail
+detectrrails,28,0,detector rail
+drail,28,0,detector rail
+drails,28,0,detector rail
+29,29,0,sticky piston
+29:0,29,0,sticky piston
+stickypiston,29,0,sticky piston
+stickypistons,29,0,sticky piston
+gooeypiston,29,0,sticky piston
+gooeypistons,29,0,sticky piston
+stickpiston,29,0,sticky piston
+stickpistons,29,0,sticky piston
+goopiston,29,0,sticky piston
+goopistons,29,0,sticky piston
+30,30,0,cobweb
+30:0,30,0,cobweb
+cobweb,30,0,cobweb
+web,30,0,cobweb
+wb,30,0,cobweb
+cobwb,30,0,cobweb
+cbweb,30,0,cobweb
+spiderman,30,0,easter egg: cobweb
+31,31,0,tall grass
+31:0,31,0,tall grass
+tallgrass,31,0,tall grass
+wildgrass,31,0,tall grass
+longgrass,31,0,tall grass
+tllgrass,31,0,tall grass
+wldgrass,31,0,tall grass
+lnggrass,31,0,tall grass
+32,32,0,shrub
+32:0,32,0,shrub
+shrub,32,0,shrub
+deadshrub,32,0,shrub
+shrubry,32,0,shrub
+shrubs,32,0,shrub
+deadshrubs,32,0,shrub
+montypython,32,0,easter egg: shrubry
+33,33,0,piston
+33:0,33,0,piston
+piston,33,0,piston
+pston,33,0,piston
+pstn,33,0,piston
+pistn,33,0,piston
+34,34,0,piston extension
+34:0,34,0,piston extension
+pistonextension,34,0,piston extension
+35,35,0,wool
+35:0,35,0,wool
+wool,35,0,wool
+whitewool,35,0,wool
+normalwool,35,0,wool
+regwool,35,0,wool
+35:1,35,1,orange wool
+orangewool,35,1,orange wool
+orngewool,35,1,orange wool
+orangwool,35,1,orange wool
+orngwool,35,1,orange wool
+owool,35,1,orange wool
+orange,35,1,orange wool
+35:2,35,2,magenta wool
+magentawool,35,2,magenta wool
+magentwool,35,2,magenta wool
+magwool,35,2,magenta wool
+magntwool,35,2,magenta wool
+mgntwool,35,2,magenta wool
+mwool,35,2,magenta wool
+magenta,35,2,magenta wool
+35:3,35,3,light blue wool
+lightbluewool,35,3,light blue wool
+lghtbluewool,35,3,light blue wool
+lghtbluwool,35,3,light blue wool
+lbluewool,35,3,light blue wool
+lbluwool,35,3,light blue wool
+lbwool,35,3,light blue wool
+lightblue,35,3,light blue wool
+35:4,35,4,yellow wool
+yellowwool,35,4,yellow wool
+yellowool,35,4,yellow wool
+yllowool,35,4,yellow wool
+ywool,35,4,yellow wool
+yellow,35,4,yellow wool
+35:5,35,5,lime wool
+limewool,35,5,lime wool
+lmewool,35,5,lime wool
+lime,35,5,lime wool
+sdxwool,35,5,easter egg: lime wool
+35:6,35,6,pink wool
+pinkwool,35,6,pink wool
+pnkwool,35,6,pink wool
+pink,35,6,pink wool
+minecraftchick,35,6,easter egg: pink wool
+mccwool,35,6,easter egg: pink wool
+35:7,35,7,grey wool
+greywool,35,7,grey wool
+grywool,35,7,grey wool
+grey,35,7,grey wool
+35:8,35,8,light grey wool
+lightgreywool,35,8,light grey wool
+lghtgreywool,35,8,light grey wool
+lghtgrywool,35,8,light grey wool
+lightgrywool,35,8,light grey wool
+lgreywool,35,8,light grey wool
+lightgrey,35,8,light grey wool
+35:9,35,9,cyan wool
+cyanwool,35,9,cyan wool
+cynwool,35,9,cyan wool
+cwool,35,9,cyan wool
+cyan,35,9,cyan wool
+35:10,35,10,purple wool
+purplewool,35,10,purple wool
+prplewool,35,10,purple wool
+purplwool,35,10,purple wool
+violetwool,35,10,violet wool
+viletwool,35,10,violet wool
+voletwool,35,10,violet wool
+vwool,35,10,violet wool
+purple,35,10,purple wool
+violet,35,10,violet wool
+35:11,35,11,blue wool
+bluewool,35,11,blue wool
+bluwool,35,11,blue wool
+blue,35,11,blue wool
+35:12,35,12,brown wool
+brownwool,35,12,brown wool
+brwnwool,35,12,brown wool
+brown,35,12,brown wool
+35:13,35,13,green wool
+greenwool,35,13,green wool
+grenwool,35,13,green wool
+green,35,13,green wool
+35:14,35,14,red wool
+redwool,35,14,red wool
+rdwool,35,14,red wool
+rwool,35,14,red wool
+red,35,14,red wool
+35:15,35,15,black wool
+blackwool,35,15,black wool
+blckwool,35,15,black wool
+black,35,15,black wool
+36,36,0,block moved by piston
+36:0,36,0,block moved by piston
+37,37,0,dandelion
+37:0,37,0,dandelion
+dandelion,37,0,dandelion
+dandlion,37,0,dandelion
+38,38,0,rose
+38:0,38,0,rose
+rose,38,0,rose
+redrose,38,0,rose
+rdrose,38,0,rose
+rse,38,0,rose
+39,39,0,brown mushroom
+39:0,39,0,brown mushroom
+brownmushroom,39,0,brown mushroom
+brownshroom,39,0,brown mushroom
+bshroom,39,0,brown mushroom
+bmushroom,39,0,brown mushroom
+brnmushroom,39,0,brown mushroom
+brnshroom,39,0,brown mushroom
+40,40,0,red mushroom
+40:0,40,0,red mushroom
+redmushroom,40,0,red mushroom
+redshroom,40,0,red mushroom
+rdshroom,40,0,red mushroom
+rdmushroom,40,0,red mushroom
+rmushroom,40,0,red mushroom
+rshroom,40,0,red mushroom
+41,41,0,gold block
+41:0,41,0,gold block
+goldblock,41,0,gold block
+gldblock,41,0,gold block
+goldblck,41,0,gold block
+gldblck,41,0,gold block
+gblock,41,0,gold block
+gblck,41,0,gold block
+42,42,0,iron block
+42:0,42,0,iron block
+ironblock,42,0,iron block
+irnblock,42,0,iron block
+ironblck,42,0,iron block
+irnblck,42,0,iron block
+iblock,42,0,iron block
+iblck,42,0,iron block
+43,43,0,stone slab
+43:0,43,0,stone slab
+43:1,43,1,sandstone slab
+43:2,43,2,wood slab
+43:3,43,3,cobble slab
+43:4,43,4,brick slab
+43:5,43,5,stone brock slab
+43,44,0,stone slab
+43:0,44,0,stone slab
+stoneslab,44,0,stone slab
+stneslab,44,0,stone slab
+stneslb,44,0,stone slab
+stoneslb,44,0,stone slab
+43:1,44,1,sandstone slab
+sandstoneslab,44,1,sandstone slab
+sandstneslab,44,1,sandstone slab
+sndstneslab,44,1,sandstone slab
+sandslab,44,1,sandstone slab
+43:2,44,2,wood slab
+woodslab,44,2,wood slab
+woodenslab,44,2,wood slab
+wslab,44,2,wood slab
+plankslab,44,2,wood slab
+43:3,44,3,cobble slab
+cobbleslab,44,3,cobble slab
+cobblestoneslab,44,3,cobble slab
+cobblestneslab,44,3,cobble slab
+cslab,44,3,cobble slab
+cbbleslab,44,3,cobble slab
+43:4,44,4,brick slab
+brickslab,44,4,brick slab
+brckslab,44,4,brick slab
+bslab,44,4,brick slab
+brslab,44,4,brick slab
+43:5,44,5,stone brock slab
+stonebrickslab,44,5,stone brock slab
+stnebrickslab,44,5,stone brock slab
+stnebrckslab,44,5,stone brock slab
+sbrickslab,44,5,stone brock slab
+sbslab,44,5,stone brock slab
+sbrslab,44,5,stone brock slab
+45,45,0,brick block
+45:0,45,0,brick block
+brickblock,45,0,brick block
+brickblck,45,0,brick block
+brckblock,45,0,brick block
+brckblck,45,0,brick block
+bblock,45,0,brick block
+46,46,0,TNT
+46:0,46,0,TNT
+tnt,46,0,TNT
+dinomyte,46,0,TNT
+captainsparklez,46,0,TNT
+boom,46,0,TNT
+47,47,0,bookshelf
+47:0,47,0,bookshelf
+bookshelf,47,0,bookshelf
+bookshlf,47,0,bookshelf
+bshelf,47,0,bookshelf
+48,48,0,moss stone
+48:0,48,0,moss stone
+mossycobble,48,0,moss stone
+mossstone,48,0,moss stone
+mosscobble,48,0,moss stone
+mossycobblestone,48,0,moss stone
+mossycbblestone,48,0,moss stone
+mossycbblestne,48,0,moss stone
+49,49,0,obsidian
+49:0,49,0,obsidian
+obsidian,49,0,obsidian
+obsidin,49,0,obsidian
+obsdian,49,0,obsidian
+50,50,0,torch
+50:0,50,0,torch
+torch,50,0,torch
+trch,50,0,torch
+51,51,0,fire
+51:0,51,0,fire
+fire,51,0,fire
+fre,51,0,fire
+ften,51,0,fire
+52,52,0,monster spawner
+52:0,52,0,monster spawner
+spawner,52,0,monster spawner
+monsterspawner,52,0,monster spawner
+mobspawner,52,0,monster spawner
+mobspwner,52,0,monster spawner
+53,53,0,wooden stairs
+53:0,53,0,wooden stairs
+woodstairs,53,0,wooden stairs
+woodenstairs,53,0,wooden stairs
+wstairs,53,0,wooden stairs
+plankstairs,53,0,wooden stairs
+plankstair,53,0,wooden stairs
+woodenstair,53,0,wooden stairs
+woodstair,53,0,wooden stairs
+54,54,0,chest
+54:0,54,0,chest
+chest,54,0,chest
+chst,54,0,chest
+55,55,0,redstone wire
+55:0,55,0,redstone wire
+redstonewire,55,0,redstone wire
+rwire,55,0,redstone wire
+rdstonewire,55,0,redstone wire
+rdstnewire,55,0,redstone wire
+56,56,0,diamond ore
+56:0,56,0,diamond ore
+diamondore,56,0,diamond ore
+dimondore,56,0,diamond ore
+dore,56,0,diamond ore
+57,57,0,diamond block
+57:0,57,0,diamond block
+diamondblock,57,0,diamond block
+diamondblck,57,0,diamond block
+dimondblock,57,0,diamond block
+dimondblck,57,0,diamond block
+dblock,57,0,diamond block
+dblck,57,0,diamond block
+58,58,0,crafting table
+58:0,58,0,crafting table
+craftingbench,58,0,crafting table
+craftingtable,58,0,crafting table
+craftbench,58,0,crafting table
+crafttable,58,0,crafting table
+crftbench,58,0,crafting table
+crfttable,58,0,crafting table
+craftbnch,58,0,crafting table
+crafttble,58,0,crafting table
+59,59,0,seeds
+59:0,59,0,seeds
+plantedseeds,59,0,seeds
+plantedseed,59,0,seeds
+60,60,0,farmland
+60:0,60,0,farmland
+farmland,60,0,farmland
+frmland,60,0,farmland
+farmlnd,60,0,farmland
+frmlnd,60,0,farmland
+61,61,0,furnace
+61:0,61,0,furnace
+furnace,61,0,furnace
+frnace,61,0,furnace
+furnce,61,0,furnace
+frnce,61,0,furnace
+62,62,0,burning furnace
+62:0,62,0,burning furnace
+burningfurnace,62,0,burning furnace
+activefurnace,62,0,burning furnace
+runningfurnace,62,0,burning furnace
+bfurnace,62,0,burning furnace
+afurnace,62,0,burning furnace
+rfurnace,62,0,burning furnace
+63,63,0,sign post
+63:0,63,0,sign post
+signpost,63,0,sign post
+sgnpost,63,0,sign post
+sgnpst,63,0,sign post
+64,64,0,wood door
+64:0,64,0,wood door
+woodendoorblock,64,0,wood door
+wooddoorblock,64,0,wood door
+wdoorblock,64,0,wood door
+65,65,0,ladder
+65:0,65,0,ladder
+ladder,65,0,ladder
+ldder,65,0,ladder
+lddr,65,0,ladder
+laddr,65,0,ladder
+66,66,0,rails
+66:0,66,0,rails
+rails,66,0,rails
+rils,66,0,rails
+rals,66,0,rails
+rail,66,0,rails
+ral,66,0,rails
+ril,66,0,rails
+67,67,0,cobble stairs
+67:0,67,0,cobble stairs
+cobblestonestairs,67,0,cobble stairs
+cobblestairs,67,0,cobble stairs
+cobblestnestairs,67,0,cobble stairs
+cbblestairs,67,0,cobble stairs
+68,68,0,wall sign
+68:0,68,0,wall sign
+wallsign,68,0,wall sign
+wllsign,68,0,wall sign
+wallsgn,68,0,wall sign
+wllsgn,68,0,wall sign
+69,69,0,lever
+69:0,69,0,lever
+lever,69,0,lever
+lver,69,0,lever
+levr,69,0,lever
+lvr,69,0,lever
+70,70,0,stone pressure plate
+70:0,70,0,stone pressure plate
+stonepressureplate,70,0,stone pressure plate
+stnepressureplate,70,0,stone pressure plate
+stneprssureplate,70,0,stone pressure plate
+stneprssreplate,70,0,stone pressure plate
+stneprssrplate,70,0,stone pressure plate
+71,71,0,iron door
+71:0,71,0,iron door
+irondoorblock,71,0,iron door
+irndoorblock,71,0,iron door
+idoorblock,71,0,iron door
+72,72,0,wood pressure plate
+72:0,72,0,wood pressure plate
+woodpressureplate,72,0,wood pressure plate
+woodenpressureplate,72,0,wood pressure plate
+wpressureplate,72,0,wood pressure plate
+73,73,0,redstone ore
+73:0,73,0,redstone ore
+redstoneore,73,0,redstone ore
+rstoneore,73,0,redstone ore
+rdstoneore,73,0,redstone ore
+rore,73,0,redstone ore
+74,74,0,glowing redstone ore
+74:0,74,0,glowing redstone ore
+glowingredstoneore,74,0,glowing redstone ore
+gredstoneore,74,0,glowing redstone ore
+grstoneore,74,0,glowing redstone ore
+grdstoneore,74,0,glowing redstone ore
+75,75,0,redstone torch off
+75:0,75,0,redstone torch off
+redstonetorchoff,75,0,redstone torch off
+offredstonetorch,75,0,redstone torch off
+offrstorch,75,0,redstone torch off
+rstorchoff,75,0,redstone torch off
+76,76,0,redstone torch
+76:0,76,0,redstone torch
+redstonetorch,76,0,redstone torch
+redstnetorch,76,0,redstone torch
+rstorch,76,0,redstone torch
+rdstnetorch,76,0,redstone torch
+77,77,0,button
+77:0,77,0,button
+button,77,0,button
+btton,77,0,button
+buttn,77,0,button
+bttn,77,0,button
+stonebutton,77,0,button
+stnebutton,77,0,button
+sbutton,77,0,button
+78,78,0,snow
+78:0,78,0,snow
+snow,78,0,snow
+snw,78,0,snow
+79,79,0,ice
+79:0,79,0,ice
+ice,79,0,ice
+80,80,0,snow block
+80:0,80,0,snow block
+snowblock,80,0,snow block
+snwblock,80,0,snow block
+sblock,80,0,snow block
+snowblck,80,0,snow block
+snwblck,80,0,snow block
+sblck,80,0,snow block
+81,81,0,cactus
+81:0,81,0,cactus
+cactus,81,0,cactus
+cctus,81,0,cactus
+cacti,81,0,cactus
+inxane,81,0,cactus
+82,82,0,clay block
+82:0,82,0,clay block
+clayblock,82,0,clay block
+clyblock,82,0,clay block
+clyblck,82,0,clay block
+clayblck,82,0,clay block
+83,83,0,sugarcane
+83:0,83,0,sugarcane
+sugarcaneblock,83,0,sugarcane
+sugarcneblock,83,0,sugarcane
+84,84,0,jukebox
+84:0,84,0,jukebox
+jukebox,84,0,jukebox
+jkebox,84,0,jukebox
+jkebx,84,0,jukebox
+fonz,84,0,jukebox
+thefonz,84,0,jukebox
+85,85,0,fence
+85:0,85,0,fence
+fence,85,0,fence
+fnce,85,0,fence
+fenc,85,0,fence
+fnc,85,0,fence
+86,86,0,pumpkin
+86:0,86,0,pumpkin
+pumpkin,86,0,pumpkin
+pmpkin,86,0,pumpkin
+pumpkn,86,0,pumpkin
+pmpkn,86,0,pumpkin
+87,87,0,netherrack
+87:0,87,0,netherrack
+netherrack,87,0,netherrack
+ntherrack,87,0,netherrack
+hellstone,87,0,netherrack
+hllstone,87,0,netherrack
+hell,87,0,netherrack
+hellstne,87,0,netherrack
+88,88,0,soulsand
+88:0,88,0,soulsand
+soulsand,88,0,soulsand
+soulsnd,88,0,soulsand
+hellsand,88,0,soulsand
+quicksand,88,0,soulsand
+89,89,0,glowstone block
+89:0,89,0,glowstone block
+glowstoneblock,89,0,glowstone block
+glowblock,89,0,glowstone block
+gblock,89,0,glowstone block
+glowstneblock,89,0,glowstone block
+gstoneblock,89,0,glowstone block
+gsblock,89,0,glowstone block
+90,90,0,portal
+90:0,90,0,portal
+portal,90,0,portal
+prtal,90,0,portal
+portl,90,0,portal
+prtl,90,0,portal
+91,91,0,jack-o-lantern
+91:0,91,0,jack-o-lantern
+jackolantern,91,0,jack-o-lantern
+jacklantern,91,0,jack-o-lantern
+jacktheripper,91,0,jack-o-lantern
+92,92,0,cake
+92:0,92,0,cake
+cakeblock,92,0,cake
+ckeblock,92,0,cake
+92:1,92,1,cake
+92:2,92,2,cake
+92:3,92,3,cake
+92:4,92,4,cake
+92:5,92,5,cake
+93,93,0,redstone repeater
+93:0,93,0,redstone repeater
+redstonerepeateroff,93,0,redstone repeater
+redstnerepeateroff,93,0,redstone repeater
+diodeoff,93,0,redstone repeater
+rsrepeateroff,93,0,redstone repeater
+94,94,0,redstone repeater
+94:0,94,0,redstone repeater
+redstonerepeateron,94,0,redstone repeater
+redstnerepeateron,94,0,redstone repeater
+diodeon,94,0,redstone repeater
+rsrepeateron,94,0,redstone repeater
+95,95,0,locked chest
+95:0,95,0,locked chest
+lockedchest,95,0,locked chest
+trickchest,95,0,locked chest
+jockchest,95,0,locked chest
+aprilchest,95,0,locked chest
+96,96,0,trapdoor
+96:0,96,0,trapdoor
+trapdoor,96,0,trapdoor
+hatch,96,0,trapdoor
+trpdoor,96,0,trapdoor
+htch,96,0,trapdoor
+97,97,0,hidden silverfish
+97:0,97,0,hidden silverfish
+hiddensilverfish,97,0,hidden silverfish
+hidsilverfish,97,0,hidden silverfish
+hidslverfish,97,0,hidden silverfish
+97:1,97,1,hidden silverfish
+97:2,97,2,hidden silverfish
+98,98,0,stone brick
+98:0,98,0,stone brick
+stonebrick,98,0,stone brick
+stnebrick,98,0,stone brick
+stnbrick,98,0,stone brick
+stnbrck,98,0,stone brick
+stnebrck,98,0,stone brick
+stonebrck,98,0,stone brick
+99,99,0,huge brown mushroom
+99:0,99,0,huge brown mushroom
+hugebrownmushroom,99,0,huge brown mushroom
+hugebrownshroom,99,0,huge brown mushroom
+100,100,0,huge red mushroom
+100:0,100,0,huge red mushroom
+hugeredmushroom,100,0,huge red mushroom
+hugeredshroom,100,0,huge red mushroom
+101,101,0,iron bars
+101:0,101,0,iron bars
+ironbars,101,0,iron bars
+inbars,101,0,iron bars
+ibars,101,0,iron bars
+102,102,0,glass pane
+102:0,102,0,glass pane
+glasspane,102,0,glass pane
+glsspane,102,0,glass pane
+glasspne,102,0,glass pane
+glsspne,102,0,glass pane
+103,103,0,melon
+103:0,103,0,melon
+melon,103,0,melon
+mlon,103,0,melon
+meln,103,0,melon
+mln,103,0,melon
+104,104,0,pumpkin stem
+104:0,104,0,pumpkin stem
+pumpkinstem,104,0,pumpkin stem
+pmpkinstem,104,0,pumpkin stem
+pmpkinstm,104,0,pumpkin stem
+pstem,104,0,pumpkin stem
+105,105,0,melon stem
+105:0,105,0,melon stem
+melonstem,105,0,melon stem
+melnstem,105,0,melon stem
+mlonstem,105,0,melon stem
+mlnstem,105,0,melon stem
+mstem,105,0,melon stem
+106,106,0,vines
+106:0,106,0,vines
+vines,106,0,vines
+vine,106,0,vines
+vin,106,0,vines
+vnes,106,0,vines
+107,107,0,fence gate
+107:0,107,0,fence gate
+fencegate,107,0,fence gate
+fncegate,107,0,fence gate
+fncegte,107,0,fence gate
+108,108,0,brick stairs
+108:0,108,0,brick stairs
+brickstairs,108,0,brick stairs
+brickstair,108,0,brick stairs
+brckstairs,108,0,brick stairs
+brckstair,108,0,brick stairs
+bstair,108,0,brick stairs
+bstairs,108,0,brick stairs
+109,109,0,stone brick stairs
+109:0,109,0,stone brick stairs
+stonebrickstair,109,0,stone brick stairs
+stonebrickstairs,109,0,stone brick stairs
+sbstairs,109,0,stone brick stairs
+sbstair,109,0,stone brick stairs
+110,110,0,mycelium
+110:0,110,0,mycelium
+mycelium,110,0,mycelium
+mycelim,110,0,mycelium
+mycelum,110,0,mycelium
+myclium,110,0,mycelium
+myelium,110,0,mycelium
+mycelm,110,0,mycelium
+111,111,0,lily pad
+111:0,111,0,lily pad
+lilypad,111,0,lily pad
+lily_pad,111,0,lily pad
+lilypd,111,0,lily pad
+llypad,111,0,lily pad
+llypd,111,0,lily pad
+112,112,0,nether brick
+112:0,112,9,nether brick
+netherbrick,112,0,nether brick
+netherbrck,112,0,nether brick
+nethrbrick,112,0,nether brick
+nethrbrck,112,0,nether brick
+nthrbrck,112,0,nether brick
+ntherbrick,112,0,nether brick
+nether_brick,112,0,nether brick
+113,113,0,nether brick fence
+113:0,113,0,nether brick fence
+netherbrickfence,113,0,nether brick fence
+netherbrickfnce,113,0,nether brick fence
+netherbrckfence,113,0,nether brick fence
+nethrbrickfence,113,0,nether brick fence
+ntherbrickfence,113,0,nether brick fence
+netherbrckfnce,113,0,nether brick fence
+nbf,113,0,nether brick fence
+114,113,0,nether brick stairs
+114:0,114,0,nether brick stairs
+netherbrickstairs,114,0,nether brick stairs
+netherbrickstirs,114,0,nether brick stairs
+netherbrckstairs,114,0,nether brick stairs
+nethrbrickstairs,114,0,nether brick stairs
+nthrbrickstairs,114,0,nether brick stairs
+nbs,114,0,nether brick stairs
+115,115,0,nether wart
+115:0,115,0,nether wart
+netherwartblock,115,0,nether wart
+netherwrtblock,115,0,nether wart
+nethrwartblock,115,0,nether wart
+ntherwartblock,115,0,nether wart
+nethrwrtblock,115,0,nether wart
+nthrwrtblock,115,0,nether wart
+116,116,0,enchantment table
+116:0,116,0,enchantment table
+enchantmenttable,116,0,enchantment table
+enchantmenttble,116,0,enchantment table
+enchantmnttable,116,0,enchantment table
+enchntmenttable,116,0,enchantment table
+enchantmnttble,116,0,enchantment table
+117,117,0,brewing stand
+117:0,117,0,brewing stand
+brewingstandblock,117,0,brewing stand
+brewingstndblock,117,0,brewing stand
+brewngstandblock,117,0,brewing stand
+brewstandblock,117,0,brewing stand
+brewngstndblock,117,0,brewing stand
+brwingstandblock,117,0,brewing stand
+118,118,0,cauldron
+118:0,118,0,cauldron
+cauldronblock,118,0,cauldron
+cauldrnblock,118,0,cauldron
+caldronblock,118,0,cauldron
+culdronblock,118,0,cauldron
+caldrnblock,118,0,cauldron
+culdrnblock,118,0,cauldron
+cldronblock,118,0,cauldron
+cldrnblock,118,0,cauldron
+119,119,0,end portal
+119:0,119,0,end portal
+endportal,119,0,end portal
+enderportal,119,0,end portal
+endrportal,119,0,end portal
+endportl,119,0,end portal
+endprtal,119,0,end portal
+120,120,0,end portal frame
+120:0,120,0,end portal frame
+endportalframe,120,0,end portal frame
+enderportalframe,120,0,end portal frame
+endrportalframe,120,0,end portal frame
+endportalfrme,120,0,end portal frame
+endportlframe,120,0,end portal frame
+endprtalframe,120,0,end portal frame
+endprtaframe,120,0,end portal frame
+endportlfrme,120,0,end portal frame
+endportalfrm,120,0,end portal frame
+121,121,0,end stone
+121:0,121,0,end stone
+endstone,121,0,end stone
+enderstone,121,0,end stone
+endston,121,0,end stone
+endstne,121,0,end stone
+endstn,121,0,end stone
+122,122,0,dragon egg
+122:0,122,0,dragon egg
+dragonegg,122,0,dragon egg
+dragongg,122,0,dragon egg
+dragnegg,122,0,dragon egg
+drgonegg,122,0,dragon egg
+dragngg,122,0,dragon egg
+drgongg,122,0,dragon egg
+drgnegg,122,0,dragon egg
+drgngg,122,0,dragon egg
+256,256,0,iron shovel
+256:0,256,0,iron shovel
+ironshovel,256,0,iron shovel
+ironspade,256,0,iron shovel
+irnshovel,256,0,iron shovel
+irnspade,256,0,iron shovel
+ishovel,256,0,iron shovel
+ispade,256,0,iron shovel
+257,257,0,iron pickaxe
+257:0,257,0,iron pickaxe
+ironpickaxe,257,0,iron pickaxe
+ironpick,257,0,iron pickaxe
+ipickaxe,257,0,iron pickaxe
+ipick,257,0,iron pickaxe
+258,258,0,iron axe
+258:0,258,0,iron axe
+ironaxe,258,0,iron axe
+irnaxe,258,0,iron axe
+iaxe,258,0,iron axe
+259,259,0,flint and steel
+259:0,259,0,flint and steel
+flintandsteel,259,0,flint and steel
+flingnsteel,259,0,flint and steel
+260,260,0,apple
+260:0,260,0,apple
+redapple,260,0,apple
+apple,260,0,apple
+pple,260,0,apple
+appl,260,0,apple
+261,261,0,bow
+261:0,261,0,bow
+bow,261,0,bow
+bw,261,0,bow
+262,262,0,arrow
+262:0,262,0,arrow
+arrow,262,0,arrow
+arrw,262,0,arrow
+rrow,262,0,arrow
+263,263,0,coal
+263:0,263,0,coal
+coal,263,0,coal
+263:1,263,1,charcoal
+charcoal,263,1,charcoal
+264,264,0,diamond
+264:0,264,0,diamond
+diamond,264,0,diamond
+dimond,264,0,diamond
+girlsbestfriend,264,0,diamond
+deadworkersparty,264,0,diamond
+265,265,0,iron ingot
+265:0,265,0,iron ingot
+ironingot,265,0,iron ingot
+irningot,265,0,iron ingot
+iingot,265,0,iron ingot
+266,266,0,gold ingot
+266:0,266,0,gold ingot
+goldingot,266,0,gold ingot
+gldingot,266,0,gold ingot
+gingot,266,0,gold ingot
+267,267,0,iron sword
+267:0,267,0,iron sword
+ironsword,267,0,iron sword
+irnsword,267,0,iron sword
+isword,267,0,iron sword
+268,268,0,wood sword
+268:0,268,0,wood sword
+woodsword,268,0,wood sword
+woodensword,268,0,wood sword
+wsword,268,0,wood sword
+269,269,0,wood shovel
+269:0,269,0,wood shovel
+woodshovel,269,0,wood shovel
+woodenshovel,269,0,wood shovel
+wshovel,269,0,wood shovel
+woodspade,269,0,wood shovel
+woodenspade,269,0,wood shovel
+wspade,269,0,wood shovel
+270,270,0,wood pickaxe
+270:0,270,0,wood pickaxe
+woodpick,270,0,wood pickaxe
+woodenpick,270,0,wood pickaxe
+woodpickaxe,270,0,wood pickaxe
+woodenpickaxe,270,0,wood pickaxe
+wpick,270,0,wood pickaxe
+wpickaxe,270,0,wood pickaxe
+271,271,0,wood axe
+271:0,271,0,wood axe
+woodaxe,271,0,wood axe
+woodenaxe,271,0,wood axe
+woodex,271,0,wood axe
+woodenex,271,0,wood axe
+waxe,271,0,wood axe
+wax,271,0,wood axe
+272,272,0,stone sword
+272:0,272,0,stone sword
+stonesword,272,0,stone sword
+stnesword,272,0,stone sword
+ssword,272,0,stone sword
+273,273,0,stone shovel
+730:0,273,0,stone shovel
+stoneshovel,273,0,stone shovel
+stonespade,273,0,stone shovel
+stneshovel,273,0,stone shovel
+stnespade,273,0,stone shovel
+sshovel,273,0,stone shovel
+sspade,273,0,stone shovel
+274,274,0,stone pick
+274:0,274,0,stone pick
+stonepickaxe,274,0,stone pick
+stonepick,274,0,stone pick
+stnepick,274,0,stone pick
+stnepickaxe,274,0,stone pick
+spickaxe,274,0,stone pick
+spick,274,0,stone pick
+275,275,0,stone axe
+275:0,275,0,stone axe
+stoneaxe,275,0,stone axe
+stoneax,275,0,stone axe
+stneaxe,275,0,stone axe
+stneax,275,0,stone axe
+saxe,275,0,stone axe
+sax,275,0,stone axe
+276,276,0,diamond sword
+276:0,276,0,diamond sword
+diamondsword,276,0,diamond sword
+dimondsword,276,0,diamond sword
+dsword,276,0,diamond sword
+277,277,0,diamond shovel
+277:0,277,0,diamond shovel
+diamondshovel,277,0,diamond shovel
+diamondspade,277,0,diamond shovel
+dimondshovel,277,0,diamond shovel
+dimondspade,277,0,diamond shovel
+dshovel,277,0,diamond shovel
+dspade,277,0,diamond shovel
+278,278,0,diamond pick
+278:0,278,0,diamond pick
+diamondpickaxe,278,0,diamond pick
+diamondpick,278,0,diamond pick
+dimondpickaxe,278,0,diamond pick
+dimondpick,278,0,diamond pick
+dpickaxe,278,0,diamond pick
+dpick,278,0,diamond pick
+279,279,0,diamond axe
+279:0,279,0,diamond axe
+diamondaxe,279,0,diamond axe
+diamondax,279,0,diamond axe
+dimondaxe,279,0,diamond axe
+dimondax,279,0,diamond axe
+daxe,279,0,diamond axe
+dax,279,0,diamond axe
+280,280,0,stick
+280:0,280,0,stick
+stick,280,0,stick
+stck,280,0,stick
+281,281,0,bowl
+281:0,281,0,bowl
+bowl,281,0,bowl
+bwl,281,0,bowl
+282,282,0,mushroom soup
+282:0,282,0,mushroom soup
+mushroomsoup,282,0,mushroom soup
+shroomsoup,282,0,mushroom soup
+soup,282,0,mushroom soup
+283,283,0,gold sword
+283:0,283,0,gold sword
+goldsword,283,0,gold sword
+gldsword,283,0,gold sword
+gsword,283,0,gold sword
+284,284,0,gold shovel
+284:0,284,0,gold shovel
+goldshovel,284,0,gold shovel
+goldspade,284,0,gold shovel
+gldshovel,284,0,gold shovel
+gldspade,284,0,gold shovel
+gshovel,284,0,gold shovel
+gspade,284,0,gold shovel
+285,285,0,gold pick
+285:0,285,0,gold pick
+goldpick,285,0,gold pick
+goldpickaxe,285,0,gold pick
+gldpick,285,0,gold pick
+gldpickaxe,285,0,gold pick
+gpick,285,0,gold pick
+gpickaxe,285,0,gold pick
+286,286,0,gold axe
+286:0,286,0,gold axe
+goldax,286,0,gold axe
+goldaxe,286,0,gold axe
+gldax,286,0,gold axe
+gldaxe,286,0,gold axe
+gax,286,0,gold axe
+gaxe,286,0,gold axe
+287,287,0,string
+287:0,287,0,string
+string,287,0,string
+strng,287,0,string
+288,288,0,feather
+288:0,288,0,feather
+feather,288,0,feather
+fether,288,0,feather
+fethr,288,0,feather
+289,289,0,gunpowder
+289:0,289,0,gunpowder
+gunpowder,289,0,gunpowder
+sulphur,289,0,gunpowder
+sulpher,289,0,gunpowder
+gnpowder,289,0,gunpowder
+gunpwder,289,0,gunpowder
+290,290,0,wood hoe
+290:0,290,0,wood hoe
+woodhoe,290,0,wood hoe
+woodho,290,0,wood hoe
+woodenhoe,290,0,wood hoe
+woodenho,290,0,wood hoe
+whoe,290,0,wood hoe
+who,290,0,wood hoe
+291,291,0,stone hoe
+291:0,291,0,stone hoe
+stonehoe,291,0,stone hoe
+stoneho,291,0,stone hoe
+stnehoe,291,0,stone hoe
+stneho,291,0,stone hoe
+shoe,291,0,stone hoe
+sho,291,0,stone hoe
+292,292,0,iron hoe
+292:0,292,0,iron hoe
+ironhoe,292,0,iron hoe
+ironho,292,0,iron hoe
+irnhoe,292,0,iron hoe
+irnho,292,0,iron hoe
+ihoe,292,0,iron hoe
+iho,292,0,iron hoe
+293,293,0,diamond hoe
+293:0,293,0,diamond hoe
+diamondho,293,0,diamond hoe
+diamondhoe,293,0,diamond hoe
+dimondho,293,0,diamond hoe
+dimondhoe,293,0,diamond hoe
+dho,293,0,diamond hoe
+dhoe,293,0,diamond hoe
+294,294,0,gold hoe
+294:0,294,0,gold hoe
+goldhoe,294,0,gold hoe
+goldho,294,0,gold hoe
+gldho,294,0,gold hoe
+gldhoe,294,0,gold hoe
+ghoe,294,0,gold hoe
+gho,294,0,gold hoe
+295,295,0,seeds
+295:0,295,0,seeds
+seeds,295,0,seeds
+seed,295,0,seeds
+296,296,0,wheat
+296:0,296,0,wheat
+wheat,296,0,wheat
+weet,296,0,wheat
+willwheaton,296,0,wheat
+297,297,0,bread
+297:0,297,0,bread
+bread,297,0,bread
+bred,297,0,bread
+298,298,0,leather cap
+298:0,298,0,leather cap
+leatherhat,298,0,leather cap
+leathercap,298,0,leather cap
+leathercp,298,0,leather cap
+leatherht,298,0,leather cap
+lhat,298,0,leather cap
+lcap,298,0,leather cap
+299,299,0,leather tunic
+299:0,299,0,leather tunic
+leathertunic,299,0,leather tunic
+leatherchest,299,0,leather tunic
+leatherplate,299,0,leather tunic
+ltunic,299,0,leather tunic
+lchest,299,0,leather tunic
+lplate,299,0,leather tunic
+300,300,0,leather chaps
+300:0,300,0,leather chaps
+leatherpants,300,0,leather chaps
+leatherchaps,300,0,leather chaps
+leatherpnts,300,0,leather chaps
+leatherchps,300,0,leather chaps
+301,301,0,leather boots
+301:0,301,0,leather boots
+leatherboots,301,0,leather boots
+leatherboot,301,0,leather boots
+302,302,0,chain helet
+302:0,302,0,chain helet
+chainhelmet,302,0,chain helet
+chainhelm,302,0,chain helet
+chelmet,302,0,chain helet
+chelm,302,0,chain helet
+303,303,0,chain chestplate
+303:0,303,0,chain chestplate
+chainmale,303,0,chain chestplate
+chainchest,303,0,chain chestplate
+chainchestplate,303,0,chain chestplate
+chainshirt,303,0,chain chestplate
+chainmaleshirt,303,0,chain chestplate
+cshirt,303,0,chain chestplate
+cchest,303,0,chain chestplate
+304,304,0,chain pants
+304:0,304,0,chain pants
+chainpants,304,0,chain pants
+chainpnts,304,0,chain pants
+chainmalepants,304,0,chain pants
+cpants,304,0,chain pants
+cleggings,304,0,chain pants
+305,305,0,chain boots
+305:0,305,0,chain boots
+chainboots,305,0,chain boots
+chainshoes,305,0,chain boots
+chainmaleboots,305,0,chain boots
+chainmaleshoes,305,0,chain boots
+cboots,305,0,chain boots
+cshoes,305,0,chain boots
+306,306,0,iron helmet
+306:0,306,0,iron helmet
+ironhelm,306,0,iron helmet
+ironhelmet,306,0,iron helmet
+irnhelm,306,0,iron helmet
+irnhelmet,306,0,iron helmet
+ihelm,306,0,iron helmet
+ihelmet,306,0,iron helmet
+307,307,0,iron chestplate
+307:0,307,0,iron chestplate
+ironchest,307,0,iron chestplate
+ironchestplate,307,0,iron chestplate
+irnchest,307,0,iron chestplate
+irnchestplate,307,0,iron chestplate
+ichest,307,0,iron chestplate
+ichestplate,307,0,iron chestplate
+308,308,0,iron leggings
+308:0,308,0,iron leggings
+ironleggings,308,0,iron leggings
+ironpants,308,0,iron leggings
+irnleggings,308,0,iron leggings
+irnpants,308,0,iron leggings
+ileggings,308,0,iron leggings
+ipants,308,0,iron leggings
+309,309,0,iron boots
+309:0,309,0,iron boots
+ironboots,309,0,iron boots
+ironshoes,309,0,iron boots
+irnboots,309,0,iron boots
+irnshoes,309,0,iron boots
+iboots,309,0,iron boots
+ishoes,309,0,iron boots
+310,310,0,diamond helmet
+310:0,310,0,diamond helmet
+diamondhelmet,310,0,diamond helmet
+diamondhelm,310,0,diamond helmet
+dimondhelm,310,0,diamond helmet
+dimondhelmet,310,0,diamond helmet
+dhelmet,310,0,diamond helmet
+dhelm,310,0,diamond helmet
+311,311,0,diamond chestplate
+311:0,311,0,diamond chestplate
+diamondchestplate,311,0,diamond chestplate
+diamondchest,311,0,diamond chestplate
+dimondchest,311,0,diamond chestplate
+dimondchestplate,311,0,diamond chestplate
+dchest,311,0,diamond chestplate
+dchestplate,311,0,diamond chestplate
+312,312,0,diamond leggings
+312:0,312,0,diamond leggings
+diamondleggings,312,0,diamond leggings
+diamondpants,312,0,diamond leggings
+dimondleggings,312,0,diamond leggings
+dimondpants,312,0,diamond leggings
+dleggings,312,0,diamond leggings
+dpants,312,0,diamond leggings
+313,313,0,diamond boots
+313:0,313,0,diamond boots
+diamondboots,313,0,diamond boots
+diamondshoes,313,0,diamond boots
+dimondboots,313,0,diamond boots
+dimondshoes,313,0,diamond boots
+dboots,313,0,diamond boots
+dshoes,313,0,diamond boots
+314,314,0,gold helmet
+314:0,314,0,gold helmet
+goldhelmet,314,0,gold helmet
+goldhelm,314,0,gold helmet
+gldhelmet,314,0,gold helmet
+gldhelm,314,0,gold helmet
+ghelmet,314,0,gold helmet
+ghelm,314,0,gold helmet
+315,315,0,gold chestplate
+315:0,315,0,gold chestplate
+goldchestplate,315,0,gold chestplate
+goldchest,315,0,gold chestplate
+gldchestplate,315,0,gold chestplate
+gldchest,315,0,gold chestplate
+gchestplate,315,0,gold chestplate
+gchest,315,0,gold chestplate
+316,316,0,gold leggings
+316:0,316,0,gold leggings
+goldleggings,316,0,gold leggings
+goldpants,316,0,gold leggings
+gldleggings,316,0,gold leggings
+gldpants,316,0,gold leggings
+gleggings,316,0,gold leggings
+gpants,316,0,gold leggings
+317,317,0,gold boots
+317:0,317,0,gold boots
+goldboots,317,0,gold boots
+goldshoes,317,0,gold boots
+gldboots,317,0,gold boots
+gldshoes,317,0,gold boots
+gboots,317,0,gold boots
+gshoes,317,0,gold boots
+318,318,0,flint
+318:0,318,0,flint
+flint,318,0,flint
+flnt,318,0,flint
+319,319,0,raw porkchop
+319:0,319,0,raw porkchop
+porkchop,319,0,raw porkchop
+rawporkchop,319,0,raw porkchop
+pork,319,0,raw porkchop
+320,320,0,cooked porkchop
+320:0,320,0,cooked porkchop
+cookedporkchop,320,0,cooked porkchop
+cookedpork,320,0,cooked porkchop
+321,321,0,painting
+321:0,321,0,painting
+painting,321,0,painting
+paintin,321,0,painting
+drawing,321,0,painting
+picture,321,0,painting
+322,322,0,golden apple
+322:0,322,0,golden apple
+goldenapple,322,0,golden apple
+goldapple,322,0,golden apple
+gldapple,322,0,golden apple
+323,323,0,sign
+323:0,323,0,sign
+sign,323,0,sign
+sgn,323,0,sign
+324,324,0,wooden door
+woodendoor,324,0,wooden door
+woodwoor,324,0,wooden door
+wdoor,324,0,wooden door
+325,325,0,bucket
+325:0,325,0,bucket
+bucket,325,0,bucket
+bukkit,325,0,bucket
+326,326,0,water bucket
+326:0,326,0,water bucket
+waterbucket,326,0,water bucket
+waterbukkit,326,0,water bucket
+327,327,0,lava bucket
+327:0,327,0,lava bucket
+lavabucket,327,0,lava bucket
+lavabukkit,327,0,lava bucket
+328,328,0,minecart
+328:0,328,0,minecart
+minecart,328,0,minecart
+minecar,328,0,minecart
+329,329,0,saddle
+329:0,329,0,saddle
+saddle,329,0,saddle
+sddle,329,0,saddle
+cowboy,329,0,saddle
+330,330,0,iron door
+330:0,330,0,iron door
+irondoor,330,0,iron door
+irndoor,330,0,iron door
+idoor,330,0,iron door
+331,331,0,redstone
+331:0,331,0,redstone
+redstone,331,0,redstone
+redstonedust,331,0,redstone
+redstne,331,0,redstone
+redstnedust,331,0,redstone
+332,332,0,snowball
+332:0,332,0,snowball
+snowball,332,0,snowball
+snwball,332,0,snowball
+snowbal,332,0,snowball
+333,333,0,boat
+333:0,333,0,boat
+boat,333,0,boat
+ship,333,0,boat
+ussminecraft,333,0,boat
+ussnotch,333,0,boat
+334,334,0,leather
+334:0,334,0,leather
+leather,334,0,leather
+leathr,334,0,leather
+335,335,0,milk
+335:0,335,0,milk
+milk,335,0,milk
+milkbucket,335,0,milk
+bucketofmilk,335,0,milk
+moomoo,335,0,milk
+336,336,0,clay brick
+336:0,336,0,clay brick
+claybrick,336,0,clay brick
+clybrick,336,0,clay brick
+claybrck,336,0,clay brick
+337,337,0,clay
+337:0,337,0,clay
+clay,337,0,clay
+cly,337,0,clay
+338,338,0,sugarcane
+338:0,338,0,sugarcane
+sugarcane,338,0,sugarcane
+sugarcne,338,0,sugarcane
+sgarcane,338,0,sugarcane
+sugrcane,338,0,sugarcane
+339,339,0,paper
+339:0,339,0,paper
+paper,339,0,paper
+pper,339,0,paper
+ppr,339,0,paper
+papr,339,0,paper
+340,340,0,book
+340:0,340,0,book
+book,340,0,book
+books,340,0,book
+341,341,0,slimeball
+341:0,341,0,slimeball
+slimeball,341,0,slimeball
+slmeball,341,0,slimeball
+slimeballs,341,0,slimeball
+342,342,0,storage minecart
+342:0,342,0,storage minecart
+storacecart,342,0,storage minecart
+storageminecart,342,0,storage minecart
+sotrageminecar,342,0,storage minecart
+storagecar,342,0,storage minecart
+343,343,0,powered minecart
+343:0,343,0,powered minecart
+poweredcart,343,0,powered minecart
+poweredcar,343,0,powered minecart
+poweredminecart,343,0,powered minecart
+poweredminecar,343,0,powered minecart
+344,344,0,egg
+344:0,344,0,egg
+egg,344,0,egg
+eggs,344,0,egg
+345,345,0,compass
+345:0,345,0,compass
+compass,345,0,compass
+compas,345,0,compass
+cumpass,345,0,compass
+cumpas,345,0,compass
+346,346,0,fishing rod
+346:0,346,0,fishing rod
+fishingrod,346,0,fishing rod
+fighingpole,346,0,fishing rod
+fishingrd,346,0,fishing rod
+347,347,0,clock
+347:0,347,0,clock
+watch,347,0,clock
+clock,347,0,clock
+clck,347,0,clock
+wtch,347,0,clock
+timer,347,0,clock
+348,348,0,glowstone dust
+348:0,348,0,glowstone dust
+glowstonedust,348,0,glowstone dust
+glowdust,348,0,glowstone dust
+glowstone,348,0,glowstone dust
+349,349,0,raw fish
+349:0,349,0,raw fish
+fish,349,0,raw fish
+rawfish,349,0,raw fish
+fawfsh,349,0,raw fish
+fsh,349,0,raw fish
+350,350,0,cooked fish
+350:0,350,0,cooked fish
+cookedfish,350,0,cooked fish
+cookedfsh,350,0,cooked fish
+351,351,0,ink sac
+351:0,351,0,ink sac
+ink sac,351,0,ink sac
+ink sack,351,0,ink sac
+blackdye,351,0,ink sac
+351:1,351,1,red dye
+reddye,351,1,red dye
+rosered,351,1,red dye
+rddye,351,1,red dye
+roserd,351,1,red dye
+351:2,351,2,cactus green
+cactusdye,351,2,cactus green
+greendye,351,2,cactus green
+cactidye,351,2,cactus green
+351:3,351,3,cocoa beans
+cocoabeans,351,3,cocoa beans
+cocoabean,351,3,cocoa beans
+cocobeans,351,3,cocoa beans
+cocobean,351,3,cocoa beans
+browndye,351,3,cocoa beans
+351:4,351,4,lapis lazuli
+lapis,351,4,lapis lazuli
+lapislazuli,351,4,lapis lazuli
+lazuli,351,4,lapis lazuli
+351:5,351,5,purple dye
+purpledye,351,5,purple dye
+prpledye,351,5,purple dye
+violetdye,351,5,purple dye
+viletdye,351,5,purple dye
+351:6,351,6,cyan dye
+cyandye,351,6,cyan dye
+351:7,351,7,light gray dye
+lightgreydye,351,7,light gray dye
+lightgraydye,351,7,light gray dye
+lgraydye,351,7,light gray dye
+lgreydye,351,7,light gray dye
+351:8,351,8,gray dye
+graydye,351,8,gray dye
+greydye,351,8,gray dye
+grydye,351,8,gray dye
+351:9,351,9,pink dye
+pinkdye,351,9,pink dye
+pnkdye,351,9,pink dye
+mccdye,351,9,easter egg: pink dye
+minecraftchickdye,351,9,easter egg: pink dye
+351:10,351,10,lime dye
+limedye,351,10,lime dye
+limegreendye,351,10,lime dye
+lgreendye,351,10,lime dye
+lmedye,351,10,lime dye
+ldye,351,10,lime dye
+sdxdye,351,10,easter egg: lime dye
+351:11,351,11,dandelion yellow
+dandelionyellow,351,11,dandelion yellow
+dandelionyellowdye,351,11,dandelion yellow
+yellowdye,351,11,dandelion yellow
+ydye,351,11,dandelion yellow
+yellodye,351,11,dandelion yellow
+351:12,351,12,light blue dye
+lightbluedye,351,12,light blue dye
+lbluedye,351,12,light blue dye
+lbludye,351,12,light blue dye
+lbdye,351,12,light blue dye
+351:13,351,13,magenta dye
+magentadye,351,13,magenta dye
+majentadye,351,13,magenta dye
+mdye,351,13,magenta dye
+351:14,351,14,orange dye
+orangedye,351,14,orange dye
+orngedye,351,14,orange dye
+odye,351,14,orange dye
+351:15,351,15,bone meal
+bonemeal,351,15,bone meal
+bnemeal,351,15,bone meal
+bonmeal,351,15,bone meal
+352,352,0,bone
+352:0,352,0,bone
+bone,352,0,bone
+bones,352,0,bone
+bne,352,0,bone
+353,353,0,sugar
+353:0,353,0,sugar
+sugar,353,0,sugar
+sgar,353,0,sugar
+sugr,353,0,sugar
+354,354,0,cake
+354:0,354,0,cake
+cake,354,0,cake
+cakeisalie,354,0,cake
+lie,354,0,cake
+355,355,0,bed
+355:0,355,0,bed
+bed,355,0,bed
+356,356,0,redstone repeater
+356:0,356,0,redstone repeater
+repeater,356,0,redstone repeater
+diode,356,0,redstone repeater
+redstonerepeater,356,0,redstone repeater
+rsrepeater,356,0,redstone repeater
+357,357,0,cookie
+357:0,357,0,cookie
+cookie,357,0,cookie
+cookies,357,0,cookie
+358,358,0,map
+358:0,358,0,map
+map,358,0,map
+maps,358,0,map
+359,359,0,shears
+359:0,359,0,shears
+shears,359,0,shears
+shear,359,0,shears
+scissors,359,0,shears
+scissor,359,0,shears
+360,360,0,melon slice
+360:0,360,0,melon slice
+melonslice,360,0,melon slice
+melonpiece,360,0,melon slice
+pieceofmelon,360,0,melon slice
+361,361,0,pumpkin seeds
+361:0,361,0,pumpkin seeds
+pumpkinseeds,361,0,pumpkin seeds
+pumpkinseed,361,0,pumpkin seeds
+pmpkinseeds,361,0,pumpkin seeds
+pmpkinseed,361,0,pumpkin seeds
+362,362,0,melon seeds
+362:0,362,0,melon seeds
+melonseeds,362,0,melon seeds
+melonseed,362,0,melon seeds
+mlonseed,362,0,melon seeds
+mlonseeds,362,0,melon seeds
+363,363,0,raw beef
+363:0,363,0,raw beef
+beef,363,0,raw beef
+rawbeef,363,0,raw beef
+rawsteak,363,0,raw beef
+364,364,0,steak
+364:0,364,0,steak
+steak,364,0,steak
+cookedbeef,364,0,steak
+cookedsteak,364,0,steak
+365,365,0,raw chicken
+365:0,365,0,raw chicken
+chicken,365,0,raw chicken
+rawchicken,365,0,raw chicken
+chickin,365,0,raw chicken
+rawchickin,365,0,raw chicken
+366,366,0,cooked chicken
+366:0,366,0,cooked chicken
+cookedchicken,366,0,cooked chicken
+cookedchickin,366,0,cooked chicken
+cookdchicken,366,0,cooked chicken
+cookdchickin,366,0,cooked chicken
+367,367,0,rotten flesh
+367:0,367,0,rotten flesh
+rottenflesh,367,0,rotten flesh
+rottingflesh,367,0,rotten flesh
+rotenflesh,367,0,rotten flesh
+rottenflsh,367,0,rotten flesh
+368,368,0,ender pearl
+368:0,368,0,ender pearl
+enderpearl,368,0,ender pearl
+endrpearl,368,0,ender pearl
+369,369,0,blaze rod
+369:0,369,0,blaze rod
+blazerod,369,0,blaze rod
+blazerd,369,0,blaze rod
+blzerod,369,0,blaze rod
+blazod,369,0,blaze rod
+blazrd,369,0,blaze rod
+blzerd,369,0,blaze rod
+blzrod,369,0,blaze rod
+370,370,0,ghast tear
+370:0,370,0,ghast tear
+ghasttear,370,0,ghast tear
+ghastter,370,0,ghast tear
+ghasttar,370,0,ghast tear
+ghsttear,370,0,ghast tear
+ghastear,370,0,ghast tear
+ghsttr,370,0,ghast tear
+371,371,0,gold nugget
+371:0,371,0,gold nugget
+goldnugget,371,0,gold nugget
+goldnuggt,371,0,gold nugget
+goldngget,371,0,gold nugget
+gldnugget,371,0,gold nugget
+gnugget,371,0,gold nugget
+goldnggt,371,0,gold nugget
+gldnuggt,371,0,gold nugget
+372,372,0,nether wart
+372:0,372,0,nether wart
+netherwart,372,0,nether wart
+netherwrt,372,0,nether wart
+nethrwart,372,0,nether wart
+ntherwart,372,0,nether wart
+nethrwrt,372,0,nether wart
+nthrwrt,372,0,nether wart
+373,373,0,potions
+373:0,373,0,potions
+potions,373,0,potions
+potions,373,0,potions
+potion,373,0,potions
+potins,373,0,potions
+potons,373,0,potions
+ptions,373,0,potions
+potns,373,0,potions
+ptons,373,0,potions
+ptins,373,0,potions
+373:1,373,1,potion of healing
+373:2,373,2,potion of swiftness (3:00)
+373:3,373,3,potion of fire resistance (3:00)
+373:4,373,4,potion of poison (0:45)
+373:5,373,5,bland potion
+373:6,373,6,clear potion
+373:7,373,7,clear potion
+373:8,373,8,potion of weakness (1:30)
+373:9,373,9,potion of strength (3:00)
+373:10,373,10,potion of slowness (1:30)
+373:11,373,11,diffuse potion
+373:12,373,12,potion of harming
+373:13,373,13,artless potion
+373:14,373,14,thin potion
+373:15,373,15,thin potion
+373:16,373,16,akward potion
+373:17,373,17,potion of healing
+373:18,373,18,potion of swiftness (3:00)
+373:19,373,19,potion of fire resistance
+373:20,373,20,potion of poison (0:45)
+373:21,373,21,bulky potion
+373:22,373,22,bungling potion
+373:23,373,23,bungling potion
+373:24,373,24,potion of weakness (1:30)
+373:25,373,25,potion of strength (3:00)
+373:26,373,26,potion of slowness (1:30)
+373:27,373,27,smooth potion
+373:28,373,28,potion of harming
+373:29,373,29,suave potion
+373:30,373,30,debonair potion
+373:31,373,31,debonair potion
+373:32,373,32,thick potion
+373:33,373,33,potion of healing 2
+373:34,373,34,potion of swiftness 2 (1:30)
+373:35,373,35,potion of fire resistance (3:00)
+373:36,373,36,potion of poison 2 (0:22)
+373:37,373,37,fancy potion
+373:38,373,38,charming potion
+373:39,373,39,charming potion
+373:40,373,40,potion of weakness (1:30)
+373:41,373,41,potion of strength 2 (1:30)
+373:42,373,42,potion of slowness (1:30)
+373:43,373,43,refined potion
+373:44,373,44,potion of harming 2
+373:45,373,44,cordial potion
+373:46,373,46,sparkling potion
+373:47,373,47,sparkling potion
+373:48,373,48,potent potion
+373:49,373,49,potion of healing 2
+373:50,373,50,potion of swiftness 2 (1:30)
+373:51,373,51,potion of fire resistance (3:00)
+373:52,373,52,potion of poison 2 (0:22)
+373:53,373,53,odorless potion
+373:54,373,54,rank potion
+373:55,373,55,rank potion
+373:56,373,56,potion of weakness (1:30)
+373:57,373,57,potion of strength 2 (1:30)
+373:58,373,58,potion of slowness (1:30)
+373:59,373,59,acrid potion
+373:60,373,60,potion of harming 2
+373:61,373,61,gross potion
+373:62,373,62,stinky potion
+373:63,373,63,stinky potion
+373:64,373,64,mundane potion
+373:65,373,65,potion of healing
+373:66,373,66,potion of swiftness (8:00)
+373:67,373,67,potion of fire resistance (8:00)
+373:68,373,68,potion of poison (2:00)
+373:69,373,69,bland potion
+373:70,373,70,clear potion
+373:71,373,71,clear potion
+373:72,373,72,potion of weakness (4:00)
+373:73,373,73,potion of strength (8:00)
+373:74,373,74,potion of slowness (4:00)
+373:75,373,75,diffuse potion
+373:76,373,76,potion of harming
+373:77,373,77,artless potion
+373:78,373,78,thin potion
+373:79,373,79,thin potion
+373:80,373,80,akward potion
+373:81,373,81,potion of healing
+373:82,373,82,potion of swiftness (8:00)
+373:83,373,83,potion of fire rresistance (8:00)
+373:84,373,84,potion of poison (2:00)
+373:85,373,85,bulky potion
+373:86,373,86,bungling potion
+373:87,373,87,bungling potion
+373:88,373,88,potion of weakness (4:00)
+373:89,373,89,potion of strength (8:00)
+373:90,373,90,potion of slowness (4:00)
+373:91,373,91,smooth potion
+373:92,373,92,potion of harming
+373:93,373,93,suave potion
+373:94,373,94,debonair potion
+373:95,373,95,debonair potion
+373:96,373,96,thick potion
+373:97,373,97,potion of healing 2
+373:98,373,98,potion of swiftness 2 (4:00)
+373:99,373,99,potion of fire resistance (8:00)
+373:100,373,100,potion of poison 2 (1:00)
+373:101,373,101,fancy potion
+373:102,373,102,charming potion
+373:103,373,103,charming potion
+373:104,373,104,potion of weakness (4:00)
+373:105,373,105,potion of strength 2 (4:00)
+373:106,373,106,potion of slowness (4:00)
+373:107,373,107,refined potion
+373:108,373,108,potion of harming 2
+373:109,373,109,cordial potion
+373:110,373,110,sparkling potion
+373:111,373,111,sparkling potion
+373:112,373,112,potent potion
+373:113,373,113,potion of healing 2
+373:114,373,114,potion of swiftness 2 (4:00)
+373:115,373,115,potion of fire resistance (8:00)
+373:116,373,116,potion of poison 2 (1:00)
+373:117,373,117,odorless potion
+373:118,373,118,rank potion
+373:119,373,119,rank potion
+373:120,373,120,potion of weakness (4:00)
+373:121,373,121,potion of strength 2 (4:00)
+373:122,373,122,potion of slowness (4:00)
+373:123,373,123,acrid potion
+373:124,373,124,potion of harming 2
+373:125,373,125,gross potion
+373:126,373,126,stinky potion
+373:127,373,127,stinky potion
+373:128,373,128,mundane potion
+373:129,373,129,potion of healing
+373:130,373,130,potion of swiftness (3:00)
+373:131,373,131,potion of fire resistance (3:00)
+373:132,373,132,potion of poison (0:45)
+373:133,373,133,bland potion
+373:134,373,134,clear potion
+373:135,373,135,clear potion
+373:136,373,136,potion of weakness (1:30)
+373:137,373,137,potion of strength (3:00)
+373:138,373,138,potion of slowness (1:30)
+373:139,373,139,diffuse potion
+373:140,373,140,potion of harming
+373:141,373,141,artless potion
+373:142,373,142,thin potion
+373:143,373,143,thin potion
+373:144,373,144,akward potion
+373:145,373,145,potion of healing
+373:146,373,146,potion of swiftness (3:00)
+373:147,373,147,potion of fire resistance (3:00)
+373:148,373,148,potion of poison (0:45)
+373:149,373,149,bulky potion
+373:150,373,150,bungling potion
+373:151,373,151,bungling potion
+373:152,373,152,potion of weakness (1:30)
+373:153,373,153,potion of strength (3:00)
+373:154,373,154,potion of slowness (1:30)
+373:155,373,155,smooth potion
+373:156,373,156,potion of harming
+373:157,373,157,suave potion
+373:158,373,158,debonair potion
+373:159,373,159,debonair potion
+373:160,373,160,thick potion
+373:161,373,161,potion of healing 2
+373:162,373,162,potion of swiftness 2 (1:30)
+373:163,373,163,potion of fire resistance (3:00)
+373:164,373,164,potion of poison 2 (0:22)
+373:165,373,165,fancy potion
+373:166,373,166,charming potion
+373:167,373,167,charming potion
+373:168,373,168,potion of weakness (1:30)
+373:169,373,169,potion of strength 2 (1:30)
+373:170,373,170,potion of slowness (1:30)
+373:180,373,180,potion of poison 2 (0:22)
+373:181,373,181,odorless potion
+373:182,373,182,rank potion
+373:183,373,183,rank potion
+373:184,373,184,potion of weakness (1:30)
+373:185,373,185,potion of strength 2 (1:30)
+373:186,373,186,potion of slowness (1:30)
+373:187,373,187,acrid potion
+373:188,373,188,potion of harming 2
+373:189,373,189,gross potion
+373:190,373,190,stinky potion
+373:191,373,191,stinky potion
+373:192,373,192,mundane potion
+373:193,373,193,potion of healing
+373:194,373,194,potion of swiftness (8:00)
+373:195,373,195,potion of fire resistance (8:00)
+373:196,373,196,potion of poison (2:00)
+373:197,373,197,bland potion
+373:198,373,198,clear potion
+373:199,373,199,clear potion
+373:200,373,200,potion of weakness (4:00)
+373:201,373,201,potion of strength (8:00)
+373:202,373,202,potion of slowness (4:00)
+373:203,373,203,diffuse potion
+373:204,373,204,potion of harming
+373:205,373,205,artles potion
+373:206,373,206,thin potion
+373:207,373,207,thin potion
+373:208,373,208,akward potion
+373:209,373,209,potion of healing
+373:210,373,210,potion of swiftness (8:00)
+373:211,373,211,potion of fire resistance (8:00)
+373:212,373,212,potion of poison (2:00)
+373:213,373,213,bulky potion
+373:214,373,214,bungling potion
+373:215,373,215,bungling potion
+373:216,373,216,potion of weakness (4:00)
+373:217,373,217,potion of strength (8:00)
+373:218,373,218,potion of slowness (4:00)
+373:219,373,219,smooth potion
+373:220,373,220,potion of harming
+373:221,373,221,suave potion
+373:222,373,222,debonair potion
+373:223,373,223,debonair potion
+373:224,373,224,thick potion
+373:225,373,225,potion of healing
+373:226,373,226,potion of swiftness 2 (4:00)
+373:227,373,227,potion of fire resistance (8:00)
+373:228,373,228,potion of poison 2 (1:00)
+373:229,373,229,fancy potion
+373:230,373,230,charming potion
+373:231,373,231,charming potion
+373:232,373,232,potion of weakness (4:00)
+373:233,373,233,potion of strength 2 (4:00)
+373:234,373,234,potion of slowness (4:00)
+373:235,373,235,refined potion
+373:236,373,236,potion of harming 2
+373:237,373,237,cordial potion
+373:238,373,238,sparkling potion
+373:239,373,239,sparkling potion
+373:240,373,240,potent potion
+373:241,373,241,potion of healing 2
+373:242,373,242,potion of swiftness 2 (4:00)
+373:243,373,243,potion of fire resistance (8:00)
+373:244,373,244,potion of poison 2 (1:00)
+373:245,373,245,odorless potion
+373:246,373,246,rank potion
+373:247,373,247,rank potion
+373:248,373,248,potion of weakness (4:00)
+373:249,373,249,potion of strength 2 (4:00)
+373:250,373,250,potion of slowness (4:00)
+373:251,373,251,acrid potion
+373:252,373,252,potion of harming 2
+373:253,373,253,gross potion
+373:254,373,254,stinky potion
+373:255,373,255,stinky potion
+373:256,373,256,mundane potion
+373:257,373,257,potion of healing
+373:258,373,258,potion of swiftness (3:00)
+373:259,373,259,potion of fire resistance (3:00)
+373:260,373,260,potion of poison (0:45)
+373:261,373,261,bland potion
+373:262,373,262,clear potion
+373:263,373,263,clear potion
+373:264,272,264,potion of weakness (1:30)
+374,374,0,glass bottle
+374:0,374,0,glass bottle
+glassbottle,374,0,glass bottle
+glassbttle,374,0,glass bottle
+glssbottle,374,0,glass bottle
+glassbottl,374,0,glass bottle
+glssbttle,374,0,glass bottle
+glassbttl,374,0,glass bottle
+glssbottl,374,0,glass bottle
+375,375,0,spider eye
+375:0,375,0,spider eye
+spidereye,375,0,spider eye
+spiderey,375,0,spider eye
+spiderye,375,0,spider eye
+spidreye,375,0,spider eye
+spdereye,375,0,spider eye
+spdreye,375,0,spider eye
+spideri,375,0,spider eye
+376,376,0,fermented spider eye
+376:0,376,0,fermented spider eye
+fermentedspidereye,376,0,fermented spider eye
+fspidereye,376,0,fermented spider eye
+fermentedspidereye,376,0,fermented spider eye
+fspidereye,376,0,fermented spider eye
+fermentedspiderey,376,0,fermented spider eye
+fspiderey,376,0,fermented spider eye
+fermentedspiderye,376,0,fermented spider eye
+fspiderye,376,0,fermented spider eye
+fermentedspidreye,376,0,fermented spider eye
+fspidreye,376,0,fermented spider eye
+fermentedspdereye,376,0,fermented spider eye
+fspdereye,376,0,fermented spider eye
+fermentedspdreye,376,0,fermented spider eye
+fspdreye,376,0,fermented spider eye
+fermentedspideri,376,0,fermented spider eye
+fspideri,376,0,fermented spider eye
+377,377,0,blaze powder
+377:0,377,0,blaze powder
+blazepowder,377,0,blaze powder
+blazepowdr,377,0,blaze powder
+blazepwder,377,0,blaze powder
+blazpowder,377,0,blaze powder
+blzepowder,377,0,blaze powder
+blazepwdr,377,0,blaze powder
+blzpowder,377,0,blaze powder
+bpowder,377,0,blaze powder
+378,378,0,magma cream
+378:0,378,0,magma cream
+magmacream,378,0,magma cream
+magmacrem,378,0,magma cream
+magmacram,378,0,magma cream
+magmcream,378,0,magma cream
+mgmacream,378,0,magma cream
+magmacrm,378,0,magma cream
+mgmcream,378,0,magma cream
+mgmcrem,378,0,magma cream
+379,379,0,brewing stand
+379:0,379,0,brewing stand
+brewingstand,379,0,brewing stand
+brewingstnd,379,0,brewing stand
+brewngstand,379,0,brewing stand
+brewstand,379,0,brewing stand
+brewngstnd,379,0,brewing stand
+brwingstand,379,0,brewing stand
+bstand,379,0,brewing stand
+380,380,0,cauldron
+380:0,380,0,cauldron
+cauldron,380,0,cauldron
+cauldrn,380,0,cauldron
+caldron,380,0,cauldron
+culdron,380,0,cauldron
+caldrn,380,0,cauldron
+culdrn,380,0,cauldron
+cldron,380,0,cauldron
+cldrn,380,0,cauldron
+381,381,0,eye of ender
+381:0,381,0,eye of ender
+eyeofender,381,0,eye of ender
+eyeofendr,381,0,eye of ender
+eyeofnder,381,0,eye of ender
+eyefender,381,0,eye of ender
+eyeender,381,0,eye of ender
+eyefender,381,0,eye of ender
+iofender,381,0,eye of ender
+yeofender,381,0,eye of ender
+382,382,0,glistering melon
+382:0,382,0,glistering melon
+glisteringmelon,382,0,glistering melon
+glisteringmeln,382,0,glistering melon
+glisteringmlon,382,0,glistering melon
+glisterngmelon,382,0,glistering melon
+glsteringmelon,382,0,glistering melon
+glisteringmln,382,0,glistering melon
+glistrngmelon,382,0,glistering melon
+2256,2256,0,13 disc
+2256:0,2256,0,13 disc
+goldmusicdisc,2256,0,13 disc
+golddisc,2256,0,13 disc
+gldmusicdisc,2256,0,13 disc
+glddisc,2256,0,13 disc
+13disc,2256,0,13 disc
+2257,2257,0,cat disc
+2257:0,2257,0,cat disc
+greenmusicdisc,2257,0,cat disc
+greendisc,2257,0,cat disc
+catdisc,2257,0,cat disc
+ctdisc,2257,0,cat disc
+2258,2258,0,block disc
+2258:0,2258,0,block disc
+blockdisc,2258,0,block disc
+blckdisc,2258,0,block disc
+blockdsc,2258,0,block disc
+blckdsc,2258,0,block disc
+2259,2259,0,chirp disc
+2259:0,2259,0,chirp disc
+chirpdisc,2259,0,chirp disc
+chrpdisc,2259,0,chirp disc
+chirpdsc,2259,0,chirp disc
+chrpdsc,2259,0,chirp disc
+2260,2260,0,far disc
+2260:0,2260,0,far disc
+fardisc,2260,0,far disc
+fardsc,2260,0,far disc
+frdisc,2260,0,far disc
+frdsc,2260,0,far disc
+2261,2261,0,mall disc
+2261:0,2261,0,mall disc
+malldisc,2261,0,mall disc
+malldsc,2261,0,mall disc
+mlldisc,2261,0,mall disc
+mlldsc,2261,0,mall disc
+2262,2262,0,mellohi disc
+2262:0,2262,0,mellohi disc
+mellohidisc,2262,0,mellohi disc
+mellohidsc,2262,0,mellohi disc
+mellohdsc,2262,0,mellohi disc
+mellhdisc,2262,0,mellohi disc
+mllhidisc,2262,0,mellohi disc
+2263,2263,0,stal disc
+2263:0,2263,0,stal disc
+staldisc,2263,0,stal disc
+staldsc,2263,0,stal disc
+stldisc,2263,0,stal disc
+stldsc,2263,0,stal disc
+2264,2264,0,strad disc
+2264:0,2264,0,strad disc
+straddisc,2264,0,strad disc
+straddsc,2264,0,strad disc
+strddisc,2264,0,strad disc
+strddsc,2264,0,strad disc
+2265,2265,0,ward disc
+2265:0,2265,0,ward disc
+warddisc,2265,0,ward disc
+warddsc,2265,0,ward disc
+wrddisc,2265,0,ward disc
+wrddsc,2265,0,ward disc
+2266,2266,0,11 disc
+2266:0,2266,0,11 disc
+11disc,2266,0,11 disc
+11dsc,2266,0,11 disc

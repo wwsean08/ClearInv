@@ -5,15 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Logger;
-
-import me.kalmanolah.extras.OKUpdater;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,9 +30,8 @@ public class Clear extends JavaPlugin {
 	PreviewCommand preview;
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
-	public final String VERSION = "1.9.3";
-	public String DBV = "1.1.3";
-	private final String NAME = "ClearInv New";
+	private final String VERSION = "1.9.3";
+	private String DBVersion = "1.1.3";
 	private File itemFile = null;
 	private Server server;
 	private FileConfiguration config;
@@ -52,7 +46,7 @@ public class Clear extends JavaPlugin {
 		getDBV();
 		createConfig();
 		if(config.getBoolean("autoupdate", true))
-			autoUpdate();
+			checkForUpdates();
 		usesSP = config.getBoolean("superperm", true);
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
@@ -708,7 +702,7 @@ public class Clear extends JavaPlugin {
 			FileReader reader = new FileReader(itemFile);
 			BufferedReader in = new BufferedReader(reader);
 			String line = in.readLine();
-			DBV = line;
+			DBVersion = line;
 		}catch(Exception e){
 		}
 	}
@@ -748,6 +742,10 @@ public class Clear extends JavaPlugin {
 		config = this.getConfig();
 		config.options().copyDefaults(true);
 		this.saveConfig();
+		//just getting ready for when the bleeding edge stuff comes out
+		if(!itemFile.exists()){
+			saveResource("items.csv", false);
+		}
 	}
 
 	/**
@@ -763,29 +761,9 @@ public class Clear extends JavaPlugin {
 	}
 
 	/**
-	 * This method runs the auto-updater, seperated it from the onEnable as part of code cleanup
+	 * TODO: Implement checking for updates and notifying the users
 	 */
-	private void autoUpdate() {
-		String name = NAME;
-		String version = VERSION;
-		String checklocation = "http://dcp.wwsean08.com/check.php";
-		String downloadlocation = "http://dcp.wwsean08.com/dl.php";
-		String logprefix = PREFIX;
-		OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
-		//check for items.csv update because they don't mind checking
-		name = "items new";
-		version = DBV;
-		File updatedFile = OKUpdater.update(name, version, checklocation, downloadlocation, log, logprefix);
-		if(updatedFile != null){
-			Path currentPath = updatedFile.toPath();
-			Path newPath = itemFile.toPath();
-			try {
-				System.gc();		//hate doing that but it prevents the file being in use and causing exceptions to be thrown
-				Files.move(currentPath, newPath, REPLACE_EXISTING);
-			} catch (IOException e) {
-				log.warning(PREFIX + " Error moving new items.csv into place");
-			}
-			updatedFile.delete();
-		}		
+	private void checkForUpdates(){
+		
 	}
 }
