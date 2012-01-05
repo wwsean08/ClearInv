@@ -2,6 +2,8 @@ This is the bukkit ClearInv plugin, which allows you to selectively clear a play
 
 Change Log:
 
+*V 1.9.3 I fixed the clear except for the server console which I overlooked while fixing it for the players. On top of that I have added the ability to undo a clear with the /clear undo command. This will clear your last undo, even if it was on another player, there are however a few limitations. It will not restore armor if you clear a players inventory slots, it will also not restore everyones stuff if you clear everyones stuff at the same time using the "*" wildcard.  Also added command executors for the preview commands and gave them their own class.
+* V 1.9.2 I've had some people having the auto-updater download the item list to the wrong location (and had it work fine on other machines as well) so I added a way to reload the item list without reloading the server. So if yours puts the item list in the wrong place, just move it to plugins/ClearInv/items.csv and then run the clear reload command and it will reload the items.csv. This uses the clear.admin plugin and also can be done via the server console. 
 * V 1.9.1 Updated the way that the config file works to be much simpler to read and work with.
 * V 1.9.0 Updated and tested for the latest RB of craftbukkit.
 * V 1.8.8 Removed support for the permissions plugin, the choices are either bukkits built in permission system or none at all. I also fixed a couple of rare null pointer exceptions and adjusted/added some outputs
