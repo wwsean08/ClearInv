@@ -372,7 +372,7 @@ public class Clear extends JavaPlugin {
 	 * @param affected is the player who's inventory gets cleared.
 	 */
 	public void clearAllRemote(CommandSender sender, Player affected) {
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), new ArrayList<ItemStack>(Arrays.asList(affected.getInventory().getContents())));
+		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), new ArrayList<ItemStack>(Arrays.asList(affected.getInventory().getContents())));
 		undo.put(sender.getName(), holder);
 		affected.getInventory().clear();
 		sender.sendMessage(affected.getDisplayName() + "'s inventory has been cleared.");
@@ -470,7 +470,7 @@ public class Clear extends JavaPlugin {
 						if(hasData(items.get(j).getItem())){
 							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
 								if(checkData(pi.getItem(k).getData().getData(), items.get(j).getDamage())){
-									clear.remove(k);
+									clear.remove((Integer)k);
 									if(!successful.contains(items.get(j).getOutput())){
 										successful.add(items.get(j).getOutput());
 									}
@@ -478,7 +478,7 @@ public class Clear extends JavaPlugin {
 							}
 						}else{
 							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
-								clear.remove(k);
+								clear.remove((Integer)k);
 								if(!successful.contains(items.get(j).getOutput())){
 									successful.add(items.get(j).getOutput());
 								}
@@ -511,7 +511,7 @@ public class Clear extends JavaPlugin {
 			return;
 		}
 		sender.sendMessage("Successfully removed everything except " + output);
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
+		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), removed);
 		undo.put(sender.getName(), holder);
 	}
 
@@ -527,8 +527,15 @@ public class Clear extends JavaPlugin {
 			for(int i = 0; i<items.size(); i++){
 				if(a.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
-						removed.add(pi.getItem(i).clone());
-						pi.remove(items.get(i).getItem());
+						for(int j = 0; j<pi.getSize(); j++){
+							ItemStack IS = pi.getItem(j);
+							if(IS == null)
+								continue;
+							if(IS.getTypeId() == items.get(i).getItem()){
+								removed.add(pi.getItem(j).clone());
+								pi.clear(j);
+							}
+						}
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
@@ -570,8 +577,15 @@ public class Clear extends JavaPlugin {
 			for(int i = 0; i<items.size(); i++){
 				if(a.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
-						removed.add(pi.getItem(i).clone());
-						pi.remove(items.get(i).getItem());
+						for(int j = 0; j<pi.getSize(); j++){
+							ItemStack IS = pi.getItem(j);
+							if(IS == null)
+								continue;
+							if(IS.getTypeId() == items.get(i).getItem()){
+								removed.add(pi.getItem(j).clone());
+								pi.clear(j);
+							}
+						}
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
@@ -588,7 +602,7 @@ public class Clear extends JavaPlugin {
 				}
 			}
 		}
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
+		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), removed);
 		undo.put(sender.getName(), holder);
 	}
 	/**
@@ -599,13 +613,17 @@ public class Clear extends JavaPlugin {
 		ClearUndoHolder holder = undo.get(player.getName());
 		if(holder != null){
 			Player affected = server.getPlayer(holder.getPlayer());
-			PlayerInventory pi = affected.getInventory();
-			for(ItemStack IS : holder.getOldInventory()){
-				if(IS == null)
-					continue;
-				pi.addItem(IS);
+			if(affected != null){
+				PlayerInventory pi = affected.getInventory();
+				if(pi != null){
+					for(ItemStack IS : holder.getOldInventory()){
+						if(IS == null || IS.getTypeId() == 0)
+							continue;
+						pi.addItem(IS);
+					}
+					undo.remove(player.getName());
+				}
 			}
-			undo.remove(player.getName());
 		}else{
 			player.sendMessage("Nothing to undo");
 		}
@@ -619,13 +637,17 @@ public class Clear extends JavaPlugin {
 		ClearUndoHolder holder = undo.get(sender.getName());
 		if(holder != null){
 			Player affected = server.getPlayer(holder.getPlayer());
-			PlayerInventory pi = affected.getInventory();
-			for(ItemStack IS : holder.getOldInventory()){
-				if(IS == null)
-					continue;
-				pi.addItem(IS);
+			if(affected != null){
+				PlayerInventory pi = affected.getInventory();
+				if(pi != null){
+					for(ItemStack IS : holder.getOldInventory()){
+						if(IS == null || IS.getTypeId() == 0)
+							continue;
+						pi.addItem(IS);
+					}
+					undo.remove(sender.getName());
+				}
 			}
-			undo.remove(sender.getName());
 		}else{
 			sender.sendMessage("Nothing to undo");
 		}
