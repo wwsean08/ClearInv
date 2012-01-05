@@ -53,14 +53,13 @@ public class Clear extends JavaPlugin {
 		createConfig();
 		if(config.getBoolean("autoupdate", true))
 			autoUpdate();
-		if(!config.getBoolean("superperm", true))
-			usesSP = false;
+		usesSP = config.getBoolean("superperm", true);
 		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
 		loadItems();
 		getCommand("preview").setExecutor(preview);
 		getCommand("unpreview").setExecutor(preview);
-		log.info(PREFIX + " clear inventory version " + VERSION + " enabled");
+		log.info(PREFIX + " version " + VERSION + " enabled");
 	}
 
 	@Override
@@ -69,23 +68,20 @@ public class Clear extends JavaPlugin {
 		for(Player p : player){
 			preview.unpreview(p);
 		}
-		log.info(PREFIX + " clear inventory version " + VERSION + " disabled");
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (commandLabel.equalsIgnoreCase("clear")) {
-			if (sender instanceof Player) {
-				if(usesSP){
-					Perm(sender, args);
-				}
-				// if no permissions set up
-				else 
-					NoPerm(sender, args);
+		if (sender instanceof Player) {
+			if(usesSP){
+				Perm(sender, args);
+			}
+			// if no permissions set up
+			else 
+				NoPerm(sender, args);
 
-			} else if (sender instanceof ConsoleCommandSender) 
-				consoleClear(sender, args);
-		}
+		} else if (sender instanceof ConsoleCommandSender) 
+			consoleClear(sender, args);
 		return true;
 	}
 
@@ -98,7 +94,7 @@ public class Clear extends JavaPlugin {
 
 	private void Perm(CommandSender sender, String[] args) {
 		Player player = (Player) sender;
-		if (player.hasPermission("clear.self") || player.hasPermission("clear.other")) {
+		if (player.hasPermission("clear.self") || player.hasPermission("clear.other") || player.hasPermission("clear.admin")) {
 			if (args.length == 0)
 				clearAll(player);
 			else if(args[0].trim().equals("*")){
@@ -150,7 +146,7 @@ public class Clear extends JavaPlugin {
 				player.sendMessage("Chestplate removed");
 			}else if (args[0].equalsIgnoreCase("help")) {
 				playerHelp(sender);
-			} else if ((server.matchPlayer(args[0]).size() != 0) && (player.hasPermission("clear.other") || sender.isOp())) {
+			} else if ((server.matchPlayer(args[0]).size() != 0) && (player.hasPermission("clear.other") || player.hasPermission("clear.admin") || sender.isOp())) {
 				Player affectedPlayer = server.matchPlayer(args[0]).get(0);
 				if (args.length == 1) {
 					clearAllRemote(player, affectedPlayer);
@@ -160,7 +156,7 @@ public class Clear extends JavaPlugin {
 					clearArmorRemote(player, affectedPlayer);
 				} else
 					clearItemRemote(player, affectedPlayer, args);
-			} else if ((server.matchPlayer(args[0]).size() != 0) && !((player.hasPermission("clear.other") || !sender.isOp()))) {
+			} else if ((server.matchPlayer(args[0]).size() != 0) && !((player.hasPermission("clear.other") || !(player.hasPermission("clear.admin")) || !sender.isOp()))) {
 				sender.sendMessage("You do not have permission to use that command");
 				log.warning(PREFIX + player.getDisplayName() + " tried to clear another players inventory without the necessary permissions");
 			} else 
@@ -286,11 +282,7 @@ public class Clear extends JavaPlugin {
 					for(Player p : online)
 						clearItemRemote(sender, p, args);
 				}
-			}else if (args.length == 1){
-				Player player = server.getPlayer(args[0]);
-				clearAllRemote(sender, player);
-			}
-			else if (args[1].equalsIgnoreCase("except")){
+			}else if (args[1].equalsIgnoreCase("except")){
 				Player player = server.getPlayer(args[0]);
 				clearExceptRemote(sender, player, args);
 			}
@@ -314,6 +306,9 @@ public class Clear extends JavaPlugin {
 				Player player = server.getPlayer(args[0]);
 				player.getInventory().setChestplate(null);
 				sender.sendMessage("Chestplate removed from " + player.getDisplayName());
+			}else if (args.length == 1){
+				Player player = server.getPlayer(args[0]);
+				clearAllRemote(sender, player);
 			}else {
 				Player player = server.getPlayer(args[0]);
 				clearItemRemote(sender, player, args);
@@ -390,9 +385,9 @@ public class Clear extends JavaPlugin {
 		ArrayList<String> successful = new ArrayList<String>();
 		for(int i = 0; i<pi.getSize(); i++)
 			clear.add(i);
-		for(String a : args){
+		for(String input : args){
 			for(int j = 0; j < items.size(); j++){
-				if(items.get(j).getInput().equalsIgnoreCase(a)){
+				if(items.get(j).getInput().equalsIgnoreCase(input)){
 					if(hasData(items.get(j).getItem())){
 						for(int k = 0; k<pi.getSize(); k++){
 							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
@@ -523,9 +518,9 @@ public class Clear extends JavaPlugin {
 	public void clearItem(Player sender, String[] args) {
 		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
 		PlayerInventory pi = sender.getInventory();
-		for(String a : args){
+		for(String input : args){
 			for(int i = 0; i<items.size(); i++){
-				if(a.equalsIgnoreCase(items.get(i).getInput())){
+				if(input.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
@@ -570,12 +565,12 @@ public class Clear extends JavaPlugin {
 		if(affected != null)
 			pi = affected.getInventory();
 		else{
-			sender.sendMessage(PREFIX + " Error: player variable was null!");
+			sender.sendMessage(PREFIX + " An error occured while clearing " + args[0] + "'s inventory");
 			return;
 		}
-		for(String a : args){
+		for(String input : args){
 			for(int i = 0; i<items.size(); i++){
-				if(a.equalsIgnoreCase(items.get(i).getInput())){
+				if(input.equalsIgnoreCase(items.get(i).getInput())){
 					if(!hasData(items.get(i).getItem())){
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
@@ -624,6 +619,9 @@ public class Clear extends JavaPlugin {
 					undo.remove(player.getName());
 				}
 			}
+			else{
+				player.sendMessage("It would appear that " + holder.getPlayer() + " is offline so you can't undo clearing his inventory");
+			}
 		}else{
 			player.sendMessage("Nothing to undo");
 		}
@@ -646,6 +644,9 @@ public class Clear extends JavaPlugin {
 						pi.addItem(IS);
 					}
 					undo.remove(sender.getName());
+				}
+				else{
+					sender.sendMessage("It would appear that " + holder.getPlayer() + " is offline so you can't undo clearing his inventory");
 				}
 			}
 		}else{
@@ -717,12 +718,12 @@ public class Clear extends JavaPlugin {
 	 */
 	private void loadItems(){
 		items = new ArrayList<ClearItemHolder>();
-		int i=1;
+		String line = "";
 		try {
 			FileReader reader = new FileReader(itemFile);
 			BufferedReader in = new BufferedReader(reader);
 			in.readLine();	//version line
-			String line = in.readLine();
+			line = in.readLine();
 			while(line != null){
 				String[] args = line.split(",");
 				int item = Integer.parseInt(args[1].trim());
@@ -730,14 +731,13 @@ public class Clear extends JavaPlugin {
 				ClearItemHolder newItem = new ClearItemHolder(args[0], item, damage, args[3]);
 				items.add(newItem);
 				line = in.readLine();
-				i++;
 			}
 		} catch (FileNotFoundException e) {
 			log.warning(ChatColor.RED + "You have not downloaded the items.csv, make sure to download the new one as it is necessary for the 1.8 update");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch(NumberFormatException e){
-			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error at line " + i+1);
+			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error with this line: " + line);
 		}
 	}
 	/**
@@ -783,7 +783,7 @@ public class Clear extends JavaPlugin {
 				System.gc();		//hate doing that but it prevents the file being in use and causing exceptions to be thrown
 				Files.move(currentPath, newPath, REPLACE_EXISTING);
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.warning(PREFIX + " Error moving new items.csv into place");
 			}
 			updatedFile.delete();
 		}		
