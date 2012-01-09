@@ -1,10 +1,15 @@
 package com.wwsean08.clear;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,7 +35,7 @@ public class Clear extends JavaPlugin {
 	PreviewCommand preview;
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
-	private final String VERSION = "1.9.3";
+	private final String VERSION = "1.9.0";
 	private String DBVersion = "1.1.3";
 	private File itemFile = null;
 	private Server server;
@@ -744,7 +749,20 @@ public class Clear extends JavaPlugin {
 		this.saveConfig();
 		//just getting ready for when the bleeding edge stuff comes out
 		if(!itemFile.exists()){
-			saveResource("items.csv", false);
+			//saveResource("items.csv", true);	//for when the new method comes out
+			try {
+				BufferedReader in = new BufferedReader(new InputStreamReader(this.getResource("items.csv")));
+				BufferedWriter out = new BufferedWriter(new FileWriter(itemFile));
+				String line = in.readLine();
+				while(line != null){
+					out.write(line + "\n");
+					line = in.readLine();
+				}
+				in.close();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -761,9 +779,64 @@ public class Clear extends JavaPlugin {
 	}
 
 	/**
-	 * TODO: Implement checking for updates and notifying the users
+	 * Checks for updates for the client and the items.csv
 	 */
 	private void checkForUpdates(){
-		
+		String check = "http://dcp.wwsean08.com/check.php?id=";
+		String clientCheck = check + "ClearInv%20New";
+		String itemsCheck = check + "items%20new";
+		try {
+			//plugin
+			URL client = new URL(clientCheck);
+			BufferedReader buf = new BufferedReader(new InputStreamReader(client.openStream()));
+			String line = buf.readLine();
+			line = line.substring(0, line.indexOf("&"));
+			if(newer(VERSION, line))
+				log.info(PREFIX + " There is a new version of ClearInv available for download, you can get it at http://dcp.wwsean08.com/dl.php?id=ClearInv%20New&ver=latest");
+			//items.csv
+			client = new URL(itemsCheck);
+			buf = new BufferedReader(new InputStreamReader(client.openStream()));
+			line = buf.readLine();
+			line = line.substring(0, line.indexOf("&"));
+			if(newer(DBVersion, line))
+				log.info(PREFIX + " There is a new version of the items.csv available for download, you can get it at http://dcp.wwsean08.com/dl.php?id=items%20new&ver=latest");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Compares the 2 versions and returns true if there is an update, otherwise returns false
+	 * @param current the version of the file on the server
+	 * @param check the version to compare it to
+	 * @return
+	 */
+	private boolean newer(String current, String check){
+		boolean result = false;
+		String[] currentVersion = current.split("\\.");
+		String[] checkVersion = check.split("\\.");
+		int i = Integer.parseInt(currentVersion[0]);
+		int j = Integer.parseInt(checkVersion[0]);
+		if(i>j)
+			result = false;
+		else if(i==j){
+			i = Integer.parseInt(currentVersion[1]);
+			j = Integer.parseInt(checkVersion[1]);
+			if(i>j)
+				result = false;
+			else if(i == j){
+				i = Integer.parseInt(currentVersion[2]);
+				j = Integer.parseInt(checkVersion[2]);
+				if(i >= j)
+					result = false;
+				else
+					result = true;
+			}else
+				result = true;
+		}else
+			result = true;
+		return result;
 	}
 }
