@@ -122,6 +122,8 @@ public class Clear extends JavaPlugin {
 					loadItems();
 					sender.sendMessage("Reloaded items");
 				}
+			}else if(args[0].equalsIgnoreCase("version")){
+				sender.sendMessage(PREFIX + "version " + VERSION);
 			}
 			else if (args[0].equalsIgnoreCase("except")){
 				clearExcept(player, args);
@@ -207,6 +209,8 @@ public class Clear extends JavaPlugin {
 				loadItems();
 				sender.sendMessage("Reloaded items");
 			}
+		}else if(args[0].equalsIgnoreCase("version")){
+			sender.sendMessage(PREFIX + "version " + VERSION);
 		}
 		else if (args[0].equalsIgnoreCase("undo")){
 			clearUndo(player);
@@ -260,10 +264,11 @@ public class Clear extends JavaPlugin {
 			}else if (args[0].equalsIgnoreCase("reload")){
 				loadItems();
 				sender.sendMessage("Reloaded items");
+			}else if(args[0].equalsIgnoreCase("version")){
+				sender.sendMessage(PREFIX + "version " + VERSION);
 			}else if (args[0].equalsIgnoreCase("undo")){
 				clearUndo(sender);
-			}
-			else if(args[0].equalsIgnoreCase("*")){
+			}else if(args[0].equalsIgnoreCase("*")){
 				Player[] online = server.getOnlinePlayers();
 				if(args.length == 1){
 					for(Player p : online)
