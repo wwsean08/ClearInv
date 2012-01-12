@@ -23,10 +23,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Clear extends JavaPlugin {
@@ -40,7 +38,6 @@ public class Clear extends JavaPlugin {
 	private File itemFile = null;
 	private Server server;
 	private FileConfiguration config;
-	private ClearPlayerListener pl;
 	private HashMap<String, ClearUndoHolder> undo;
 
 
@@ -773,7 +770,7 @@ public class Clear extends JavaPlugin {
 	 */
 	private void initVariables() {
 		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
-		pl = new ClearPlayerListener(this);
+		new ClearPlayerListener(this);
 		server = Bukkit.getServer();
 		preview = new PreviewCommand(this);
 		undo = new HashMap<String, ClearUndoHolder>();
