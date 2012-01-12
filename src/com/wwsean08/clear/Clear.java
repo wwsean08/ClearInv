@@ -40,7 +40,6 @@ public class Clear extends JavaPlugin {
 	private File itemFile = null;
 	private Server server;
 	private FileConfiguration config;
-	private PluginManager pm;
 	private ClearPlayerListener pl;
 	private HashMap<String, ClearUndoHolder> undo;
 
@@ -53,8 +52,6 @@ public class Clear extends JavaPlugin {
 		if(config.getBoolean("autoupdate", true))
 			checkForUpdates();
 		usesSP = config.getBoolean("superperm", true);
-		pm.registerEvent(Event.Type.PLAYER_QUIT, pl, Event.Priority.Monitor, this);
-		pm.registerEvent(Event.Type.PLAYER_KICK, pl, Event.Priority.Monitor, this);
 		loadItems();
 		getCommand("preview").setExecutor(preview);
 		getCommand("unpreview").setExecutor(preview);
@@ -147,7 +144,7 @@ public class Clear extends JavaPlugin {
 				player.sendMessage("Chestplate removed");
 			}else if (args[0].equalsIgnoreCase("help")) {
 				playerHelp(sender);
-			} else if ((server.matchPlayer(args[0]).size() != 0) && (player.hasPermission("clear.other") || player.hasPermission("clear.admin") || sender.isOp())) {
+			} else if ((server.getPlayer(args[0]) != null) && (player.hasPermission("clear.other") || player.hasPermission("clear.admin") || sender.isOp())) {
 				Player affectedPlayer = server.matchPlayer(args[0]).get(0);
 				if (args.length == 1) {
 					clearAllRemote(player, affectedPlayer);
@@ -157,7 +154,7 @@ public class Clear extends JavaPlugin {
 					clearArmorRemote(player, affectedPlayer);
 				} else
 					clearItemRemote(player, affectedPlayer, args);
-			} else if ((server.matchPlayer(args[0]).size() != 0) && !((player.hasPermission("clear.other") || !(player.hasPermission("clear.admin")) || !sender.isOp()))) {
+			} else if ((server.getPlayer(args[0]) != null) && !((player.hasPermission("clear.other") || !(player.hasPermission("clear.admin")) || !sender.isOp()))) {
 				sender.sendMessage("You do not have permission to use that command");
 				log.warning(PREFIX + player.getDisplayName() + " tried to clear another players inventory without the necessary permissions");
 			} else 
@@ -778,7 +775,6 @@ public class Clear extends JavaPlugin {
 		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
 		pl = new ClearPlayerListener(this);
 		server = Bukkit.getServer();
-		pm = server.getPluginManager();
 		preview = new PreviewCommand(this);
 		undo = new HashMap<String, ClearUndoHolder>();
 	}
