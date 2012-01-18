@@ -693,6 +693,7 @@ public class Clear extends JavaPlugin {
 		case 263:
 		case 351:
 		case 373:
+		case 383:
 			return true;
 		}
 		return false;
