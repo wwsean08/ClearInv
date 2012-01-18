@@ -1,4 +1,4 @@
-1.1.3
+1.1.4
 1,1,0,stone
 1:0,1,0,stone
 stone,1,0,stone
@@ -2091,6 +2091,116 @@ glisterngmelon,382,0,glistering melon
 glsteringmelon,382,0,glistering melon
 glisteringmln,382,0,glistering melon
 glistrngmelon,382,0,glistering melon
+383:2,383,2,experience orb egg
+experienceegg,383,2,experience orb egg
+experiencegg,383,2,experience orb egg
+eoegg,383,2,experience orb egg
+383:20,383,20,tnt egg
+tntegg,383,20,tnt egg
+383:50,383,59,creeper egg
+creeperegg,383,50,creeper egg
+creepergg,383,50,creeper egg
+creeper,383,50,creeper egg
+383:51,383,51,skeleton egg
+skeletonegg,383,51,skeleton egg
+skeleegg,383,51,skeleton egg
+skelegg,383,51,skeleton egg
+skeleton,383,51,skeleton egg
+383:52,383,52,spider egg
+spideregg,383,52,spider egg
+spidereggs,383,52,spider egg
+spidergg,383,52,spider egg
+spider,383,52,spider egg
+383:53,383,53,giant egg
+giantegg,383,53,giant egg
+giantgg,383,53,giant egg
+giant,383,53,giant egg
+383:54,383,54,zombie egg
+zombieegg,383,54,zombie egg
+zombiegg,383,54,zombie egg
+zombie,383,54,zombie egg
+383:55,383,55,slime egg
+slimeegg,383,55,slime egg
+slimeyegg,383,55,slime egg
+slimegg,383,55,slime egg
+slime,383,55,slime egg
+383:56,383,56,ghast egg
+ghastegg,383,56,ghast egg
+ghastgg,383,56,ghast egg
+ghast,383,56,ghast egg
+383:57,383,57,zombie pigman egg
+zombiepigmanegg,383,57,zombie pigman egg
+zpegg,383,57,zombie pigman egg
+zombiepigegg,383,57,zombie pigman egg
+zombiepigman,383,57,zombie pigman egg
+383:58,383,58,enderman egg
+endermanegg,383,58,enderman egg
+enderegg,383,58,enderman egg
+endergg,383,58,enderman egg
+endermangg,383,58,enderman egg
+enderman,383,58,enderman egg
+383:59,383,59,cave spider egg
+cavespideregg,383,59,cave spider egg
+cavespider,383,59,cave spider egg
+csegg,383,59,cave spider egg
+cspideregg,383,59,cave spider egg
+383:60,383,60,silverfish egg
+silverfishegg,383,60,silverfish egg
+sfegg,383,60,silverfish egg
+silverfishgg,383,60,silverfish egg
+silverfish,383,60,silverfish egg
+383:61,383,61,blaze egg
+blazeegg,383,61,blaze egg
+blazegg,383,61,blaze egg
+blaze,383,61,blaze egg
+383:62,383,62,magma cube egg
+magmacubeegg,383,62,magma cube egg
+mcegg,383,62,magma cube egg
+magmacube,383,62,magma cube egg
+383:63,383,63,enderdragon egg
+enderdragonegg,383,63,enderdragon egg
+edegg,383,63,enderdragon egg
+enderdragon,383,63,enderdragon egg
+383:90,383,90,pig egg
+pigegg,383,90,pig egg
+piggg,383,90,pig egg
+baconegg,383,90,easter egg: bacon egg
+pig,383,90,pig egg
+383:91,383,91,sheep egg
+sheepegg,383,91,sheep egg
+sheepgg,383,91,sheep egg
+sheep,383,91,sheep egg
+383:92,383,92,cow egg
+cowegg,383,92,cow egg
+cowgg,383,92,cow egg
+cow,383,92,cow egg
+383:93,383,93,chicken egg
+chickenegg,383,93,chicken egg
+chickengg,383,93,chicken egg
+chicken,383,93,chicken egg
+383:94,383,94,squid egg
+squidegg,383,94,squid egg
+squidgg,383,94,squid egg
+squid,383,94,squid egg
+383:95,383,95,wolf egg
+wolfegg,383,95,wolf egg
+wolfgg,383,95,wolf egg
+wolf,383,95,wolf egg
+383:96,383,96,mooshroom egg
+mooshroomegg,383,96,mooshroom egg
+mooshroomgg,383,96,mooshroom egg
+mooshroom,383,96,mooshroom egg
+383:97,383,97,snow golem egg
+snowgolemegg,383,97,snow golem egg
+sgegg,383,97,snow golem egg
+snowgolem,383,97,snow golem egg
+383:120,383,120,villager egg
+villageregg,383,120,villager egg
+villagergg,383,120,villager egg
+villager,383,120,villager
+383:200,383,200,ender crystal egg
+endercrystalegg,383,200,ender crystal egg
+ecegg,383,200,ender crystal egg
 2256,2256,0,13 disc
 2256:0,2256,0,13 disc
 goldmusicdisc,2256,0,13 disc
