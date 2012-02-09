@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -52,11 +53,11 @@ public class PreviewCommand implements CommandExecutor{
 			}
 			else{
 				if(args.length == 0){
-					sender.sendMessage("Error: I need a name of who to preview");
+					sender.sendMessage(ChatColor.GRAY + "Error: I need a name of who to preview");
 				}else{
 					Player player = server.getPlayer(args[0]);
 					ArrayList<String> contains = preview(player);
-					sender.sendMessage("Here is the inventory of " + player.getDisplayName());
+					sender.sendMessage(ChatColor.GRAY + "Here is the inventory of " + player.getDisplayName());
 					for(String s : contains){
 						sender.sendMessage(s);
 					}
