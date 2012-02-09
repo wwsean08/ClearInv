@@ -114,10 +114,11 @@ public class Clear extends JavaPlugin {
 			else if (args[0].equalsIgnoreCase("reload")){
 				if(player.hasPermission("clear.admin")){
 					loadItems();
-					sender.sendMessage("Reloaded items");
+					sender.sendMessage(ChatColor.GRAY + "Reloaded items");
 				}
 			}else if(args[0].equalsIgnoreCase("version")){
-				sender.sendMessage(PREFIX + "version " + VERSION);
+				sender.sendMessage(ChatColor.GRAY + PREFIX + "version " + VERSION);
+				sender.sendMessage(ChatColor.GRAY + "item list version " + DBVersion);
 			}
 			else if (args[0].equalsIgnoreCase("except")){
 				clearExcept(player, args);
@@ -201,10 +202,11 @@ public class Clear extends JavaPlugin {
 		else if (args[0].equalsIgnoreCase("reload")){
 			if(player.isOp()){
 				loadItems();
-				sender.sendMessage("Reloaded items");
+				sender.sendMessage(ChatColor.GRAY + "Reloaded items");
 			}
 		}else if(args[0].equalsIgnoreCase("version")){
-			sender.sendMessage(PREFIX + "version " + VERSION);
+			sender.sendMessage(ChatColor.GRAY + PREFIX + "version " + VERSION);
+			sender.sendMessage(ChatColor.GRAY + "item list version " + DBVersion);
 		}
 		else if (args[0].equalsIgnoreCase("undo")){
 			clearUndo(player);
@@ -257,9 +259,10 @@ public class Clear extends JavaPlugin {
 				return;
 			}else if (args[0].equalsIgnoreCase("reload")){
 				loadItems();
-				sender.sendMessage("Reloaded items");
+				sender.sendMessage(ChatColor.GRAY + "Reloaded items");
 			}else if(args[0].equalsIgnoreCase("version")){
-				sender.sendMessage(PREFIX + "version " + VERSION);
+				sender.sendMessage(ChatColor.GRAY + PREFIX + "version " + VERSION);
+				sender.sendMessage(ChatColor.GRAY + "item list version " + DBVersion);
 			}else if (args[0].equalsIgnoreCase("undo")){
 				clearUndo(sender);
 			}else if(args[0].equalsIgnoreCase("*")){
