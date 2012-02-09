@@ -141,7 +141,7 @@ public class Clear extends JavaPlugin {
 				player.getInventory().setChestplate(null);
 				player.sendMessage(ChatColor.GRAY + "Chestplate removed");
 			}else if (args[0].equalsIgnoreCase("help")) {
-				playerHelp(sender);
+				help(sender);
 			} else if ((server.getPlayer(args[0]) != null) && (player.hasPermission("clear.other") || player.hasPermission("clear.admin") || sender.isOp())) {
 				Player affectedPlayer = server.matchPlayer(args[0]).get(0);
 				if (args.length == 1) {
@@ -198,7 +198,7 @@ public class Clear extends JavaPlugin {
 			}
 		}
 		else if (args[0].equalsIgnoreCase("help")) 
-			playerHelp(sender);
+			help(sender);
 		else if (args[0].equalsIgnoreCase("reload")){
 			if(player.isOp()){
 				loadItems();
@@ -255,7 +255,7 @@ public class Clear extends JavaPlugin {
 	private void consoleClear(CommandSender sender, String[] args){
 		if (args.length >= 1) {
 			if (args[0].equalsIgnoreCase("help")){
-				consoleHelp(sender);
+				help(sender);
 				return;
 			}else if (args[0].equalsIgnoreCase("reload")){
 				loadItems();
@@ -317,37 +317,34 @@ public class Clear extends JavaPlugin {
 		}
 	}
 	/**
-	 * displays the help text if the console sent the command
+	 * displays the help text
 	 * @param sender is the person who sent the command
 	 */
-	private void consoleHelp(CommandSender sender){
-		sender.sendMessage(ChatColor.BLUE + "Because you are the server console, you don't have an inventory, however you can clear other players inventories");
-		sender.sendMessage(ChatColor.BLUE + "To clear a players inventory completely type:");
-		sender.sendMessage(ChatColor.RED + "/clear <player>");
-		sender.sendMessage(ChatColor.BLUE + "To clear certain items from a players inventory type:");
-		sender.sendMessage(ChatColor.RED + "/clear <player> <item1> [item2] [item3]...");
-		sender.sendMessage(ChatColor.BLUE + "And if you want to clear everything bu8t certain items from a players inventory type this:");
-		sender.sendMessage(ChatColor.RED + "/clear <player> except <item1> [item2] [item3]...");
-		sender.sendMessage(ChatColor.GOLD + "Thank you for using wwsean08's inventory clearing plugin");
-	}
-	/**
-	 * displays the help text if the player sent the command
-	 * @param sender Is the person who sent the command
-	 */
-	private void playerHelp(CommandSender sender){
-		Player player = (Player) sender;
-		sender.sendMessage(ChatColor.AQUA + "you can clear your inventory of everything like this:");
-		sender.sendMessage(ChatColor.RED + "/clear");
-		sender.sendMessage(ChatColor.AQUA + "You can exclude items using the except keyword as the first argument like this:");
-		sender.sendMessage(ChatColor.RED + "/clear except sand");
-		sender.sendMessage(ChatColor.AQUA + "You can delete select items by naming them as arguments like this:");
-		sender.sendMessage(ChatColor.RED + "/clear sand gravel");
-		if (sender.isOp() || player.hasPermission("clear.other")) {
-			sender.sendMessage(ChatColor.AQUA + "And you have permission to clear other peoples invetories, and view them");
-			sender.sendMessage(ChatColor.RED + "/clear name item1 item2...");
-			sender.sendMessage(ChatColor.AQUA + "Tp view them the command is preview and to unview them its unpreview");
-			sender.sendMessage(ChatColor.RED + "/preview <user> to put the players inventory in yours");
-			sender.sendMessage(ChatColor.RED + "/unpreview to restore your inventory");
+	private void help(CommandSender sender){
+		if(sender instanceof ConsoleCommandSender){	//if it's the console
+			sender.sendMessage(ChatColor.BLUE + "Because you are the server console, you don't have an inventory, however you can clear other players inventories");
+			sender.sendMessage(ChatColor.BLUE + "To clear a players inventory completely type:");
+			sender.sendMessage(ChatColor.RED + "/clear <player>");
+			sender.sendMessage(ChatColor.BLUE + "To clear certain items from a players inventory type:");
+			sender.sendMessage(ChatColor.RED + "/clear <player> <item1> [item2] [item3]...");
+			sender.sendMessage(ChatColor.BLUE + "And if you want to clear everything bu8t certain items from a players inventory type this:");
+			sender.sendMessage(ChatColor.RED + "/clear <player> except <item1> [item2] [item3]...");
+			sender.sendMessage(ChatColor.GOLD + "Thank you for using wwsean08's inventory clearing plugin");
+		}else{	//if it's a player
+			Player player = (Player) sender;
+			sender.sendMessage(ChatColor.AQUA + "you can clear your inventory of everything like this:");
+			sender.sendMessage(ChatColor.RED + "/clear");
+			sender.sendMessage(ChatColor.AQUA + "You can exclude items using the except keyword as the first argument like this:");
+			sender.sendMessage(ChatColor.RED + "/clear except sand");
+			sender.sendMessage(ChatColor.AQUA + "You can delete select items by naming them as arguments like this:");
+			sender.sendMessage(ChatColor.RED + "/clear sand gravel");
+			if (sender.isOp() || player.hasPermission("clear.other")) {
+				sender.sendMessage(ChatColor.AQUA + "And you have permission to clear other peoples invetories, and view them");
+				sender.sendMessage(ChatColor.RED + "/clear name item1 item2...");
+				sender.sendMessage(ChatColor.AQUA + "Tp view them the command is preview and to unview them its unpreview");
+				sender.sendMessage(ChatColor.RED + "/preview <user> to put the players inventory in yours");
+				sender.sendMessage(ChatColor.RED + "/unpreview to restore your inventory");
+			}
 		}
 	}
 
