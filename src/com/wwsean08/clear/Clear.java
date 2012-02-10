@@ -89,7 +89,7 @@ public class Clear extends JavaPlugin {
 		Player player = (Player) sender;
 		if (player.hasPermission("clear.self") || player.hasPermission("clear.other") || player.hasPermission("clear.admin")) {
 			if (args.length == 0)
-				clearAll(player);
+				clearAll(sender, player);
 			else if(args[0].trim().equals("*")){
 				if(player.hasPermission("clear.admin")){
 					Player[] online = server.getOnlinePlayers();
@@ -121,13 +121,13 @@ public class Clear extends JavaPlugin {
 				sender.sendMessage(ChatColor.GRAY + "item list version " + DBVersion);
 			}
 			else if (args[0].equalsIgnoreCase("except")){
-				clearExcept(player, args);
+				clearExcept(sender, player, args);
 			}
 			else if (args[0].equalsIgnoreCase("undo")){
-				clearUndo(player);
+				clearUndo(sender);
 			}
 			else if (args[0].equalsIgnoreCase("armor"))
-				clearArmor(player);
+				clearArmor(sender, player);
 			else if(args[0].equalsIgnoreCase("boots") || args[0].equalsIgnoreCase("boot")){
 				player.getInventory().setBoots(null);
 				player.sendMessage(ChatColor.GRAY + "Boots removed");
@@ -156,7 +156,7 @@ public class Clear extends JavaPlugin {
 				sender.sendMessage(ChatColor.RED + "You do not have permission to use that command");
 				log.warning(PREFIX + player.getDisplayName() + " tried to clear another players inventory without the necessary permissions");
 			} else 
-				clearItem(player, args);
+				clearItem(sender, player, args);
 		}
 	}
 
@@ -169,9 +169,9 @@ public class Clear extends JavaPlugin {
 	private void NoPerm(CommandSender sender, String[] args){
 		Player player = (Player) sender;
 		if (args.length == 0) 
-			clearAll(player);
+			clearAll(sender, player);
 		else if (args[0].equalsIgnoreCase("except")) 
-			clearExcept(player, args);
+			clearExcept(sender, player, args);
 		else if(args[0].trim().equals("*")){
 			if(sender.isOp()){
 				Player[] online = server.getOnlinePlayers();
@@ -213,7 +213,7 @@ public class Clear extends JavaPlugin {
 		}
 		//begin armor removal
 		else if(args[0].equalsIgnoreCase("armor"))
-			clearArmor(player);
+			clearArmor(sender, player);
 		else if(args[0].equalsIgnoreCase("boots") || args[0].equalsIgnoreCase("boot")){
 			player.getInventory().setBoots(null);
 			player.sendMessage(ChatColor.GRAY + "Boots removed");
@@ -244,7 +244,7 @@ public class Clear extends JavaPlugin {
 				log.warning(PREFIX + player.getDisplayName() + " tried to clear another players inventory without the necessary permissions");
 			}
 		} else 
-			clearItem(player, args);
+			clearItem(sender, player, args);
 	}
 
 	/**
@@ -349,17 +349,6 @@ public class Clear extends JavaPlugin {
 	}
 
 	/**
-	 * Clears all the items out of the players inventory
-	 * @param sender is the player who sent the command
-	 */
-	public void clearAll(Player sender) {
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), new ArrayList<ItemStack>(Arrays.asList(sender.getInventory().getContents())));
-		undo.put(sender.getName(), holder);
-		sender.getInventory().clear();
-		sender.sendMessage(ChatColor.GRAY + "Inventory Cleared");
-	}
-
-	/**
 	 * Clears all the items out of another user's inventory
 	 * @param sender is the player who sent the command.
 	 * @param affected is the player who's inventory gets cleared.
@@ -368,72 +357,10 @@ public class Clear extends JavaPlugin {
 		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), new ArrayList<ItemStack>(Arrays.asList(affected.getInventory().getContents())));
 		undo.put(sender.getName(), holder);
 		affected.getInventory().clear();
-		sender.sendMessage(ChatColor.GRAY + affected.getDisplayName() + "'s inventory has been cleared.");
-	}
-
-	/**
-	 * clears all the items except for the ones specified by the player.
-	 * @param sender is the player who sent the command
-	 * @param args the list of items to exclude (either in number of name form).
-	 */
-	public void clearExcept(Player sender, String[] args) {
-		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
-		PlayerInventory pi = sender.getInventory();
-		ArrayList<Integer> clear = new ArrayList<Integer>();
-		ArrayList<String> successful = new ArrayList<String>();
-		for(int i = 0; i<pi.getSize(); i++)
-			clear.add(i);
-		for(String input : args){
-			for(int j = 0; j < items.size(); j++){
-				if(items.get(j).getInput().equalsIgnoreCase(input)){
-					if(hasData(items.get(j).getItem())){
-						for(int k = 0; k<pi.getSize(); k++){
-							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
-								if(checkData(pi.getItem(k).getData().getData(), items.get(j).getDamage())){
-									clear.remove((Integer)k);
-									if(!successful.contains(items.get(j).getOutput())){
-										successful.add(items.get(j).getOutput());
-									}
-								}
-							}
-						}
-					}else{
-						for(int k = 0; k<pi.getSize();k++){
-							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
-								clear.remove((Integer)k);
-								if(!successful.contains(items.get(j).getOutput())){
-									successful.add(items.get(j).getOutput());
-								}
-							}
-						}
-					}
-					break;
-				}
-			}
-		}
-
-		for(Integer slot : clear){
-			removed.add(pi.getItem(slot).clone());
-			pi.clear(slot);
-		}
-		StringBuilder output = new StringBuilder();
-		if(successful.size() >= 3){
-			for(int i = 0; i<successful.size()-1; i++){
-				output.append(successful.get(i) + ", ");
-			}
-			output.append("and " + successful.get(successful.size()-1));
-		}else if(successful.size() == 2){
-			output.append(successful.get(0));
-			output.append(" and ");
-			output.append(successful.get(1));
-		}else if(successful.size() == 1){
-			output.append(successful.get(0));
-		}else{
-			sender.sendMessage(ChatColor.RED + "Clear except command failed or you didn't have that to start out with");
-		}
-		sender.sendMessage(ChatColor.GRAY + "Successfully removed everything except " + output);
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
-		undo.put(sender.getName(), holder);
+		if(sender.getName() != affected.getName())
+			sender.sendMessage(ChatColor.GRAY + affected.getDisplayName() + "'s inventory has been cleared.");
+		else
+			sender.sendMessage(ChatColor.GRAY + "Your inventory has been cleared");
 	}
 
 
@@ -448,7 +375,6 @@ public class Clear extends JavaPlugin {
 		if(affected != null)
 			pi = affected.getInventory();
 		else{
-			sender.sendMessage(ChatColor.RED + PREFIX + " Error: player variable was null!");
 			return;
 		}
 		ArrayList<Integer> clear = new ArrayList<Integer>();
@@ -500,54 +426,14 @@ public class Clear extends JavaPlugin {
 		}else if(successful.size() == 1){
 			output.append(successful.get(0));
 		}else{
-			sender.sendMessage(ChatColor.RED + "Clear except command failed or they didn't have that to start out with");
+			if(sender.getName() != affected.getName())
+				sender.sendMessage(ChatColor.RED + "Clear except command failed or they didn't have that to start out with");
+			else
+				sender.sendMessage(ChatColor.RED + "Clear except command failed or you didn't have that to start out with");
 			return;
 		}
 		sender.sendMessage(ChatColor.GRAY + "Successfully removed everything except " + output);
 		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), removed);
-		undo.put(sender.getName(), holder);
-	}
-
-	/**
-	 * clears all of the selected items by the player
-	 * @param Sender the player who sent the command
-	 * @param args is the list or item(s) that the user wants to delete from their inventory
-	 */
-	public void clearItem(Player sender, String[] args) {
-		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
-		PlayerInventory pi = sender.getInventory();
-		for(String input : args){
-			for(int i = 0; i<items.size(); i++){
-				if(input.equalsIgnoreCase(items.get(i).getInput())){
-					if(!hasData(items.get(i).getItem())){
-						for(int j = 0; j<pi.getSize(); j++){
-							ItemStack IS = pi.getItem(j);
-							if(IS == null)
-								continue;
-							if(IS.getTypeId() == items.get(i).getItem()){
-								removed.add(pi.getItem(j).clone());
-								pi.clear(j);
-							}
-						}
-					}else{
-						for(int j = 0; j<pi.getSize(); j++){
-							ItemStack IS = pi.getItem(j);
-							if(IS == null)
-								continue;
-							if(hasData(IS.getTypeId())){
-								if(checkData(IS.getData().getData(), items.get(i).getDamage())){
-									removed.add(IS.clone());
-									pi.clear(j);
-								}
-							}
-						}
-					}
-					sender.sendMessage(ChatColor.GRAY + "Cleared all " + items.get(i).getOutput());
-					break;
-				}
-			}
-		}
-		ClearUndoHolder holder = new ClearUndoHolder(sender.getName(), removed);
 		undo.put(sender.getName(), holder);
 	}
 
@@ -563,7 +449,6 @@ public class Clear extends JavaPlugin {
 		if(affected != null)
 			pi = affected.getInventory();
 		else{
-			sender.sendMessage(ChatColor.RED + PREFIX + " An error occured while clearing " + args[0] + "'s inventory");
 			return;
 		}
 		for(String input : args){
@@ -598,32 +483,7 @@ public class Clear extends JavaPlugin {
 		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), removed);
 		undo.put(sender.getName(), holder);
 	}
-	/**
-	 * allows a player to undo the last clearing of an inventory they did.  This will not fix a clearing of all players.
-	 * @param player
-	 */
-	public void clearUndo(Player player){
-		ClearUndoHolder holder = undo.get(player.getName());
-		if(holder != null){
-			Player affected = server.getPlayer(holder.getPlayer());
-			if(affected != null){
-				PlayerInventory pi = affected.getInventory();
-				if(pi != null){
-					for(ItemStack IS : holder.getOldInventory()){
-						if(IS == null || IS.getTypeId() == 0)
-							continue;
-						pi.addItem(IS);
-					}
-					undo.remove(player.getName());
-				}
-			}
-			else{
-				player.sendMessage(ChatColor.RED + "It would appear that " + holder.getPlayer() + " is offline so you can't undo clearing his inventory");
-			}
-		}else{
-			player.sendMessage(ChatColor.GRAY + "Nothing to undo");
-		}
-	}
+
 	/**
 	 * allows a command sender (the console specifically) to undo the last clearing of an inventory they did. 
 	 * This will not fix a clearing of all players.
@@ -652,20 +512,15 @@ public class Clear extends JavaPlugin {
 		}
 	}
 
-	private void clearArmor(Player sender){
-		sender.getInventory().setBoots(null);
-		sender.getInventory().setChestplate(null);
-		sender.getInventory().setHelmet(null);
-		sender.getInventory().setLeggings(null);
-		sender.sendMessage(ChatColor.GRAY + "Armor removed");
-	}
-
-	private void clearArmor(CommandSender sender, Player affected){
+	public void clearArmor(CommandSender sender, Player affected){
 		affected.getInventory().setBoots(null);
 		affected.getInventory().setChestplate(null);
 		affected.getInventory().setHelmet(null);
 		affected.getInventory().setLeggings(null);
-		sender.sendMessage(ChatColor.GRAY + affected.getName() + " has had his armor removed by you");
+		if(!sender.getName().equals(affected.getName()))
+			sender.sendMessage(ChatColor.GRAY + affected.getName() + " has had his armor removed by you");
+		else
+			sender.sendMessage(ChatColor.GRAY + "Armor removed");
 	}
 
 	/**
