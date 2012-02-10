@@ -34,7 +34,7 @@ public class Clear extends JavaPlugin {
 	PreviewCommand preview;
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
-	private final String VERSION = "1.9.5";
+	private final String VERSION = "1.9.6";
 	private final String BASEDBV = "1.1.4";
 	private String DBVersion = BASEDBV;
 	private File itemFile = null;
@@ -616,6 +616,8 @@ public class Clear extends JavaPlugin {
 		//just getting ready for when the bleeding edge stuff comes out
 		if(!itemFile.exists() || newer(BASEDBV, DBVersion)){
 			saveResource("items.csv", true);
+			log.info("items.csv updated");
+			getDBV();
 		}
 	}
 
