@@ -78,12 +78,13 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param player the player whose inventory is being previewed
 	 * @return a list of items to display to the server console
 	 */
-	private ArrayList<String> preview(Player player) {
+	public ArrayList<String> preview(Player player) {
 		ArrayList<String> inventoryList = new ArrayList<String>();
 		ArrayList<Integer> itemNumbers = new ArrayList<Integer>();
 		HashMap<Integer, Integer> ammount = new HashMap<Integer, Integer>();
 		PlayerInventory inv = player.getInventory();
 		ItemStack[] contents = inv.getContents();
+		//loop thru the contents of the inventory in order to make our array list of items
 		for(ItemStack a : contents){
 			if(a != null){
 				Integer value = a.getTypeId();
@@ -97,6 +98,7 @@ public class PreviewCommand implements CommandExecutor{
 				}
 			}
 		}
+		//build an array list of strings with the ammount they have and the item
 		for(Integer i : itemNumbers){
 			StringBuilder out = new StringBuilder();
 			out.append(ammount.get(i) + "x ");
@@ -114,9 +116,9 @@ public class PreviewCommand implements CommandExecutor{
 	/**
 	 * Allows an admin to preview a players inventory
 	 * @param previewer The admin that will be previewing the inventory
-	 * @param previewee The player whose inventory is being previewed
+	 * @param previewee The player whose inventory we want to preview
 	 */
-	private void preview(Player previewer, Player previewee){
+	public void preview(Player previewer, Player previewee){
 		ItemStack[] preview = previewee.getInventory().getContents();
 		if(!originalInventory.containsKey(previewer))
 			originalInventory.put(previewer, previewer.getInventory().getContents());
@@ -128,7 +130,7 @@ public class PreviewCommand implements CommandExecutor{
 
 	/**
 	 * Restores the content of an admins inventory if they are previewing one
-	 * @param previewer the player who is previewing an inventory
+	 * @param previewer the admin who is getting their inventory back
 	 */
 	public void unpreview(Player previewer){
 		if(originalInventory.containsKey(previewer)){
