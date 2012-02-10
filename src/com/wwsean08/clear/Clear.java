@@ -1,11 +1,9 @@
 package com.wwsean08.clear;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -28,13 +26,17 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Clear extends JavaPlugin {
+	/**
+	 * instance variables
+	 */
 	Logger log = Logger.getLogger("Minecraft");
 	ArrayList<ClearItemHolder> items;
 	PreviewCommand preview;
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
 	private final String VERSION = "1.9.5";
-	private String DBVersion = "1.1.4";
+	private final String BASEDBV = "1.1.4";
+	private String DBVersion = BASEDBV;
 	private File itemFile = null;
 	private Server server;
 	private FileConfiguration config;
@@ -84,7 +86,6 @@ public class Clear extends JavaPlugin {
 	 * @param args is the arguments of the command
 	 * 
 	 */
-
 	private void Perm(CommandSender sender, String[] args) {
 		Player player = (Player) sender;
 		if (player.hasPermission("clear.self") || player.hasPermission("clear.other") || player.hasPermission("clear.admin")) {
@@ -316,6 +317,7 @@ public class Clear extends JavaPlugin {
 			}
 		}
 	}
+
 	/**
 	 * displays the help text
 	 * @param sender is the person who sent the command
@@ -362,7 +364,6 @@ public class Clear extends JavaPlugin {
 		else
 			sender.sendMessage(ChatColor.GRAY + "Your inventory has been cleared");
 	}
-
 
 	/**
 	 * clears all the items except for the ones specified by the player.
@@ -512,6 +513,11 @@ public class Clear extends JavaPlugin {
 		}
 	}
 
+	/**
+	 * clears the armor of the affected player
+	 * @param sender the sender of the command
+	 * @param affected the affected player (may or may not be the sender)
+	 */
 	public void clearArmor(CommandSender sender, Player affected){
 		affected.getInventory().setBoots(null);
 		affected.getInventory().setChestplate(null);
@@ -532,6 +538,7 @@ public class Clear extends JavaPlugin {
 		Byte testByte = data;
 		return testByte.intValue() == damage;
 	}
+
 	/**
 	 * checks against known items which have data
 	 * @param the item ID used to determine if it has data (or can have data).
@@ -597,6 +604,7 @@ public class Clear extends JavaPlugin {
 			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error with this line: " + line);
 		}
 	}
+
 	/**
 	 * creates the config.yml if one doesn't exist or is outdated
 	 * 
@@ -606,21 +614,8 @@ public class Clear extends JavaPlugin {
 		config.options().copyDefaults(true);
 		this.saveConfig();
 		//just getting ready for when the bleeding edge stuff comes out
-		if(!itemFile.exists()){
-			//saveResource("items.csv", true);	//for when the new method comes out
-			try {
-				BufferedReader in = new BufferedReader(new InputStreamReader(this.getResource("items.csv")));
-				BufferedWriter out = new BufferedWriter(new FileWriter(itemFile));
-				String line = in.readLine();
-				while(line != null){
-					out.write(line + "\n");
-					line = in.readLine();
-				}
-				in.close();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		if(!itemFile.exists() || newer(BASEDBV, DBVersion)){
+			saveResource("items.csv", true);
 		}
 	}
 
