@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -41,7 +42,7 @@ public class Clear extends JavaPlugin {
 	private Server server;
 	private FileConfiguration config;
 	private HashMap<String, ClearUndoHolder> undo;
-
+	private List<Integer> hasData;
 
 	@Override
 	public void onEnable() {
@@ -51,6 +52,7 @@ public class Clear extends JavaPlugin {
 		if(config.getBoolean("autoupdate", true))
 			checkForUpdates();
 		usesSP = config.getBoolean("superperm", true);
+		hasData = config.getIntegerList("hasData");
 		loadItems();
 		getCommand("preview").setExecutor(preview);
 		getCommand("unpreview").setExecutor(preview);
@@ -544,18 +546,7 @@ public class Clear extends JavaPlugin {
 	 * @param the item ID used to determine if it has data (or can have data).
 	 */
 	private boolean hasData(int ID) {
-		switch(ID){
-		case 17:
-		case 18:
-		case 26:
-		case 35:
-		case 43:
-		case 92:
-		case 93:
-		case 263:
-		case 351:
-		case 373:
-		case 383:
+		if(hasData.contains(ID)){
 			return true;
 		}
 		return false;
