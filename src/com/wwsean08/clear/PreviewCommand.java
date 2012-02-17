@@ -34,21 +34,19 @@ public class PreviewCommand implements CommandExecutor{
 					Player player = (Player) sender;
 					if(server.matchPlayer(args[0]) != null){
 						Player affected = server.matchPlayer(args[0]).get(0);
-						if(affected!=null){
-							if(plugin.usesSP){
-								if(player.hasPermission("clear.other")){
-									preview(player, affected);
-									ClearRunnable run = new ClearRunnable(this, player);
-									server.getScheduler().scheduleSyncDelayedTask(plugin, run, 6000);
-								}
-							}else if(player.isOp()){
+						if(plugin.usesSP){
+							if(player.hasPermission("clear.other")){
 								preview(player, affected);
 								ClearRunnable run = new ClearRunnable(this, player);
 								server.getScheduler().scheduleSyncDelayedTask(plugin, run, 6000);
-							}else{
-								sender.sendMessage("You do not have permission to use this command");
-								plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
 							}
+						}else if(player.isOp()){
+							preview(player, affected);
+							ClearRunnable run = new ClearRunnable(this, player);
+							server.getScheduler().scheduleSyncDelayedTask(plugin, run, 6000);
+						}else{
+							sender.sendMessage("You do not have permission to use this command");
+							plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
 						}
 					}
 				}
