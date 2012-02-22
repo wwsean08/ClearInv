@@ -40,7 +40,7 @@ public class Clear extends JavaPlugin {
 	private String DBVersion = BASEDBV;
 	private File itemFile = null;
 	private Server server;
-	private FileConfiguration config;
+	private FileConfiguration config = this.getConfig();
 	private HashMap<String, ClearUndoHolder> undo;
 	private List<Integer> hasData;
 
@@ -563,7 +563,11 @@ public class Clear extends JavaPlugin {
 			DBVersion = line;
 			in.close();
 			reader.close();
-		}catch(Exception e){}
+		}catch(Exception e){
+			if(config.getBoolean("debug", false)){
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -590,7 +594,8 @@ public class Clear extends JavaPlugin {
 		} catch (FileNotFoundException e) {
 			log.warning(ChatColor.RED + "You have not downloaded the items.csv, make sure to download the new one as it is necessary for the 1.8 update");
 		} catch (IOException e) {
-			e.printStackTrace();
+			if (config.getBoolean("debug", true))
+				e.printStackTrace();
 		} catch(NumberFormatException e){
 			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error with this line: " + line);
 		}
@@ -601,7 +606,6 @@ public class Clear extends JavaPlugin {
 	 * 
 	 */
 	private void createConfig(){
-		config = this.getConfig();
 		config.options().copyDefaults(true);
 		this.saveConfig();
 		//just getting ready for when the bleeding edge stuff comes out
@@ -646,9 +650,13 @@ public class Clear extends JavaPlugin {
 			if(newer(DBVersion, line))
 				log.info(PREFIX + " There is a new version of the items.csv available for download, you can get it at http://dcp.wwsean08.com/dl.php?id=items%20new&ver=latest");
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			if (config.getBoolean("debug", true))
+				e.printStackTrace();
+			getLogger().warning("Unable to check for updates!");
 		} catch (IOException e) {
-			e.printStackTrace();
+			if (config.getBoolean("debug", true))
+				e.printStackTrace();
+			getLogger().warning("Unable to check for updates!");
 		}
 	}
 

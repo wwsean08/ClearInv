@@ -1,3 +1,4 @@
+debug: false
 autoupdate: true
 superPerms: true
 hasData: [17, 18, 26, 35, 43, 92, 93, 263, 351, 373, 383]
