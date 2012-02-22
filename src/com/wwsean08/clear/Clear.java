@@ -35,7 +35,7 @@ public class Clear extends JavaPlugin {
 	PreviewCommand preview;
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
-	private final String VERSION = "1.9.6";
+	private final String VERSION = "1.9.7";
 	private final String BASEDBV = "1.1.4";
 	private String DBVersion = BASEDBV;
 	private File itemFile = null;
