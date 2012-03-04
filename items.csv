@@ -1,4 +1,4 @@
-1.1.4
+1.1.5
 1,1,0,stone
 1:0,1,0,stone
 stone,1,0,stone
@@ -957,6 +957,14 @@ dragngg,122,0,dragon egg
 drgongg,122,0,dragon egg
 drgnegg,122,0,dragon egg
 drgngg,122,0,dragon egg
+123,123,0,Redstone Lamp
+123:0,123,0,Redstone Lamp
+redstonelamp,123,0,Redstone Lamp
+rslamp,123,0,Redstone Lamp
+124,124,0,Redstone Lamp (active)
+124:0,124,0,Redstone Lamp (active)
+redstonelampactive,124,0,Redstone Lamp (active)
+rslampactive,124,0,Redstone Lamp (active)
 256,256,0,iron shovel
 256:0,256,0,iron shovel
 ironshovel,256,0,iron shovel
@@ -2201,6 +2209,14 @@ villager,383,120,villager
 383:200,383,200,ender crystal egg
 endercrystalegg,383,200,ender crystal egg
 ecegg,383,200,ender crystal egg
+384,384,0,Bottle O' Enchanting
+384:0,384,0,Bottle O' Enchanting
+bottleoenchanting,384,0,Bottle O' Enchanting
+xpbottle,384,0,Bottle O' Enchanting
+enchantingbottle,384,0,Bottle O' Enchanting
+385,385,0,Fire Charge
+385:0,385,0,Fire Charge
+firecharge,385,0,Fire Charge
 2256,2256,0,13 disc
 2256:0,2256,0,13 disc
 goldmusicdisc,2256,0,13 disc
