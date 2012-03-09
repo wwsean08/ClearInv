@@ -26,27 +26,41 @@ public class PreviewCommand implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if(commandLabel.equalsIgnoreCase("preview")){
 			if(sender instanceof Player){
+				Player player = (Player) sender;
 				if(args.length == 0){
-					Player player = (Player) sender;
 					unpreview(player);
 				}
-				if(args.length == 1){
-					Player player = (Player) sender;
+				//non-continuous preview
+				else if(args.length == 1){
 					if(server.matchPlayer(args[0]) != null){
 						Player affected = server.matchPlayer(args[0]).get(0);
 						if(plugin.usesSP){
 							if(player.hasPermission("clear.other")){
-								preview(player, affected);
-								ClearRunnable run = new ClearRunnable(this, player);
-								server.getScheduler().scheduleSyncDelayedTask(plugin, run, 6000);
+								preview(player, affected, false);
 							}
 						}else if(player.isOp()){
-							preview(player, affected);
-							ClearRunnable run = new ClearRunnable(this, player);
-							server.getScheduler().scheduleSyncDelayedTask(plugin, run, 6000);
+							preview(player, affected, false);
 						}else{
 							sender.sendMessage("You do not have permission to use this command");
 							plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
+						}
+					}
+				}
+				//continuous preview
+				else if(args.length == 2){
+					if(args[0].equalsIgnoreCase("-c")){
+						if(server.matchPlayer(args[1]) != null){
+							Player affected = server.matchPlayer(args[1]).get(0);
+							if(plugin.usesSP){
+								if(player.hasPermission("clear.other")){
+									preview(player, affected, true);
+								}
+							}else if(player.isOp()){
+								preview(player, affected, true);
+							}else{
+								sender.sendMessage("You do not have permission to use this command");
+								plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
+							}
 						}
 					}
 				}
@@ -117,8 +131,9 @@ public class PreviewCommand implements CommandExecutor{
 	 * Allows an admin to preview a players inventory
 	 * @param previewer The admin that will be previewing the inventory
 	 * @param previewee The player whose inventory we want to preview
+	 * @param mode is wether or not it will be continuous mode or not which still has to be implemented
 	 */
-	public void preview(Player previewer, Player previewee){
+	public void preview(Player previewer, Player previewee, boolean mode){
 		ItemStack[] preview = previewee.getInventory().getContents();
 		if(!originalInventory.containsKey(previewer))
 			originalInventory.put(previewer, previewer.getInventory().getContents());
