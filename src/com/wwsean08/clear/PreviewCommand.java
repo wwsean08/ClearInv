@@ -138,7 +138,7 @@ public class PreviewCommand implements CommandExecutor{
 		if(!originalInventory.containsKey(previewer))
 			originalInventory.put(previewer, previewer.getInventory().getContents());
 		previewer.getInventory().setContents(preview);
-		ClearRunnable runner = new ClearRunnable(this, previewer);
+		PreviewRunnable runner = new PreviewRunnable(this, previewer);
 		server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 		previewer.sendMessage("You are now previewing " + previewee.getDisplayName());
 	}
