@@ -16,13 +16,11 @@ import org.bukkit.inventory.PlayerInventory;
 public class PreviewCommand implements CommandExecutor{
 	Clear plugin;
 	Server server;
-	private HashMap<Player, ItemStack[]> originalInventory;
-	private ArrayList<PreviewHolder> previewList;
+	public ArrayList<PreviewHolder> previewList;
 
 	public PreviewCommand(Clear instance){
 		plugin = instance;
 		server = Bukkit.getServer();
-		originalInventory = new HashMap<Player, ItemStack[]>();
 		previewList = new ArrayList<PreviewHolder>();
 	}
 	@Override
@@ -136,15 +134,6 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param previewee The player whose inventory we want to preview
 	 * @param mode is wether or not it will be continuous mode or not which still has to be implemented
 	 */
-	public void preview(Player previewer, Player previewee){
-		ItemStack[] preview = previewee.getInventory().getContents();
-		if(!originalInventory.containsKey(previewer))
-			originalInventory.put(previewer, previewer.getInventory().getContents());
-		previewer.getInventory().setContents(preview);
-		PreviewRunnable runner = new PreviewRunnable(this, previewer);
-		server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
-		previewer.sendMessage("You are now previewing " + previewee.getDisplayName());
-	}
 	public void preview(Player previewer, Player previewee, boolean mode){
 		for(PreviewHolder a : previewList){
 			if(a.getObserver().getName().equals(previewer.getName())){
@@ -171,17 +160,11 @@ public class PreviewCommand implements CommandExecutor{
 	public void unpreview(Player previewer){
 		for(PreviewHolder a : previewList){
 			if(a.getObserver().getName().equals(previewer.getName())){
+				previewList.remove(a);
 				previewer.getInventory().clear();
 				previewer.getInventory().setContents(a.getOriginalInventory());
-				previewList.remove(a);
 				previewer.sendMessage(ChatColor.GRAY + "Your inventory has been restored");
 			}
 		}
-		/*if(originalInventory.containsKey(previewer)){
-			previewer.getInventory().clear();
-			previewer.getInventory().setContents(originalInventory.get(previewer));
-			originalInventory.remove(previewer);
-			previewer.sendMessage("Your inventory has been restored");
-		}*/
 	}
 }
