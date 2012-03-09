@@ -56,7 +56,6 @@ public class Clear extends JavaPlugin {
 		loadItems();
 		getCommand("preview").setExecutor(preview);
 		getCommand("unpreview").setExecutor(preview);
-		log.info(PREFIX + " version " + VERSION + " enabled");
 	}
 
 	@Override
@@ -70,6 +69,7 @@ public class Clear extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (sender instanceof Player) {
+			// permissions setup
 			if(usesSP){
 				Perm(sender, args);
 			}
