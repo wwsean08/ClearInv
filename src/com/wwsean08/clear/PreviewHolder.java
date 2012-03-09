@@ -14,6 +14,7 @@ public class PreviewHolder {
 		originalInventory = inven;
 		continuous = cont;
 	}
+	
 	/**
 	 * a getter for the player observing another players inventory
 	 * @return the observer
@@ -21,6 +22,7 @@ public class PreviewHolder {
 	public Player getObserver(){
 		return observer;
 	}
+	
 	/**
 	 * a getter for the player being observed
 	 * @return the player being observed
@@ -28,6 +30,7 @@ public class PreviewHolder {
 	public Player getObserved(){
 		return beingWatched;
 	}
+	
 	/**
 	 * a getter for the observers original inventory
 	 * @return the observers original inventory
@@ -42,5 +45,21 @@ public class PreviewHolder {
 	 */
 	public boolean getContinuous(){
 		return continuous;
+	}
+	
+	/**
+	 * A setter for what player is being observed
+	 * @param watching the new player being observed
+	 */
+	public void setObserved(Player watching){
+		beingWatched = watching;
+	}
+	
+	/**
+	 * A setter for wether or not it is a continuous preview
+	 * @param mode the type of preview
+	 */
+	public void setContinuous(boolean mode){
+		continuous = mode;
 	}
 }
