@@ -40,7 +40,7 @@ public class Clear extends JavaPlugin {
 	private String DBVersion = BASEDBV;
 	private File itemFile = null;
 	private Server server;
-	private FileConfiguration config = this.getConfig();
+	private FileConfiguration config;
 	private HashMap<String, ClearUndoHolder> undo;
 	private List<Integer> hasData;
 
@@ -399,10 +399,12 @@ public class Clear extends JavaPlugin {
 								}
 							}
 						}else{
-							if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
-								clear.remove((Integer)k);
-								if(!successful.contains(items.get(j).getOutput())){
-									successful.add(items.get(j).getOutput());
+							if(pi.getItem(k) != null){
+								if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
+									clear.remove((Integer)k);
+									if(!successful.contains(items.get(j).getOutput())){
+										successful.add(items.get(j).getOutput());
+									}
 								}
 							}
 						}
@@ -412,7 +414,8 @@ public class Clear extends JavaPlugin {
 		}
 		for(Integer slot : clear){
 			if(pi != null){
-				removed.add(pi.getItem(slot).clone());
+				if(pi.getItem(slot) != null)
+					removed.add(pi.getItem(slot).clone());
 				pi.clear(slot);
 			}
 		}
@@ -460,9 +463,7 @@ public class Clear extends JavaPlugin {
 					if(!hasData(items.get(i).getItem())){
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
-							if(IS == null)
-								continue;
-							if(IS.getTypeId() == items.get(i).getItem()){
+							if(IS != null && IS.getTypeId() == items.get(i).getItem()){
 								removed.add(pi.getItem(j).clone());
 								pi.clear(j);
 							}
@@ -470,10 +471,12 @@ public class Clear extends JavaPlugin {
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
-							if(hasData(IS.getTypeId())){
-								if(checkData(IS.getData().getData(), items.get(i).getDamage())){
-									removed.add(IS.clone());
-									pi.clear(j);
+							if(IS != null){
+								if(hasData(IS.getTypeId())){
+									if(checkData(IS.getData().getData(), items.get(i).getDamage())){
+										removed.add(IS.clone());
+										pi.clear(j);
+									}
 								}
 							}
 						}
@@ -620,6 +623,7 @@ public class Clear extends JavaPlugin {
 	 * This initializes the instance variables in order to clean up the onEnable method
 	 */
 	private void initVariables() {
+		config = this.getConfig();
 		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
 		new ClearPlayerListener(this);
 		server = Bukkit.getServer();
