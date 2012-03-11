@@ -1,7 +1,9 @@
 package com.wwsean08.clear;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,12 +18,13 @@ import org.bukkit.inventory.PlayerInventory;
 public class PreviewCommand implements CommandExecutor{
 	Clear plugin;
 	Server server;
-	public ArrayList<PreviewHolder> previewList;
+	private ArrayList<PreviewHolder> privateList;
+	public List<PreviewHolder> previewList; 
 
 	public PreviewCommand(Clear instance){
 		plugin = instance;
 		server = Bukkit.getServer();
-		previewList = new ArrayList<PreviewHolder>();
+		privateList = new ArrayList<PreviewHolder>();
 	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -143,6 +146,7 @@ public class PreviewCommand implements CommandExecutor{
 				PreviewRunnable runner = new PreviewRunnable(this, previewer);
 				server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 				previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
+				previewList = Collections.synchronizedList(privateList);
 				return;
 			}
 		}
@@ -151,7 +155,8 @@ public class PreviewCommand implements CommandExecutor{
 		previewer.getInventory().setContents(previewee.getInventory().getContents());
 		PreviewRunnable runner = new PreviewRunnable(this, previewer);
 		server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
-		previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());		
+		previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
+		previewList = Collections.synchronizedList(privateList);
 	}
 	/**
 	 * Restores the content of an admins inventory if they are previewing one
@@ -166,5 +171,6 @@ public class PreviewCommand implements CommandExecutor{
 				previewer.sendMessage(ChatColor.GRAY + "Your inventory has been restored");
 			}
 		}
+		previewList = Collections.synchronizedList(privateList);
 	}
 }
