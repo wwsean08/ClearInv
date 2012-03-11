@@ -25,6 +25,7 @@ public class PreviewCommand implements CommandExecutor{
 		plugin = instance;
 		server = Bukkit.getServer();
 		privateList = new ArrayList<PreviewHolder>();
+		previewList = Collections.synchronizedList(privateList);
 	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
