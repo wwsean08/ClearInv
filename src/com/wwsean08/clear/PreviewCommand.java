@@ -18,15 +18,14 @@ import org.bukkit.inventory.PlayerInventory;
 public class PreviewCommand implements CommandExecutor{
 	Clear plugin;
 	Server server;
-	private ArrayList<PreviewHolder> privateList;
-	public List<PreviewHolder> previewList; 
+	private ArrayList<PreviewHolder> previewList;
 
 	public PreviewCommand(Clear instance){
 		plugin = instance;
 		server = Bukkit.getServer();
-		privateList = new ArrayList<PreviewHolder>();
-		previewList = Collections.synchronizedList(privateList);
+		previewList = new ArrayList<PreviewHolder>();
 	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if(commandLabel.equalsIgnoreCase("preview")){
@@ -139,39 +138,44 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param mode is wether or not it will be continuous mode or not which still has to be implemented
 	 */
 	public void preview(Player previewer, Player previewee, boolean mode){
-		for(PreviewHolder a : previewList){
-			if(a.getObserver().getName().equals(previewer.getName())){
-				a.setObserved(previewee);
-				a.setContinuous(mode);
-				previewer.getInventory().setContents(previewee.getInventory().getContents());
-				PreviewRunnable runner = new PreviewRunnable(this, previewer);
-				server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
-				previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
-				previewList = Collections.synchronizedList(privateList);
-				return;
+		synchronized(previewList){
+			for(PreviewHolder a : previewList){
+				if(a.getObserver().getName().equals(previewer.getName())){
+					a.setObserved(previewee);
+					a.setContinuous(mode);
+					previewer.getInventory().setContents(previewee.getInventory().getContents());
+					PreviewRunnable runner = new PreviewRunnable(this, previewer);
+					server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
+					previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
+					return;
+				}
 			}
+			PreviewHolder PH = new PreviewHolder(previewer, previewee, previewer.getInventory().getContents(), mode);
+			previewList.add(PH);
+			previewer.getInventory().setContents(previewee.getInventory().getContents());
+			PreviewRunnable runner = new PreviewRunnable(this, previewer);
+			server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
+			previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
 		}
-		PreviewHolder PH = new PreviewHolder(previewer, previewee, previewer.getInventory().getContents(), mode);
-		previewList.add(PH);
-		previewer.getInventory().setContents(previewee.getInventory().getContents());
-		PreviewRunnable runner = new PreviewRunnable(this, previewer);
-		server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
-		previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
-		previewList = Collections.synchronizedList(privateList);
 	}
 	/**
 	 * Restores the content of an admins inventory if they are previewing one
 	 * @param previewer the admin who is getting their inventory back
 	 */
 	public void unpreview(Player previewer){
-		for(PreviewHolder a : previewList){
-			if(a.getObserver().getName().equals(previewer.getName())){
-				previewList.remove(a);
-				previewer.getInventory().clear();
-				previewer.getInventory().setContents(a.getOriginalInventory());
-				previewer.sendMessage(ChatColor.GRAY + "Your inventory has been restored");
+		synchronized(previewList){
+			for(PreviewHolder a : previewList){
+				if(a.getObserver().getName().equals(previewer.getName())){
+					previewList.remove(a);
+					previewer.getInventory().clear();
+					previewer.getInventory().setContents(a.getOriginalInventory());
+					previewer.sendMessage(ChatColor.GRAY + "Your inventory has been restored");
+				}
 			}
 		}
-		previewList = Collections.synchronizedList(privateList);
+	}
+
+	public List<PreviewHolder> getPreviewList(){
+		return Collections.synchronizedList(previewList);
 	}
 }

@@ -6,6 +6,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.painting.PaintingPlaceEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
+import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -49,11 +52,13 @@ public class ClearPlayerListener implements Listener{
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockPlace(BlockPlaceEvent event){
-		for(PreviewHolder a : plugin.preview.previewList){
-			if(a.getObserved().getName().equals(event.getPlayer().getName())){
-				if(a.getContinuous()){
-					a.getObserver().getInventory().clear();
-					a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
 				}
 			}
 		}
@@ -62,18 +67,20 @@ public class ClearPlayerListener implements Listener{
 	/**
 	 * used for when we are in continuous preview mode
 	 * @param event
-	 */
+	 *
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onInventoryClose(InventoryCloseEvent event){
-		for(PreviewHolder a : plugin.preview.previewList){
-			if(a.getObserved().getName().equals(event.getPlayer().getName())){
-				if(a.getContinuous()){
-					a.getObserver().getInventory().clear();
-					a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
 				}
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * used for when we are in continuous preview mode
@@ -81,11 +88,13 @@ public class ClearPlayerListener implements Listener{
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent event){
-		for(PreviewHolder a : plugin.preview.previewList){
-			if(a.getObserved().getName().equals(event.getPlayer().getName())){
-				if(a.getContinuous()){
-					a.getObserver().getInventory().clear();
-					a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
 				}
 			}
 		}
@@ -97,11 +106,13 @@ public class ClearPlayerListener implements Listener{
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerPickupItem(PlayerPickupItemEvent event){
-		for(PreviewHolder a : plugin.preview.previewList){
-			if(a.getObserved().getName().equals(event.getPlayer().getName())){
-				if(a.getContinuous()){
-					a.getObserver().getInventory().clear();
-					a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
 				}
 			}
 		}
@@ -113,11 +124,13 @@ public class ClearPlayerListener implements Listener{
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerRespawn(PlayerRespawnEvent event){
-		for(PreviewHolder a : plugin.preview.previewList){
-			if(a.getObserved().getName().equals(event.getPlayer().getName())){
-				if(a.getContinuous()){
-					a.getObserver().getInventory().clear();
-					a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
 				}
 			}
 		}
@@ -129,11 +142,67 @@ public class ClearPlayerListener implements Listener{
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerItemDrop(PlayerDropItemEvent event){
-		for(PreviewHolder a : plugin.preview.previewList){
-			if(a.getObserved().getName().equals(event.getPlayer().getName())){
-				if(a.getContinuous()){
-					a.getObserver().getInventory().clear();
-					a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * used for when we are in continuous preview mode
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPaintingPlace(PaintingPlaceEvent event){
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * used for when we are in continuous preview mode
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerBucketFill(PlayerBucketFillEvent event){
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * used for when we are in continuous preview mode
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerBucketEmpty(PlayerBucketEmptyEvent event){
+		synchronized(plugin.preview.getPreviewList()){
+			for(PreviewHolder a : plugin.preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						a.getObserver().getInventory().clear();
+						a.getObserver().getInventory().setContents(event.getPlayer().getInventory().getContents());
+					}
 				}
 			}
 		}
