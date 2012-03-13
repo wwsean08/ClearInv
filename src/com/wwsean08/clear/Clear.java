@@ -625,7 +625,6 @@ public class Clear extends JavaPlugin {
 	private void initVariables() {
 		config = this.getConfig();
 		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
-		new ClearListener(this);
 		new PreviewListener(this);
 		server = Bukkit.getServer();
 		preview = new PreviewCommand(this);
