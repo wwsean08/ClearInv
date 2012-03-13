@@ -2,6 +2,7 @@ package com.wwsean08.clear;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -147,6 +148,9 @@ public class PreviewCommand implements CommandExecutor{
 					PreviewRunnable runner = new PreviewRunnable(this, previewer);
 					server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 					previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
+					if(mode){
+						previewer.sendMessage(ChatColor.GRAY + "You will have a live preview of their inventory which will be kept up to date");
+					}
 					return;
 				}
 			}
@@ -156,6 +160,9 @@ public class PreviewCommand implements CommandExecutor{
 			PreviewRunnable runner = new PreviewRunnable(this, previewer);
 			server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 			previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
+			if(mode){
+				previewer.sendMessage(ChatColor.GRAY + "You will have a live preview of their inventory which will be kept up to date");
+			}
 		}
 	}
 	/**
@@ -163,18 +170,26 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param previewer the admin who is getting their inventory back
 	 */
 	public void unpreview(Player previewer){
-		synchronized(getPreviewList()){
-			for(PreviewHolder a : getPreviewList()){
-				if(a.getObserver().getName().equals(previewer.getName())){
-					previewList.remove(a);
-					previewer.getInventory().clear();
-					previewer.getInventory().setContents(a.getOriginalInventory());
-					previewer.sendMessage(ChatColor.GRAY + "Your inventory has been restored");
+		try{
+			synchronized(getPreviewList()){
+				for(PreviewHolder a : getPreviewList()){
+					if(a.getObserver().getName().equals(previewer.getName())){
+						previewList.remove(a);
+						previewer.getInventory().clear();
+						previewer.getInventory().setContents(a.getOriginalInventory());
+						previewer.sendMessage(ChatColor.GRAY + "Your inventory has been restored");
+					}
 				}
 			}
+		}catch(ConcurrentModificationException e){
+			unpreview(previewer);
 		}
 	}
 
+	/**
+	 * The list which holds who is previewing (it should be synchronized)
+	 * @return a hopefully synchronized list
+	 */
 	public List<PreviewHolder> getPreviewList(){
 		return Collections.synchronizedList(previewList);
 	}

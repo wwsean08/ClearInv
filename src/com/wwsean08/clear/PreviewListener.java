@@ -20,7 +20,7 @@ public class PreviewListener implements Listener{
 	Clear plugin;
 
 	/**
-	 * the public constructor for the player listener
+	 * the public constructor for the listener
 	 * @param instance is the class that called us
 	 */
 	public PreviewListener(Clear instance){
@@ -46,6 +46,10 @@ public class PreviewListener implements Listener{
 		plugin.preview.unpreview(event.getPlayer());
 	}
 	
+	/**
+	 * used for when in continuous preview mode, if they place a block, check if someone was previewing them
+	 * @param event
+	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockPlace(BlockPlaceEvent event){
 		synchronized(plugin.preview.getPreviewList()){
@@ -63,7 +67,7 @@ public class PreviewListener implements Listener{
 	/**
 	 * used for when we are in continuous preview mode
 	 * @param event
-	 *
+	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onInventoryClose(InventoryCloseEvent event){
 		synchronized(plugin.preview.getPreviewList()){
@@ -76,7 +80,7 @@ public class PreviewListener implements Listener{
 				}
 			}
 		}
-	}*/
+	}
 
 	/**
 	 * used for when we are in continuous preview mode
@@ -203,5 +207,4 @@ public class PreviewListener implements Listener{
 			}
 		}
 	}
-
 }
