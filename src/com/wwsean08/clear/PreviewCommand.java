@@ -182,10 +182,35 @@ public class PreviewCommand implements CommandExecutor{
 				}
 			}
 		}catch(ConcurrentModificationException e){
-			unpreview(previewer);
+			unpreview(previewer, 0);
 		}
 	}
 
+	/**
+	 * Restores the content of an admins inventory if they are previewing one
+	 * @param previewer the admin who is getting their inventory back
+	 * @param rounds is the ammount of times it has looped thru, after 10 it will give up
+	 */
+	public void unpreview(Player previewer, int rounds){
+		try{
+			synchronized(getPreviewList()){
+				for(PreviewHolder a : getPreviewList()){
+					if(a.getObserver().getName().equals(previewer.getName())){
+						previewList.remove(a);
+						previewer.getInventory().clear();
+						previewer.getInventory().setContents(a.getOriginalInventory());
+						previewer.sendMessage(ChatColor.GRAY + "Your inventory has been restored");
+					}
+				}
+			}
+		}catch(ConcurrentModificationException e){
+			if(rounds++ >= 10){
+				previewer.sendMessage(ChatColor.RED + "There was an error reverting your inventory");
+				return;
+			}
+			unpreview(previewer, rounds);
+		}
+	}
 	/**
 	 * The list which holds who is previewing (it should be synchronized)
 	 * @return a hopefully synchronized list
