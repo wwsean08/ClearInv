@@ -138,8 +138,8 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param mode is wether or not it will be continuous mode or not which still has to be implemented
 	 */
 	public void preview(Player previewer, Player previewee, boolean mode){
-		synchronized(previewList){
-			for(PreviewHolder a : previewList){
+		synchronized(getPreviewList()){
+			for(PreviewHolder a : getPreviewList()){
 				if(a.getObserver().getName().equals(previewer.getName())){
 					a.setObserved(previewee);
 					a.setContinuous(mode);
@@ -163,8 +163,8 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param previewer the admin who is getting their inventory back
 	 */
 	public void unpreview(Player previewer){
-		synchronized(previewList){
-			for(PreviewHolder a : previewList){
+		synchronized(getPreviewList()){
+			for(PreviewHolder a : getPreviewList()){
 				if(a.getObserver().getName().equals(previewer.getName())){
 					previewList.remove(a);
 					previewer.getInventory().clear();
