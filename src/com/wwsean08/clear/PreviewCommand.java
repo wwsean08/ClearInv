@@ -126,10 +126,9 @@ public class PreviewCommand implements CommandExecutor{
 			for(int j = 0; j < plugin.items.size(); j++){
 				if(plugin.items.get(j).getItem() == i.intValue()){
 					if(danger.contains(i)){
-						out.append(ChatColor.RED + plugin.items.get(j).getOutput());
-					}else{
-						out.append(plugin.items.get(j).getOutput());
+						out.insert(0, ChatColor.RED);
 					}
+					out.append(plugin.items.get(j).getOutput());
 					break;
 				}
 			}
