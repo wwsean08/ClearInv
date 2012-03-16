@@ -2,4 +2,4 @@ debug: false
 autoupdate: true
 superPerms: true
 hasData: [17, 18, 26, 35, 43, 92, 93, 263, 351, 373, 383]
-dangerItems: [7, 8, 9, 10, 11, 51, 46, 97, 110, 259, 289, 385] 
+dangerItems: [7, 8, 9, 10, 11, 51, 46, 97, 110, 259, 289, 326, 327, 385]
