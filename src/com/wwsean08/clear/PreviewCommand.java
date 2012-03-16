@@ -20,11 +20,13 @@ public class PreviewCommand implements CommandExecutor{
 	Clear plugin;
 	Server server;
 	private ArrayList<PreviewHolder> previewList;
+	private List<Integer> danger;
 
 	public PreviewCommand(Clear instance){
 		plugin = instance;
 		server = Bukkit.getServer();
 		previewList = new ArrayList<PreviewHolder>();
+		danger = plugin.config.getIntegerList("dangerItems");
 	}
 
 	@Override
@@ -75,11 +77,7 @@ public class PreviewCommand implements CommandExecutor{
 					sender.sendMessage(ChatColor.GRAY + "Error: I need a name of who to preview");
 				}else{
 					Player player = server.getPlayer(args[0]);
-					ArrayList<String> contains = preview(player);
-					sender.sendMessage(ChatColor.GRAY + "Here is the inventory of " + player.getDisplayName());
-					for(String s : contains){
-						sender.sendMessage(s);
-					}
+					preview(player,sender);
 				}
 			}
 		}
@@ -97,7 +95,11 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param player the player whose inventory is being previewed
 	 * @return a list of items to display to the server console
 	 */
-	public ArrayList<String> preview(Player player) {
+	public void preview(Player player, CommandSender sender) {
+		if(player == null){
+			sender.sendMessage("Sorry I couldn't find a player by that name");
+			return;
+		}
 		ArrayList<String> inventoryList = new ArrayList<String>();
 		ArrayList<Integer> itemNumbers = new ArrayList<Integer>();
 		HashMap<Integer, Integer> ammount = new HashMap<Integer, Integer>();
@@ -123,13 +125,20 @@ public class PreviewCommand implements CommandExecutor{
 			out.append(ammount.get(i) + "x ");
 			for(int j = 0; j < plugin.items.size(); j++){
 				if(plugin.items.get(j).getItem() == i.intValue()){
-					out.append(plugin.items.get(j).getOutput());
+					if(danger.contains(i)){
+						out.append(ChatColor.RED + plugin.items.get(j).getOutput());
+					}else{
+						out.append(plugin.items.get(j).getOutput());
+					}
 					break;
 				}
 			}
 			inventoryList.add(out.toString());
 		}
-		return inventoryList;
+		sender.sendMessage("Here is what is in " + player.getName() + "'s inventory:");
+		for(String s : inventoryList){
+			sender.sendMessage(s);
+		}
 	}
 
 	/**
@@ -145,11 +154,12 @@ public class PreviewCommand implements CommandExecutor{
 					a.setObserved(previewee);
 					a.setContinuous(mode);
 					previewer.getInventory().setContents(previewee.getInventory().getContents());
-					PreviewRunnable runner = new PreviewRunnable(this, previewer);
-					server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 					previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
 					if(mode){
 						previewer.sendMessage(ChatColor.GRAY + "You will have a live preview of their inventory which will be kept up to date");
+					}else{
+						PreviewRunnable runner = new PreviewRunnable(this, previewer);
+						server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 					}
 					return;
 				}
@@ -157,11 +167,12 @@ public class PreviewCommand implements CommandExecutor{
 			PreviewHolder PH = new PreviewHolder(previewer, previewee, previewer.getInventory().getContents(), mode);
 			previewList.add(PH);
 			previewer.getInventory().setContents(previewee.getInventory().getContents());
-			PreviewRunnable runner = new PreviewRunnable(this, previewer);
-			server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 			previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
 			if(mode){
 				previewer.sendMessage(ChatColor.GRAY + "You will have a live preview of their inventory which will be kept up to date");
+			}else{
+				PreviewRunnable runner = new PreviewRunnable(this, previewer);
+				server.getScheduler().scheduleSyncDelayedTask(plugin, runner, 6000);
 			}
 		}
 	}

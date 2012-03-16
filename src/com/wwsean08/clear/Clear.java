@@ -33,6 +33,7 @@ public class Clear extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
 	ArrayList<ClearItemHolder> items;
 	PreviewCommand preview;
+	FileConfiguration config;
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
 	private final String VERSION = "1.9.7";
@@ -40,7 +41,6 @@ public class Clear extends JavaPlugin {
 	private String DBVersion = BASEDBV;
 	private File itemFile = null;
 	private Server server;
-	private FileConfiguration config;
 	private HashMap<String, ClearUndoHolder> undo;
 	private List<Integer> hasData;
 
