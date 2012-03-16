@@ -122,12 +122,11 @@ public class PreviewCommand implements CommandExecutor{
 		//build an array list of strings with the ammount they have and the item
 		for(Integer i : itemNumbers){
 			StringBuilder out = new StringBuilder();
+			if(danger.contains(i))
+				out.append(ChatColor.RED);
 			out.append(ammount.get(i) + "x ");
 			for(int j = 0; j < plugin.items.size(); j++){
 				if(plugin.items.get(j).getItem() == i.intValue()){
-					if(danger.contains(i)){
-						out.insert(0, ChatColor.RED);
-					}
 					out.append(plugin.items.get(j).getOutput());
 					break;
 				}
