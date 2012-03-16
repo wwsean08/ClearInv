@@ -533,6 +533,20 @@ public class Clear extends JavaPlugin {
 		else
 			sender.sendMessage(ChatColor.GRAY + "Armor removed");
 	}
+	
+	/**
+	 * TODO: Implement
+	 * This will be used to clear out an inventory by an admin and put the items cleared out into a chest
+	 * @param sender the sender of the command
+	 * @param affected the player whose inventory is being cleared
+	 */
+	public void clearToChest(Player sender, Player affected, String[] args){
+		//First create an item stack list of what fits into the args
+		//Second create a chest to place them in in the world
+		//Third place the items into the chest
+		//Fourth remove the items from the affected player
+		//Fifth lock the chest using LWC and using the sender as the owner
+	}
 
 	/**
 	 * Checks the data to see if the two pieces of data given are the same
@@ -695,5 +709,13 @@ public class Clear extends JavaPlugin {
 		}else
 			result = true;
 		return result;
+	}
+	
+	/**
+	 * TODO: Implement
+	 * this will initialize the hook into the LWC plugin
+	 */
+	private void initLWC(){
+		//use the code on the wiki to initialize the LWC handle
 	}
 }
