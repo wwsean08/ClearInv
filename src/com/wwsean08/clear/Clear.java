@@ -16,12 +16,17 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Server;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
@@ -29,6 +34,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.griefcraft.lwc.LWC;
 import com.griefcraft.lwc.LWCPlugin;
+import com.griefcraft.model.ProtectionTypes;
 
 public class Clear extends JavaPlugin {
 	/**
@@ -98,6 +104,13 @@ public class Clear extends JavaPlugin {
 		if (player.hasPermission("clear.self") || player.hasPermission("clear.other") || player.hasPermission("clear.admin")) {
 			if (args.length == 0)
 				clearAll(sender, player);
+			else if(args[0].trim().equalsIgnoreCase("-c") && (player.hasPermission("clear.other") || player.hasPermission("clear.admin"))){
+				Player p = server.getPlayer(args[1]);
+				if(p != null)
+					clearToChest(player, p, args);
+				else
+					player.sendMessage(ChatColor.GRAY + "Could not find a player by the name of " + args[1]);
+			}
 			else if(args[0].trim().equals("*")){
 				if(player.hasPermission("clear.admin")){
 					Player[] online = server.getOnlinePlayers();
@@ -180,6 +193,13 @@ public class Clear extends JavaPlugin {
 			clearAll(sender, player);
 		else if (args[0].equalsIgnoreCase("except")) 
 			clearExcept(sender, player, args);
+		else if(args[0].trim().equalsIgnoreCase("-c") && player.isOp()){
+			Player p = server.getPlayer(args[1]);
+			if(p != null)
+				clearToChest(player, p, args);
+			else
+				player.sendMessage(ChatColor.GRAY + "Could not find a player by the name of " + args[1]);
+		}
 		else if(args[0].trim().equals("*")){
 			if(sender.isOp()){
 				Player[] online = server.getOnlinePlayers();
@@ -547,6 +567,7 @@ public class Clear extends JavaPlugin {
 	 * @param sender the sender of the command
 	 * @param affected the player whose inventory is being cleared
 	 */
+	@SuppressWarnings("deprecation")
 	public void clearToChest(Player sender, Player affected, String[] args){
 		//make sure LWC is on the server and setup
 		if(lwc == null){
@@ -557,11 +578,23 @@ public class Clear extends JavaPlugin {
 			}
 		}
 		ArrayList<ItemStack> removed = clearItem((CommandSender)sender, affected, args);
-		//First create an item stack list of what fits into the args
-		//Second create a chest to place them in in the world
-		//Third place the items into the chest
-		//Fourth remove the items from the affected player
-		//Fifth lock the chest using LWC and using the sender as the owner
+		//First create an item stack list of what fits into the args -done
+		Location playerLocation = sender.getLocation();
+		playerLocation.add(1, 0, 0);
+		Block temp = playerLocation.getWorld().getHighestBlockAt(playerLocation);
+		Location chestLocation = temp.getLocation();
+		Block chestBlock = chestLocation.getBlock();
+		chestBlock.setType(Material.CHEST);
+		//Second create a chest to place them in in the world -done
+		Chest chest = (Chest)chestBlock.getState();
+		Inventory CI = chest.getInventory();
+		for(ItemStack IS : removed){
+			CI.addItem(IS);
+		}
+		//Third place the items into the chest -done
+		//Fourth remove the items from the affected player -done
+		//Fifth lock the chest using LWC and using the sender as the owner -done
+		lwc.getPhysicalDatabase().registerProtection(0, ProtectionTypes.PRIVATE, chest.getWorld().getName(), sender.getName(), "", chest.getX(), chest.getY(), chest.getZ());
 	}
 
 	/**
