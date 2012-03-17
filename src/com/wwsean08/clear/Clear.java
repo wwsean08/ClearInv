@@ -36,6 +36,7 @@ import com.griefcraft.lwc.LWC;
 import com.griefcraft.lwc.LWCPlugin;
 import com.griefcraft.model.ProtectionTypes;
 
+@SuppressWarnings("deprecation")
 public class Clear extends JavaPlugin {
 	/**
 	 * instance variables
