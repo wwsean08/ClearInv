@@ -10,7 +10,9 @@ import org.bukkit.event.painting.PaintingPlaceEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -204,6 +206,58 @@ public class PreviewListener implements Listener{
 					if(a.getContinuous()){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * used for when we are in continuous preview mode
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerEggThrow(PlayerEggThrowEvent event){
+		synchronized(preview.getPreviewList()){
+			for(PreviewHolder a : preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getContinuous()){
+						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * used for when we are in continuous preview mode
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerCommandPreprocessEmpty(PlayerCommandPreprocessEvent event){
+		if(event.getMessage().startsWith("/i ") || event.getMessage().startsWith("/item ") || event.getMessage().startsWith("/give ")){
+			if(event.getMessage().startsWith("/give")){
+				String[] args = event.getMessage().split(" ");
+				synchronized(preview.getPreviewList()){
+					for(PreviewHolder a : preview.getPreviewList()){
+						if(a.getObserved().getName().equals(args[1])){
+							if(a.getContinuous()){
+								InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+								Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
+							}
+						}
+					}
+				}
+			}else{
+				synchronized(preview.getPreviewList()){
+					for(PreviewHolder a : preview.getPreviewList()){
+						if(a.getObserved().getName().equals(event.getPlayer().getName())){
+							if(a.getContinuous()){
+								InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+								Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
+							}
+						}
 					}
 				}
 			}
