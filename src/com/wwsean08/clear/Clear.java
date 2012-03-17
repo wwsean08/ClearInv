@@ -562,7 +562,6 @@ public class Clear extends JavaPlugin {
 	}
 
 	/**
-	 * TODO: Implement
 	 * This will be used to clear out an inventory by an admin and put the items cleared out into a chest
 	 * @param sender the sender of the command
 	 * @param affected the player whose inventory is being cleared
@@ -573,27 +572,22 @@ public class Clear extends JavaPlugin {
 		if(lwc == null){
 			initLWC();
 			if(lwc == null){
-				sender.sendMessage("This command is not supported by your server, please install LWC");
+				sender.sendMessage("This command is not supported by your server, please ask your admin to install LWC");
 				return;
 			}
 		}
 		ArrayList<ItemStack> removed = clearItem((CommandSender)sender, affected, args);
-		//First create an item stack list of what fits into the args -done
 		Location playerLocation = sender.getLocation();
 		playerLocation.add(1, 0, 0);
 		Block temp = playerLocation.getWorld().getHighestBlockAt(playerLocation);
 		Location chestLocation = temp.getLocation();
 		Block chestBlock = chestLocation.getBlock();
 		chestBlock.setType(Material.CHEST);
-		//Second create a chest to place them in in the world -done
 		Chest chest = (Chest)chestBlock.getState();
 		Inventory CI = chest.getInventory();
 		for(ItemStack IS : removed){
 			CI.addItem(IS);
 		}
-		//Third place the items into the chest -done
-		//Fourth remove the items from the affected player -done
-		//Fifth lock the chest using LWC and using the sender as the owner -done
 		lwc.getPhysicalDatabase().registerProtection(0, ProtectionTypes.PRIVATE, chest.getWorld().getName(), sender.getName(), "", chest.getX(), chest.getY(), chest.getZ());
 	}
 
