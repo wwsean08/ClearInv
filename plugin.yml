@@ -4,7 +4,7 @@ version: 1.9.7
 website: www.wwsean08.com
 author: wwsean08
 description: this is a plugin for players to selectively clear their inventory
-
+softdepend: [LWC]
 
 commands:
    clear:
