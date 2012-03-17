@@ -24,7 +24,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.griefcraft.lwc.LWC;
+import com.griefcraft.lwc.LWCPlugin;
 
 public class Clear extends JavaPlugin {
 	/**
@@ -43,6 +47,7 @@ public class Clear extends JavaPlugin {
 	private Server server;
 	private HashMap<String, ClearUndoHolder> undo;
 	private List<Integer> hasData;
+	private LWC lwc = null;
 
 	@Override
 	public void onEnable() {
@@ -448,14 +453,15 @@ public class Clear extends JavaPlugin {
 	 * @param Sender is the player who sent the command.
 	 * @param affected is the player who's items are being removed
 	 * @param args is the list or item(s) that the user wants to delete from their inventory
+	 * @return an array list of what was removed (to make clearToChest easier to implement)
 	 */
-	public void clearItem(CommandSender sender, Player affected, String[] args) {
+	public ArrayList<ItemStack> clearItem(CommandSender sender, Player affected, String[] args) {
 		ArrayList<ItemStack> removed = new ArrayList<ItemStack>();
 		PlayerInventory pi;
 		if(affected != null)
 			pi = affected.getInventory();
 		else{
-			return;
+			return null;
 		}
 		for(String input : args){
 			for(int i = 0; i<items.size(); i++){
@@ -488,6 +494,7 @@ public class Clear extends JavaPlugin {
 		}
 		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), removed);
 		undo.put(sender.getName(), holder);
+		return removed;
 	}
 
 	/**
@@ -533,7 +540,7 @@ public class Clear extends JavaPlugin {
 		else
 			sender.sendMessage(ChatColor.GRAY + "Armor removed");
 	}
-	
+
 	/**
 	 * TODO: Implement
 	 * This will be used to clear out an inventory by an admin and put the items cleared out into a chest
@@ -541,6 +548,15 @@ public class Clear extends JavaPlugin {
 	 * @param affected the player whose inventory is being cleared
 	 */
 	public void clearToChest(Player sender, Player affected, String[] args){
+		//make sure LWC is on the server and setup
+		if(lwc == null){
+			initLWC();
+			if(lwc == null){
+				sender.sendMessage("This command is not supported by your server, please install LWC");
+				return;
+			}
+		}
+		ArrayList<ItemStack> removed = clearItem((CommandSender)sender, affected, args);
 		//First create an item stack list of what fits into the args
 		//Second create a chest to place them in in the world
 		//Third place the items into the chest
@@ -643,6 +659,7 @@ public class Clear extends JavaPlugin {
 		new PreviewListener(this);
 		server = Bukkit.getServer();
 		undo = new HashMap<String, ClearUndoHolder>();
+		initLWC();
 	}
 
 	/**
@@ -710,12 +727,14 @@ public class Clear extends JavaPlugin {
 			result = true;
 		return result;
 	}
-	
+
 	/**
-	 * TODO: Implement
 	 * this will initialize the hook into the LWC plugin
 	 */
 	private void initLWC(){
-		//use the code on the wiki to initialize the LWC handle
+		Plugin lwcPlugin = getServer().getPluginManager().getPlugin("LWC");
+		if(lwcPlugin != null) {
+			lwc = ((LWCPlugin) lwcPlugin).getLWC();
+		}
 	}
 }
