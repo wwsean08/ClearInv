@@ -237,26 +237,17 @@ public class PreviewListener implements Listener{
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerCommandPreprocessEmpty(PlayerCommandPreprocessEvent event){
 		if(event.getMessage().startsWith("/i ") || event.getMessage().startsWith("/item ") || event.getMessage().startsWith("/give ")){
+			String player = event.getPlayer().getName();
 			if(event.getMessage().startsWith("/give")){
 				String[] args = event.getMessage().split(" ");
-				synchronized(preview.getPreviewList()){
-					for(PreviewHolder a : preview.getPreviewList()){
-						if(a.getObserved().getName().equals(args[1])){
-							if(a.getContinuous()){
-								InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
-								Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
-							}
-						}
-					}
-				}
-			}else{
-				synchronized(preview.getPreviewList()){
-					for(PreviewHolder a : preview.getPreviewList()){
-						if(a.getObserved().getName().equals(event.getPlayer().getName())){
-							if(a.getContinuous()){
-								InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
-								Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
-							}
+				player = args[1];
+			}
+			synchronized(preview.getPreviewList()){
+				for(PreviewHolder a : preview.getPreviewList()){
+					if(a.getObserved().getName().equals(player)){
+						if(a.getContinuous()){
+							InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+							Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 						}
 					}
 				}
