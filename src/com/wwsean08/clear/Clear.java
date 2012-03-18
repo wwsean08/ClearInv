@@ -579,7 +579,15 @@ public class Clear extends JavaPlugin {
 		}
 		ArrayList<ItemStack> removed = clearItem((CommandSender)sender, affected, args);
 		Location playerLocation = sender.getLocation();
-		playerLocation.add(1, 0, 0);
+		if(playerLocation.getYaw() > 315 ||  playerLocation.getYaw() <= 45){
+			playerLocation.add(0, 0, 1);
+		}else if(playerLocation.getYaw() > 45 || playerLocation.getYaw() <= 135){
+			playerLocation.add(1, 0, 0);
+		}else if(playerLocation.getYaw() > 135 || playerLocation.getYaw() <= 225){
+			playerLocation.subtract(0, 0, 1);
+		}else{
+			playerLocation.subtract(1, 0, 0);
+		}
 		Block temp = playerLocation.getWorld().getHighestBlockAt(playerLocation);
 		Location chestLocation = temp.getLocation();
 		Block chestBlock = chestLocation.getBlock();
