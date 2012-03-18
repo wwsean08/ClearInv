@@ -567,7 +567,6 @@ public class Clear extends JavaPlugin {
 	 * @param sender the sender of the command
 	 * @param affected the player whose inventory is being cleared
 	 */
-	@SuppressWarnings("deprecation")
 	public void clearToChest(Player sender, Player affected, String[] args){
 		//make sure LWC is on the server and setup
 		if(lwc == null){
