@@ -105,12 +105,16 @@ public class Clear extends JavaPlugin {
 		if (player.hasPermission("clear.self") || player.hasPermission("clear.other") || player.hasPermission("clear.admin")) {
 			if (args.length == 0)
 				clearAll(sender, player);
-			else if(args[0].trim().equalsIgnoreCase("-c") && (player.hasPermission("clear.other") || player.hasPermission("clear.admin"))){
-				Player p = server.getPlayer(args[1]);
-				if(p != null)
-					clearToChest(player, p, args);
-				else
-					player.sendMessage(ChatColor.GRAY + "Could not find a player by the name of " + args[1]);
+			else if(args[0].trim().equalsIgnoreCase("-c")){
+				if(player.hasPermission("clear.other") || player.hasPermission("clear.admin")){
+					Player p = server.getPlayer(args[1]);
+					if(p != null)
+						clearToChest(player, p, args);
+					else
+						player.sendMessage(ChatColor.GRAY + "Could not find a player by the name of " + args[1]);
+				}else{
+					player.sendMessage(ChatColor.RED + "You don't have permission to use this command");
+				}
 			}
 			else if(args[0].trim().equals("*")){
 				if(player.hasPermission("clear.admin")){
@@ -194,12 +198,16 @@ public class Clear extends JavaPlugin {
 			clearAll(sender, player);
 		else if (args[0].equalsIgnoreCase("except")) 
 			clearExcept(sender, player, args);
-		else if(args[0].trim().equalsIgnoreCase("-c") && player.isOp()){
-			Player p = server.getPlayer(args[1]);
-			if(p != null)
-				clearToChest(player, p, args);
-			else
-				player.sendMessage(ChatColor.GRAY + "Could not find a player by the name of " + args[1]);
+		else if(args[0].trim().equalsIgnoreCase("-c")){
+			if(player.isOp()){
+				Player p = server.getPlayer(args[1]);
+				if(p != null)
+					clearToChest(player, p, args);
+				else
+					player.sendMessage(ChatColor.GRAY + "Could not find a player by the name of " + args[1]);
+			}else{
+				player.sendMessage(ChatColor.RED + "You don't have permission to use this command");
+			}
 		}
 		else if(args[0].trim().equals("*")){
 			if(sender.isOp()){
@@ -572,7 +580,7 @@ public class Clear extends JavaPlugin {
 		if(lwc == null){
 			initLWC();
 			if(lwc == null){
-				sender.sendMessage("This command is not supported by your server, please ask your admin to install LWC");
+				sender.sendMessage(ChatColor.RED + "This command is not supported by your server, please ask your admin to install LWC");
 				return;
 			}
 		}
