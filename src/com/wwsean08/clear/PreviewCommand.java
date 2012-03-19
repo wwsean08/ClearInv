@@ -43,10 +43,10 @@ public class PreviewCommand implements CommandExecutor{
 						Player affected = server.matchPlayer(args[0]).get(0);
 						if(plugin.usesSP){
 							if(player.hasPermission("clear.other")){
-								preview(player, affected, false);
+								preview(player, affected, 0);
 							}
 						}else if(player.isOp()){
-							preview(player, affected, false);
+							preview(player, affected, 0);
 						}else{
 							sender.sendMessage("You do not have permission to use this command");
 							plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
@@ -60,14 +60,33 @@ public class PreviewCommand implements CommandExecutor{
 							Player affected = server.matchPlayer(args[1]).get(0);
 							if(plugin.usesSP){
 								if(player.hasPermission("clear.other")){
-									preview(player, affected, true);
+									preview(player, affected, 1);
 								}
 							}else if(player.isOp()){
-								preview(player, affected, true);
+								preview(player, affected, 1);
 							}else{
 								sender.sendMessage("You do not have permission to use this command");
 								plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
 							}
+						}else{
+							sender.sendMessage(ChatColor.RED + "Sorry, I couldn't find anyone by that name");
+						}
+						//full, start off with changing inventory slots as well, eventually try and give the user their view
+					}else if(args[0].equalsIgnoreCase("-f")){	
+						if(server.matchPlayer(args[1]) != null){
+							Player affected = server.matchPlayer(args[1]).get(0);
+							if(plugin.usesSP){
+								if(player.hasPermission("clear.other")){
+									preview(player, affected, 2);
+								}
+							}else if(player.isOp()){
+								preview(player, affected, 2);
+							}else{
+								sender.sendMessage("You do not have permission to use this command");
+								plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
+							}
+						}else{
+							sender.sendMessage(ChatColor.RED + "Sorry, I couldn't find anyone by that name");
 						}
 					}
 				}
@@ -145,15 +164,15 @@ public class PreviewCommand implements CommandExecutor{
 	 * @param previewee The player whose inventory we want to preview
 	 * @param mode is wether or not it will be continuous mode or not which still has to be implemented
 	 */
-	public void preview(Player previewer, Player previewee, boolean mode){
+	public void preview(Player previewer, Player previewee, int mode){
 		synchronized(getPreviewList()){
 			for(PreviewHolder a : getPreviewList()){
 				if(a.getObserver().getName().equals(previewer.getName())){
 					a.setObserved(previewee);
-					a.setContinuous(mode);
+					a.setMode(mode);
 					previewer.getInventory().setContents(previewee.getInventory().getContents());
 					previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
-					if(mode){
+					if(mode != 0){
 						previewer.sendMessage(ChatColor.GRAY + "You will have a live preview of their inventory which will be kept up to date");
 					}else{
 						PreviewRunnable runner = new PreviewRunnable(this, previewer);
@@ -166,7 +185,7 @@ public class PreviewCommand implements CommandExecutor{
 			previewList.add(PH);
 			previewer.getInventory().setContents(previewee.getInventory().getContents());
 			previewer.sendMessage(ChatColor.GRAY + "You are now previewing " + previewee.getDisplayName());
-			if(mode){
+			if(mode != 0){
 				previewer.sendMessage(ChatColor.GRAY + "You will have a live preview of their inventory which will be kept up to date");
 			}else{
 				PreviewRunnable runner = new PreviewRunnable(this, previewer);

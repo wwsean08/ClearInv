@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerEggThrowEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -59,7 +60,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -77,7 +78,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -95,7 +96,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -113,7 +114,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -131,7 +132,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -149,7 +150,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -167,7 +168,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -185,7 +186,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -203,7 +204,7 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -221,7 +222,26 @@ public class PreviewListener implements Listener{
 		synchronized(preview.getPreviewList()){
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
-					if(a.getContinuous()){
+					if(a.getMode() != 0){
+						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * TODO: find a way to change what item is being held from the server
+	 * used for when we are in full preview mode 
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerItemHeld(PlayerItemHeldEvent event){
+		synchronized(preview.getPreviewList()){
+			for(PreviewHolder a : preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getMode() != 0){
 						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
@@ -245,7 +265,7 @@ public class PreviewListener implements Listener{
 			synchronized(preview.getPreviewList()){
 				for(PreviewHolder a : preview.getPreviewList()){
 					if(a.getObserved().getName().equals(player)){
-						if(a.getContinuous()){
+						if(a.getMode() != 0){
 							InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
 							Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 						}

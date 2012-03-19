@@ -7,12 +7,12 @@ public class PreviewHolder {
 	private Player observer;
 	private Player beingWatched;
 	private ItemStack[] originalInventory;
-	private boolean continuous;
-	public PreviewHolder(Player watcher, Player watched, ItemStack[] inven, boolean cont){
+	private int mode;
+	public PreviewHolder(Player watcher, Player watched, ItemStack[] inven, int m){
 		observer = watcher;
 		beingWatched = watched;
 		originalInventory = inven;
-		continuous = cont;
+		mode = m;
 	}
 	
 	/**
@@ -43,8 +43,8 @@ public class PreviewHolder {
 	 * a getter for whether or not the preview is a continuous preview
 	 * @return the preview mode
 	 */
-	public boolean getContinuous(){
-		return continuous;
+	public int getMode(){
+		return mode;
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class PreviewHolder {
 	 * A setter for wether or not it is a continuous preview
 	 * @param mode the type of preview
 	 */
-	public void setContinuous(boolean mode){
-		continuous = mode;
+	public void setMode(int mode){
+		this.mode = mode;
 	}
 }
