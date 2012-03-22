@@ -61,10 +61,7 @@ public class Clear extends JavaPlugin {
 		initVariables();
 		getDBV();
 		createConfig();
-		if(config.getBoolean("autoupdate", true))
-			checkForUpdates();
-		usesSP = config.getBoolean("superperm", true);
-		hasData = config.getIntegerList("hasData");
+		loadConfig();
 		loadItems();
 		getCommand("preview").setExecutor(preview);
 		getCommand("unpreview").setExecutor(preview);
@@ -140,7 +137,8 @@ public class Clear extends JavaPlugin {
 			else if (args[0].equalsIgnoreCase("reload")){
 				if(player.hasPermission("clear.admin")){
 					loadItems();
-					sender.sendMessage(ChatColor.GRAY + "Reloaded items");
+					loadConfig();
+					sender.sendMessage(ChatColor.GRAY + "Reloaded items and config");
 				}
 			}else if(args[0].equalsIgnoreCase("version")){
 				sender.sendMessage(ChatColor.GRAY + PREFIX + "version " + VERSION);
@@ -239,7 +237,8 @@ public class Clear extends JavaPlugin {
 		else if (args[0].equalsIgnoreCase("reload")){
 			if(player.isOp()){
 				loadItems();
-				sender.sendMessage(ChatColor.GRAY + "Reloaded items");
+				loadConfig();
+				sender.sendMessage(ChatColor.GRAY + "Reloaded items and config");
 			}
 		}else if(args[0].equalsIgnoreCase("version")){
 			sender.sendMessage(ChatColor.GRAY + PREFIX + "version " + VERSION);
@@ -296,7 +295,8 @@ public class Clear extends JavaPlugin {
 				return;
 			}else if (args[0].equalsIgnoreCase("reload")){
 				loadItems();
-				sender.sendMessage(ChatColor.GRAY + "Reloaded items");
+				loadConfig();
+				sender.sendMessage(ChatColor.GRAY + "Reloaded items and config");
 			}else if(args[0].equalsIgnoreCase("version")){
 				sender.sendMessage(ChatColor.GRAY + PREFIX + "version " + VERSION);
 				sender.sendMessage(ChatColor.GRAY + "item list version " + DBVersion);
@@ -690,6 +690,17 @@ public class Clear extends JavaPlugin {
 			log.info("items.csv updated");
 			getDBV();
 		}
+	}
+	
+	/**
+	 * loads the configuration either when starting the plugin or on a reload command
+	 */
+	private void loadConfig(){
+		reloadConfig();
+		if(config.getBoolean("autoupdate", true))
+			checkForUpdates();
+		usesSP = config.getBoolean("superperm", true);
+		hasData = config.getIntegerList("hasData");
 	}
 
 	/**
