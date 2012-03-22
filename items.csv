@@ -1,4 +1,4 @@
-1.1.5
+1.1.6
 1,1,0,stone
 1:0,1,0,stone
 stone,1,0,stone
@@ -785,6 +785,20 @@ stnbrick,98,0,stone brick
 stnbrck,98,0,stone brick
 stnebrck,98,0,stone brick
 stonebrck,98,0,stone brick
+98:1,98,1,mossy stone brick
+mossystonebrick,98,1,mossy stone brick
+mossystnebrick,98,1,mossy stone brick
+mossstonebrick,98,1,mossy stone brick
+mosstonebrick,98,1,mossy stone brick
+98:2,98,2,cracked stone brick
+crackedstonebrick,98,2,cracked stone brick
+crckedstonebrick,98,2,cracked stone brick
+crackedstnebrick,98,2,cracked stone brock
+98:3,98,3,circle stone brick
+circlestonebrick,98,3,circle stone brick
+circlstonebrick,98,3,circle stone brick
+circlestnebrick,98,3,circle stone brick
+crclstonebrick,98,3,circle stone brick
 99,99,0,huge brown mushroom
 99:0,99,0,huge brown mushroom
 hugebrownmushroom,99,0,huge brown mushroom
