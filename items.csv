@@ -35,6 +35,22 @@ wod,5,0,wood
 plank,5,0,plank
 plnk,5,0,plank
 planks,5,0,planks
+5:1,5,1,pine planks
+pineplanks,5,1,pine planks
+pneplanks,5,1,pine planks
+pineplnks,5,1,pine planks
+pneplnks,5,1,pine planks
+5:2,5,2,birch planks
+birchplanks,5,2,birch planks
+brchplanks,5,2,birch planks
+birchplnks,5,2,birch planks
+brchplnks,5,2,birch planks
+5:3,5,3,jungle planks
+jungleplanks,5,3,jungle planks
+jngleplanks,5,3,jungle planks
+junglplanks,5,3,jungle planks
+junglplnks,5,3,jungle planks
+jungleplnks,5,3,jungle planks
 6:0,6,0,sapling
 6,6,0,sapling
 sapling,6,0,sapling
@@ -200,6 +216,15 @@ sandstone,24,0,sandstone
 sandstne,24,0,sandstone
 sndstone,24,0,sandstone
 sndstne,24,0,sandstone
+24:1,24,1,creeper sandstone
+24:2,24,2,smooth sandstone
+smoothsandstone,24,2,smooth sandstone
+smoothsndstne,24,2,smooth sandstone
+smoothss,24,2,smooth sandstone
+smoothsand,24,2,smooth sandstone
+smthsandstone,24,2,smooth sandstone
+smthsndstone,24,2,smooth sandstone
+smthsndstne,24,2,smooth sandstone
 25,25,0,noteblock
 25:0,25,0,noteblock
 noteblock,25,0,noteblock
