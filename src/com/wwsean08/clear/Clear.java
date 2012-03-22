@@ -59,8 +59,8 @@ public class Clear extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		initVariables();
-		getDBV();
 		createConfig();
+		getDBV();
 		if(config.getBoolean("autoupdate", true))
 			checkForUpdates();
 		usesSP = config.getBoolean("superperm", true);
