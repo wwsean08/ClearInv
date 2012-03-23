@@ -78,6 +78,14 @@ birchsaplings,6,2,birch sapling
 bsaplings,6,2,birch sapling
 brchsaplings,6,2,birch sapling
 bircsaplings,6,2,birch sapling
+6:3,6,3,jungle sapling
+junglesapling,6,3,jungle sapling
+jnglesapling,6,3,jungle sapling
+junglsapling,6,3,jungle sapling
+jnglsapling,6,3,jungle sapling
+jnglsaplng,6,3,jungle sapling
+jnglspling,6,3,jungle sapling
+jnglsplng,6,3,jungle sapling
 7,7,0,bedrock
 7:0,7,0,bedrock
 bedrock,7,0,bedrock
@@ -217,6 +225,18 @@ sandstne,24,0,sandstone
 sndstone,24,0,sandstone
 sndstne,24,0,sandstone
 24:1,24,1,creeper sandstone
+creepersandstone,24,1,creeper sandstone
+creepersndstone,24,2,creeper sandstone
+creepersndstne,24,2,creeper sandstone
+creeperss,24,2,creeper sandstone
+crepersandstone,24,2,creeper sandstone
+crpersandstone,24,2,creeper sandstone
+hieroglyphicsandstone,24,2,creeper sandstone
+hieroglyphic,24,2,creeper sandstone
+hieroglyphicss,24,2,creeper sandstone
+hieroglyphicsndstne,24,2,creeper sandstone
+hieroglyphicsandstne,24,2,creeper sandstone
+hieroglyphicsndstone,24,2,creeper sandstone
 24:2,24,2,smooth sandstone
 smoothsandstone,24,2,smooth sandstone
 smoothsndstne,24,2,smooth sandstone
