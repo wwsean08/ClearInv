@@ -20,13 +20,12 @@ public class PreviewCommand implements CommandExecutor{
 	Clear plugin;
 	Server server;
 	private ArrayList<PreviewHolder> previewList;
-	private List<Integer> danger;
+	
 
 	public PreviewCommand(Clear instance){
 		plugin = instance;
 		server = Bukkit.getServer();
 		previewList = new ArrayList<PreviewHolder>();
-		danger = plugin.config.getIntegerList("dangerItems");
 	}
 
 	@Override
@@ -141,7 +140,7 @@ public class PreviewCommand implements CommandExecutor{
 		//build an array list of strings with the ammount they have and the item
 		for(Integer i : itemNumbers){
 			StringBuilder out = new StringBuilder();
-			if(danger.contains(i))
+			if(plugin.danger.contains(i))
 				out.append(ChatColor.RED);
 			out.append(ammount.get(i) + "x ");
 			for(int j = 0; j < plugin.items.size(); j++){

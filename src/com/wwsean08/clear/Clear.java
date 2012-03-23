@@ -47,6 +47,7 @@ public class Clear extends JavaPlugin {
 	FileConfiguration config;
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
+	List<Integer> danger;
 	private final String VERSION = "1.9.7";
 	private final String BASEDBV = "1.1.6";
 	private String DBVersion = BASEDBV;
@@ -55,6 +56,7 @@ public class Clear extends JavaPlugin {
 	private HashMap<String, ClearUndoHolder> undo;
 	private List<Integer> hasData;
 	private LWC lwc = null;
+	
 
 	@Override
 	public void onEnable() {
@@ -701,6 +703,7 @@ public class Clear extends JavaPlugin {
 			checkForUpdates();
 		usesSP = config.getBoolean("superperm", true);
 		hasData = config.getIntegerList("hasData");
+		danger = config.getIntegerList("dangerItems");
 	}
 
 	/**
