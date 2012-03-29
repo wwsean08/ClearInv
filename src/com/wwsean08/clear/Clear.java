@@ -329,6 +329,10 @@ public class Clear extends JavaPlugin {
 						clearItem(sender, p, args);
 					return;
 				}
+			}else if (args.length == 1){
+				Player player = server.getPlayer(args[0]);
+				clearAll(sender, player);
+				return;
 			}else if (args[1].equalsIgnoreCase("except")){
 				Player player = server.getPlayer(args[0]);
 				clearExcept(sender, player, args);
@@ -354,14 +358,10 @@ public class Clear extends JavaPlugin {
 				player.getInventory().setLeggings(null);
 				sender.sendMessage(ChatColor.GRAY + "Leggings removed from " + player.getDisplayName());
 				return;
-			}else if(args[1].equalsIgnoreCase("shirt") || args[1].equalsIgnoreCase("chestplate") || args[1].equalsIgnoreCase("chest")){
+			}else if(args[1].equalsIgnoreCase("shirt") || args[1].equalsIgnoreCase("chestplate")){
 				Player player = server.getPlayer(args[0]);
 				player.getInventory().setChestplate(null);
 				sender.sendMessage(ChatColor.GRAY + "Chestplate removed from " + player.getDisplayName());
-				return;
-			}else if (args.length == 1){
-				Player player = server.getPlayer(args[0]);
-				clearAll(sender, player);
 				return;
 			}else {
 				Player player = server.getPlayer(args[0]);
