@@ -34,9 +34,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.griefcraft.lwc.LWC;
 import com.griefcraft.lwc.LWCPlugin;
-import com.griefcraft.model.ProtectionTypes;
+import com.griefcraft.model.Protection;
 
-@SuppressWarnings("deprecation")
 public class Clear extends JavaPlugin {
 	/**
 	 * instance variables
@@ -620,7 +619,7 @@ public class Clear extends JavaPlugin {
 		for(ItemStack IS : removed){
 			CI.addItem(IS);
 		}
-		lwc.getPhysicalDatabase().registerProtection(0, ProtectionTypes.PRIVATE, chest.getWorld().getName(), sender.getName(), "", chest.getX(), chest.getY(), chest.getZ());
+		lwc.getPhysicalDatabase().registerProtection(chest.getType().getId(), Protection.Type.PRIVATE, chest.getWorld().getName(), sender.getName(), "", chest.getX(), chest.getY(), chest.getZ());
 	}
 
 	/**
