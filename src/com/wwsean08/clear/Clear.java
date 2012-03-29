@@ -56,7 +56,7 @@ public class Clear extends JavaPlugin {
 	private HashMap<String, ClearUndoHolder> undo;
 	private List<Integer> hasData;
 	private LWC lwc = null;
-	
+
 
 	@Override
 	public void onEnable() {
@@ -299,56 +299,70 @@ public class Clear extends JavaPlugin {
 				loadItems();
 				loadConfig();
 				sender.sendMessage(ChatColor.GRAY + "Reloaded items and config");
+				return;
 			}else if(args[0].equalsIgnoreCase("version")){
 				sender.sendMessage(ChatColor.GRAY + PREFIX + "version " + VERSION);
 				sender.sendMessage(ChatColor.GRAY + "item list version " + DBVersion);
+				return;
 			}else if (args[0].equalsIgnoreCase("undo")){
 				clearUndo(sender);
+				return;
 			}else if(args[0].equalsIgnoreCase("*")){
 				Player[] online = server.getOnlinePlayers();
 				if(args.length == 1){
 					for(Player p : online)
 						clearAll(sender, p);
+					return;
 				}
 				else if(args[1].trim().equalsIgnoreCase("except")){
 					for(Player p : online)
 						clearExcept(sender, p, args);
+					return;
 				}
 				else if(args[1].equalsIgnoreCase("armor")){
 					for(Player p : online)
 						clearArmor(sender, p);
+					return;
 				}
 				else{
 					for(Player p : online)
 						clearItem(sender, p, args);
+					return;
 				}
 			}else if (args[1].equalsIgnoreCase("except")){
 				Player player = server.getPlayer(args[0]);
 				clearExcept(sender, player, args);
+				return;
 			}
 			else if(args[1].equalsIgnoreCase("armor")){
 				Player player = server.getPlayer(args[0]);
 				clearArmor(sender, player);
+				return;
 			}
 			else if(args[1].equalsIgnoreCase("boots") || args[1].equalsIgnoreCase("boot")){
 				Player player = server.getPlayer(args[0]);
 				player.getInventory().setBoots(null);
 				sender.sendMessage(ChatColor.GRAY + "Boots removed from " + player.getDisplayName());
+				return;
 			}else if(args[1].equalsIgnoreCase("helmet") || args[1].equalsIgnoreCase("helm")){
 				Player player = server.getPlayer(args[0]);
 				player.getInventory().setHelmet(null);
 				sender.sendMessage(ChatColor.GRAY + "Helmet removed from " + player.getDisplayName());
+				return;
 			}else if(args[1].equalsIgnoreCase("pants") || args[1].equalsIgnoreCase("leggings")){
 				Player player = server.getPlayer(args[0]);
 				player.getInventory().setLeggings(null);
 				sender.sendMessage(ChatColor.GRAY + "Leggings removed from " + player.getDisplayName());
+				return;
 			}else if(args[1].equalsIgnoreCase("shirt") || args[1].equalsIgnoreCase("chestplate") || args[1].equalsIgnoreCase("chest")){
 				Player player = server.getPlayer(args[0]);
 				player.getInventory().setChestplate(null);
 				sender.sendMessage(ChatColor.GRAY + "Chestplate removed from " + player.getDisplayName());
+				return;
 			}else if (args.length == 1){
 				Player player = server.getPlayer(args[0]);
 				clearAll(sender, player);
+				return;
 			}else {
 				Player player = server.getPlayer(args[0]);
 				clearItem(sender, player, args);
@@ -693,7 +707,7 @@ public class Clear extends JavaPlugin {
 			getDBV();
 		}
 	}
-	
+
 	/**
 	 * loads the configuration either when starting the plugin or on a reload command
 	 */
