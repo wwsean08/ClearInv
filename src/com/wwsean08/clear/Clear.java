@@ -47,7 +47,7 @@ public class Clear extends JavaPlugin {
 	final String PREFIX = "[ClearInv]";
 	boolean usesSP = true;
 	List<Integer> danger;
-	private final String VERSION = "1.9.7";
+	private final String VERSION = "2.0.0";
 	private final String BASEDBV = "1.1.6";
 	private String DBVersion = BASEDBV;
 	private File itemFile = null;
