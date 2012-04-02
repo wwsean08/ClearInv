@@ -439,7 +439,7 @@ public class Clear extends JavaPlugin {
 				if(items.get(j).getInput().equalsIgnoreCase(a)){
 					for(int k = 0; k<35; k++){
 						if(hasData(items.get(j).getItem())){
-							if(items.get(j) != null){
+							if(pi.getItem(k) != null){
 								if(pi.getItem(k).getTypeId() == items.get(j).getItem()){
 									if(checkData(pi.getItem(k).getData().getData(), items.get(j).getDamage())){
 										clear.remove((Integer)k);
