@@ -20,7 +20,7 @@ public class PreviewCommand implements CommandExecutor{
 	Clear plugin;
 	Server server;
 	private ArrayList<PreviewHolder> previewList;
-	
+
 
 	public PreviewCommand(Clear instance){
 		plugin = instance;
@@ -41,8 +41,11 @@ public class PreviewCommand implements CommandExecutor{
 					if(server.matchPlayer(args[0]) != null){
 						Player affected = server.matchPlayer(args[0]).get(0);
 						if(plugin.usesSP){
-							if(player.hasPermission("clear.other")){
+							if(player.hasPermission("preview.normal")){
 								preview(player, affected, 0);
+							}else{
+								sender.sendMessage("You do not have permission to use this command");
+								plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
 							}
 						}else if(player.isOp()){
 							preview(player, affected, 0);
@@ -58,8 +61,11 @@ public class PreviewCommand implements CommandExecutor{
 						if(server.matchPlayer(args[1]) != null){
 							Player affected = server.matchPlayer(args[1]).get(0);
 							if(plugin.usesSP){
-								if(player.hasPermission("clear.other")){
+								if(player.hasPermission("preview.continuous")){
 									preview(player, affected, 1);
+								}else{
+									sender.sendMessage("You do not have permission to use this command");
+									plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
 								}
 							}else if(player.isOp()){
 								preview(player, affected, 1);
@@ -70,26 +76,12 @@ public class PreviewCommand implements CommandExecutor{
 						}else{
 							sender.sendMessage(ChatColor.RED + "Sorry, I couldn't find anyone by that name");
 						}
-						//full, start off with changing inventory slots as well, eventually try and give the user their view
-					}else if(args[0].equalsIgnoreCase("-f")){	
-						if(server.matchPlayer(args[1]) != null){
-							Player affected = server.matchPlayer(args[1]).get(0);
-							if(plugin.usesSP){
-								if(player.hasPermission("clear.other")){
-									preview(player, affected, 2);
-								}
-							}else if(player.isOp()){
-								preview(player, affected, 2);
-							}else{
-								sender.sendMessage("You do not have permission to use this command");
-								plugin.log.warning(plugin.PREFIX + player.getDisplayName() + " Attempted to preview another players inventory");
-							}
-						}else{
-							sender.sendMessage(ChatColor.RED + "Sorry, I couldn't find anyone by that name");
-						}
 					}
 				}
 			}
+			/*
+			 * This else is for the console
+			 */
 			else{
 				if(args.length == 0){
 					sender.sendMessage(ChatColor.GRAY + "Error: I need a name of who to preview");
