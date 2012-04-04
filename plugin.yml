@@ -19,11 +19,17 @@ commands:
        aliases: [revert]
 permissions:
     clear.self:
-        description: Allows you to clear stuff from your own inventory
+        description: Allows you to clear stuff from your own inventory.
         default: true
     clear.other:
-        description: Allows you to clear other players inventory and preview their inventory as well
+        description: Allows you to clear other players inventory and preview their inventory as well.
         default: op
     clear.admin:
-        descriptions: Allows you to clear everyones inventory at once
+        descriptions: Allows you to clear everyones inventory at once.
+        default: op
+    preview.normal:
+        description: Allows you to have a normal preview of a player (non-continuous).
+        default: op
+    preview.continuous:
+        description: Allows you to have a continuous preview of a players inventory.
         default: op
