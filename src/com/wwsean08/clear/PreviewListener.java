@@ -61,7 +61,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -79,7 +79,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -97,7 +97,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -115,7 +115,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -133,7 +133,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -151,7 +151,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -169,7 +169,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -187,7 +187,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -205,7 +205,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -223,7 +223,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -242,7 +242,7 @@ public class PreviewListener implements Listener{
 			for(PreviewHolder a : preview.getPreviewList()){
 				if(a.getObserved().getName().equals(event.getPlayer().getName())){
 					if(a.getMode() != 0){
-						InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+						PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 					}
 				}
@@ -266,7 +266,7 @@ public class PreviewListener implements Listener{
 				for(PreviewHolder a : preview.getPreviewList()){
 					if(a.getObserved().getName().equals(player)){
 						if(a.getMode() != 0){
-							InventoryRunnable IR = new InventoryRunnable(a.getObserver(), a.getObserved());
+							PreviewInventoryUpdater IR = new PreviewInventoryUpdater(a.getObserver(), a.getObserved());
 							Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, IR);
 						}
 					}
