@@ -34,21 +34,41 @@ public class PreviewListener implements Listener{
 	}
 
 	/**
-	 * a player quit event happened so we gotta make sure they weren't previewing an inventory
+	 * a player quit so make sure they weren't previewing an inventory, or that they weren't being previewed
+	 * If the player was being previewed, then revert anyone who was previewing them to their normal inventory
 	 * @param event
 	 */
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerQuit(PlayerQuitEvent event){
 		preview.unpreview(event.getPlayer());
+		synchronized(preview.getPreviewList()){
+			for(PreviewHolder a : preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getMode() != 0){
+						preview.unpreview(a.getObserver());
+					}
+				}
+			}
+		}
 	}
 
 	/**
-	 * a player got kicked so make sure they weren't previewing an inventory
+	 * a player got kicked so make sure they weren't previewing an inventory, or that they weren't being previewed
+	 * If the player was being previewed, then revert anyone who was previewing them to their normal inventory
 	 * @param event
 	 */
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerKick(PlayerKickEvent event){
 		preview.unpreview(event.getPlayer());
+		synchronized(preview.getPreviewList()){
+			for(PreviewHolder a : preview.getPreviewList()){
+				if(a.getObserved().getName().equals(event.getPlayer().getName())){
+					if(a.getMode() != 0){
+						preview.unpreview(a.getObserver());
+					}
+				}
+			}
+		}
 	}
 
 	/**
