@@ -523,291 +523,288 @@ public class Clear extends JavaPlugin {
 					}else{
 						for(int j = 0; j<pi.getSize(); j++){
 							ItemStack IS = pi.getItem(j);
-							if(IS != null && hasData(IS.getTypeId())){
-								if(IS.getTypeId() == items.get(i).getItem()){
-									if(checkData(IS.getData().getData(), items.get(i).getDamage())){
-										removed.add(IS.clone());
-										pi.clear(j);
-									}
+							if(IS != null && IS.getTypeId() == items.get(i).getItem()){
+								if(checkData(IS.getData().getData(), items.get(i).getDamage())){
+									removed.add(IS.clone());
+									pi.clear(j);
 								}
 							}
 						}
 					}
+					sender.sendMessage(ChatColor.GRAY + "Cleared all " + items.get(i).getOutput());
+					break;
 				}
-				sender.sendMessage(ChatColor.GRAY + "Cleared all " + items.get(i).getOutput());
-				break;
 			}
 		}
+		ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), removed);
+		undo.put(sender.getName(), holder);
+		return removed;
 	}
-	ClearUndoHolder holder = new ClearUndoHolder(affected.getName(), removed);
-	undo.put(sender.getName(), holder);
-	return removed;
-}
 
-/**
- * allows a command sender (the console specifically) to undo the last clearing of an inventory they did. 
- * This will not fix a clearing of all players.
- * @param sender
- */
-public void clearUndo(CommandSender sender){
-	ClearUndoHolder holder = undo.get(sender.getName());
-	if(holder != null){
-		Player affected = server.getPlayer(holder.getPlayer());
-		if(affected != null){
-			PlayerInventory pi = affected.getInventory();
-			if(pi != null){
-				for(ItemStack IS : holder.getOldInventory()){
-					if(IS == null || IS.getTypeId() == 0)
-						continue;
-					pi.addItem(IS);
+	/**
+	 * allows a command sender (the console specifically) to undo the last clearing of an inventory they did. 
+	 * This will not fix a clearing of all players.
+	 * @param sender
+	 */
+	public void clearUndo(CommandSender sender){
+		ClearUndoHolder holder = undo.get(sender.getName());
+		if(holder != null){
+			Player affected = server.getPlayer(holder.getPlayer());
+			if(affected != null){
+				PlayerInventory pi = affected.getInventory();
+				if(pi != null){
+					for(ItemStack IS : holder.getOldInventory()){
+						if(IS == null || IS.getTypeId() == 0)
+							continue;
+						pi.addItem(IS);
+					}
+					undo.remove(sender.getName());
 				}
-				undo.remove(sender.getName());
+				else{
+					sender.sendMessage(ChatColor.RED + "It would appear that " + holder.getPlayer() + " is offline so you can't undo clearing his inventory");
+				}
 			}
-			else{
-				sender.sendMessage(ChatColor.RED + "It would appear that " + holder.getPlayer() + " is offline so you can't undo clearing his inventory");
-			}
+		}else{
+			sender.sendMessage(ChatColor.GRAY + "Nothing to undo");
 		}
-	}else{
-		sender.sendMessage(ChatColor.GRAY + "Nothing to undo");
 	}
-}
 
-/**
- * clears the armor of the affected player
- * @param sender the sender of the command
- * @param affected the affected player (may or may not be the sender)
- */
-public void clearArmor(CommandSender sender, Player affected){
-	affected.getInventory().setBoots(null);
-	affected.getInventory().setChestplate(null);
-	affected.getInventory().setHelmet(null);
-	affected.getInventory().setLeggings(null);
-	if(!sender.getName().equals(affected.getName()))
-		sender.sendMessage(ChatColor.GRAY + affected.getName() + " has had his armor removed by you");
-	else
-		sender.sendMessage(ChatColor.GRAY + "Armor removed");
-}
+	/**
+	 * clears the armor of the affected player
+	 * @param sender the sender of the command
+	 * @param affected the affected player (may or may not be the sender)
+	 */
+	public void clearArmor(CommandSender sender, Player affected){
+		affected.getInventory().setBoots(null);
+		affected.getInventory().setChestplate(null);
+		affected.getInventory().setHelmet(null);
+		affected.getInventory().setLeggings(null);
+		if(!sender.getName().equals(affected.getName()))
+			sender.sendMessage(ChatColor.GRAY + affected.getName() + " has had his armor removed by you");
+		else
+			sender.sendMessage(ChatColor.GRAY + "Armor removed");
+	}
 
-/**
- * This will be used to clear out an inventory by an admin and put the items cleared out into a chest
- * @param sender the sender of the command
- * @param affected the player whose inventory is being cleared
- */
-public void clearToChest(Player sender, Player affected, String[] args){
-	//make sure LWC is on the server and setup
-	if(lwc == null){
-		initLWC();
+	/**
+	 * This will be used to clear out an inventory by an admin and put the items cleared out into a chest
+	 * @param sender the sender of the command
+	 * @param affected the player whose inventory is being cleared
+	 */
+	public void clearToChest(Player sender, Player affected, String[] args){
+		//make sure LWC is on the server and setup
 		if(lwc == null){
-			sender.sendMessage(ChatColor.RED + "This command is not supported by your server, please ask your admin to install LWC");
-			return;
+			initLWC();
+			if(lwc == null){
+				sender.sendMessage(ChatColor.RED + "This command is not supported by your server, please ask your admin to install LWC");
+				return;
+			}
+		}
+		ArrayList<ItemStack> removed = clearItem((CommandSender)sender, affected, args);
+		Location playerLocation = sender.getLocation();
+		if(playerLocation.getYaw() > 315 ||  playerLocation.getYaw() <= 45){
+			playerLocation.add(0, 0, 1);
+		}else if(playerLocation.getYaw() > 45 || playerLocation.getYaw() <= 135){
+			playerLocation.add(1, 0, 0);
+		}else if(playerLocation.getYaw() > 135 || playerLocation.getYaw() <= 225){
+			playerLocation.subtract(0, 0, 1);
+		}else{
+			playerLocation.subtract(1, 0, 0);
+		}
+		Block temp = playerLocation.getWorld().getHighestBlockAt(playerLocation);
+		Location chestLocation = temp.getLocation();
+		Block chestBlock = chestLocation.getBlock();
+		chestBlock.setType(Material.CHEST);
+		Chest chest = (Chest)chestBlock.getState();
+		Inventory CI = chest.getInventory();
+		for(ItemStack IS : removed){
+			CI.addItem(IS);
+		}
+		lwc.getPhysicalDatabase().registerProtection(chest.getType().getId(), Protection.Type.PRIVATE, chest.getWorld().getName(), sender.getName(), "", chest.getX(), chest.getY(), chest.getZ());
+	}
+
+	/**
+	 * Checks the data to see if the two pieces of data given are the same
+	 * @param data is the data of the item from the inventory
+	 * @param damage is the data we want it to be
+	 */
+	private boolean checkData(byte data, int damage) {
+		Byte testByte = data;
+		return testByte.intValue() == damage;
+	}
+
+	/**
+	 * checks against known items which have data
+	 * @param the item ID used to determine if it has data (or can have data).
+	 */
+	private boolean hasData(int ID) {
+		if(hasData.contains(ID)){
+			return true;
+		}
+		return false;
+	}
+
+	/** 
+	 * A method for getting the version of the items.csv file.
+	 */
+	private void getDBV(){
+		try {
+			FileReader reader = new FileReader(itemFile);
+			BufferedReader in = new BufferedReader(reader);
+			String line = in.readLine();
+			DBVersion = line;
+			in.close();
+			reader.close();
+		}catch(Exception e){
+			if(config.getBoolean("debug", false)){
+				e.printStackTrace();
+			}
 		}
 	}
-	ArrayList<ItemStack> removed = clearItem((CommandSender)sender, affected, args);
-	Location playerLocation = sender.getLocation();
-	if(playerLocation.getYaw() > 315 ||  playerLocation.getYaw() <= 45){
-		playerLocation.add(0, 0, 1);
-	}else if(playerLocation.getYaw() > 45 || playerLocation.getYaw() <= 135){
-		playerLocation.add(1, 0, 0);
-	}else if(playerLocation.getYaw() > 135 || playerLocation.getYaw() <= 225){
-		playerLocation.subtract(0, 0, 1);
-	}else{
-		playerLocation.subtract(1, 0, 0);
-	}
-	Block temp = playerLocation.getWorld().getHighestBlockAt(playerLocation);
-	Location chestLocation = temp.getLocation();
-	Block chestBlock = chestLocation.getBlock();
-	chestBlock.setType(Material.CHEST);
-	Chest chest = (Chest)chestBlock.getState();
-	Inventory CI = chest.getInventory();
-	for(ItemStack IS : removed){
-		CI.addItem(IS);
-	}
-	lwc.getPhysicalDatabase().registerProtection(chest.getType().getId(), Protection.Type.PRIVATE, chest.getWorld().getName(), sender.getName(), "", chest.getX(), chest.getY(), chest.getZ());
-}
 
-/**
- * Checks the data to see if the two pieces of data given are the same
- * @param data is the data of the item from the inventory
- * @param damage is the data we want it to be
- */
-private boolean checkData(byte data, int damage) {
-	Byte testByte = data;
-	return testByte.intValue() == damage;
-}
-
-/**
- * checks against known items which have data
- * @param the item ID used to determine if it has data (or can have data).
- */
-private boolean hasData(int ID) {
-	if(hasData.contains(ID)){
-		return true;
-	}
-	return false;
-}
-
-/** 
- * A method for getting the version of the items.csv file.
- */
-private void getDBV(){
-	try {
-		FileReader reader = new FileReader(itemFile);
-		BufferedReader in = new BufferedReader(reader);
-		String line = in.readLine();
-		DBVersion = line;
-		in.close();
-		reader.close();
-	}catch(Exception e){
-		if(config.getBoolean("debug", false)){
-			e.printStackTrace();
-		}
-	}
-}
-
-/**
- * This method loads the csv into the ClearItemHolder object
- */
-private void loadItems(){
-	items = new ArrayList<ClearItemHolder>();
-	String line = "";
-	try {
-		FileReader reader = new FileReader(itemFile);
-		BufferedReader in = new BufferedReader(reader);
-		in.readLine();	//version line
-		line = in.readLine();
-		while(line != null){
-			String[] args = line.split(",");
-			int item = Integer.parseInt(args[1].trim());
-			int damage = Integer.parseInt(args[2].trim());
-			ClearItemHolder newItem = new ClearItemHolder(args[0], item, damage, args[3]);
-			items.add(newItem);
+	/**
+	 * This method loads the csv into the ClearItemHolder object
+	 */
+	private void loadItems(){
+		items = new ArrayList<ClearItemHolder>();
+		String line = "";
+		try {
+			FileReader reader = new FileReader(itemFile);
+			BufferedReader in = new BufferedReader(reader);
+			in.readLine();	//version line
 			line = in.readLine();
+			while(line != null){
+				String[] args = line.split(",");
+				int item = Integer.parseInt(args[1].trim());
+				int damage = Integer.parseInt(args[2].trim());
+				ClearItemHolder newItem = new ClearItemHolder(args[0], item, damage, args[3]);
+				items.add(newItem);
+				line = in.readLine();
+			}
+			in.close();
+			reader.close();
+		} catch (FileNotFoundException e) {
+			log.warning(ChatColor.RED + "You have not downloaded the items.csv, make sure to download the new one as it is necessary for the 1.8 update");
+		} catch (IOException e) {
+			if (config.getBoolean("debug", true))
+				e.printStackTrace();
+		} catch(NumberFormatException e){
+			log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error with this line: " + line);
 		}
-		in.close();
-		reader.close();
-	} catch (FileNotFoundException e) {
-		log.warning(ChatColor.RED + "You have not downloaded the items.csv, make sure to download the new one as it is necessary for the 1.8 update");
-	} catch (IOException e) {
-		if (config.getBoolean("debug", true))
-			e.printStackTrace();
-	} catch(NumberFormatException e){
-		log.warning("If you did NOT edit the items.csv tell wwsean08 in the bukkit forums that there is an error with this line: " + line);
 	}
-}
 
-/**
- * creates the config.yml if one doesn't exist or is outdated
- * 
- */
-private void createConfig(){
-	config.options().copyDefaults(true);
-	this.saveConfig();
-	//just getting ready for when the bleeding edge stuff comes out
-	if(!itemFile.exists() || newer(BASEDBV, DBVersion)){
-		saveResource("items.csv", true);
-		log.info("items.csv updated");
-		getDBV();
+	/**
+	 * creates the config.yml if one doesn't exist or is outdated
+	 * 
+	 */
+	private void createConfig(){
+		config.options().copyDefaults(true);
+		this.saveConfig();
+		//just getting ready for when the bleeding edge stuff comes out
+		if(!itemFile.exists() || newer(BASEDBV, DBVersion)){
+			saveResource("items.csv", true);
+			log.info("items.csv updated");
+			getDBV();
+		}
 	}
-}
 
-/**
- * loads the configuration either when starting the plugin or on a reload command
- */
-private void loadConfig(){
-	reloadConfig();
-	if(config.getBoolean("autoupdate", true))
-		checkForUpdates();
-	usesSP = config.getBoolean("superperm", true);
-	hasData = config.getIntegerList("hasData");
-	danger = config.getIntegerList("dangerItems");
-}
-
-/**
- * This initializes the instance variables in order to clean up the onEnable method
- */
-private void initVariables() {
-	config = this.getConfig();
-	itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
-	preview = new PreviewCommand(this);
-	new PreviewListener(this);
-	server = Bukkit.getServer();
-	undo = new HashMap<String, ClearUndoHolder>();
-	initLWC();
-}
-
-/**
- * Checks for updates for the client and the items.csv
- */
-private void checkForUpdates(){
-	String check = "http://dcp.wwsean08.com/check.php?id=";
-	String clientCheck = check + "ClearInv%20New";
-	String itemsCheck = check + "items%20new";
-	try {
-		//plugin
-		URL client = new URL(clientCheck);
-		BufferedReader buf = new BufferedReader(new InputStreamReader(client.openStream()));
-		String line = buf.readLine();
-		line = line.substring(0, line.indexOf("&"));
-		if(newer(VERSION, line))
-			log.info(PREFIX + " There is a new version of ClearInv available for download, you can get it at http://dcp.wwsean08.com/dl.php?id=ClearInv%20New&ver=latest");
-		//items.csv
-		client = new URL(itemsCheck);
-		buf = new BufferedReader(new InputStreamReader(client.openStream()));
-		line = buf.readLine();
-		line = line.substring(0, line.indexOf("&"));
-		if(newer(DBVersion, line))
-			log.info(PREFIX + " There is a new version of the items.csv available for download, you can get it at http://dcp.wwsean08.com/dl.php?id=items%20new&ver=latest");
-	} catch (MalformedURLException e) {
-		if (config.getBoolean("debug", true))
-			e.printStackTrace();
-		getLogger().warning("Unable to check for updates!");
-	} catch (IOException e) {
-		if (config.getBoolean("debug", true))
-			e.printStackTrace();
-		getLogger().warning("Unable to check for updates!");
+	/**
+	 * loads the configuration either when starting the plugin or on a reload command
+	 */
+	private void loadConfig(){
+		reloadConfig();
+		if(config.getBoolean("autoupdate", true))
+			checkForUpdates();
+		usesSP = config.getBoolean("superperm", true);
+		hasData = config.getIntegerList("hasData");
+		danger = config.getIntegerList("dangerItems");
 	}
-}
 
-/**
- * Compares the 2 versions and returns true if there is an update, otherwise returns false
- * @param current the version of the file on the server
- * @param check the version to compare it to
- * @return
- */
-private boolean newer(String current, String check){
-	boolean result = false;
-	String[] currentVersion = current.split("\\.");
-	String[] checkVersion = check.split("\\.");
-	int i = Integer.parseInt(currentVersion[0]);
-	int j = Integer.parseInt(checkVersion[0]);
-	if(i>j)
-		result = false;
-	else if(i==j){
-		i = Integer.parseInt(currentVersion[1]);
-		j = Integer.parseInt(checkVersion[1]);
+	/**
+	 * This initializes the instance variables in order to clean up the onEnable method
+	 */
+	private void initVariables() {
+		config = this.getConfig();
+		itemFile = new File(this.getDataFolder() + File.separator + "items.csv");
+		preview = new PreviewCommand(this);
+		new PreviewListener(this);
+		server = Bukkit.getServer();
+		undo = new HashMap<String, ClearUndoHolder>();
+		initLWC();
+	}
+
+	/**
+	 * Checks for updates for the client and the items.csv
+	 */
+	private void checkForUpdates(){
+		String check = "http://dcp.wwsean08.com/check.php?id=";
+		String clientCheck = check + "ClearInv%20New";
+		String itemsCheck = check + "items%20new";
+		try {
+			//plugin
+			URL client = new URL(clientCheck);
+			BufferedReader buf = new BufferedReader(new InputStreamReader(client.openStream()));
+			String line = buf.readLine();
+			line = line.substring(0, line.indexOf("&"));
+			if(newer(VERSION, line))
+				log.info(PREFIX + " There is a new version of ClearInv available for download, you can get it at http://dcp.wwsean08.com/dl.php?id=ClearInv%20New&ver=latest");
+			//items.csv
+			client = new URL(itemsCheck);
+			buf = new BufferedReader(new InputStreamReader(client.openStream()));
+			line = buf.readLine();
+			line = line.substring(0, line.indexOf("&"));
+			if(newer(DBVersion, line))
+				log.info(PREFIX + " There is a new version of the items.csv available for download, you can get it at http://dcp.wwsean08.com/dl.php?id=items%20new&ver=latest");
+		} catch (MalformedURLException e) {
+			if (config.getBoolean("debug", true))
+				e.printStackTrace();
+			getLogger().warning("Unable to check for updates!");
+		} catch (IOException e) {
+			if (config.getBoolean("debug", true))
+				e.printStackTrace();
+			getLogger().warning("Unable to check for updates!");
+		}
+	}
+
+	/**
+	 * Compares the 2 versions and returns true if there is an update, otherwise returns false
+	 * @param current the version of the file on the server
+	 * @param check the version to compare it to
+	 * @return
+	 */
+	private boolean newer(String current, String check){
+		boolean result = false;
+		String[] currentVersion = current.split("\\.");
+		String[] checkVersion = check.split("\\.");
+		int i = Integer.parseInt(currentVersion[0]);
+		int j = Integer.parseInt(checkVersion[0]);
 		if(i>j)
 			result = false;
-		else if(i == j){
-			i = Integer.parseInt(currentVersion[2]);
-			j = Integer.parseInt(checkVersion[2]);
-			if(i >= j)
+		else if(i==j){
+			i = Integer.parseInt(currentVersion[1]);
+			j = Integer.parseInt(checkVersion[1]);
+			if(i>j)
 				result = false;
-			else
+			else if(i == j){
+				i = Integer.parseInt(currentVersion[2]);
+				j = Integer.parseInt(checkVersion[2]);
+				if(i >= j)
+					result = false;
+				else
+					result = true;
+			}else
 				result = true;
 		}else
 			result = true;
-	}else
-		result = true;
-	return result;
-}
-
-/**
- * this will initialize the hook into the LWC plugin
- */
-private void initLWC(){
-	Plugin lwcPlugin = getServer().getPluginManager().getPlugin("LWC");
-	if(lwcPlugin != null) {
-		lwc = ((LWCPlugin) lwcPlugin).getLWC();
+		return result;
 	}
-}
+
+	/**
+	 * this will initialize the hook into the LWC plugin
+	 */
+	private void initLWC(){
+		Plugin lwcPlugin = getServer().getPluginManager().getPlugin("LWC");
+		if(lwcPlugin != null) {
+			lwc = ((LWCPlugin) lwcPlugin).getLWC();
+		}
+	}
 }
