@@ -159,6 +159,11 @@ brchlog,17,2,birch log
 brchlogs,17,2,birch logs
 blog,17,2,birch log
 blogs,17,2,birch logs
+junglelogs,17,3,jungle logs
+jungllogs,17,3,jungle logs
+junglogs,17,3,jungle logs
+jlogs,17,3,jungle logs
+jlog,17,3,jungle logs
 18,18,0,leaves
 18:0,18,0,leaves
 leaves,18,0,leaves
@@ -184,6 +189,11 @@ brcleaf,18,2,birch leaves
 bleaves,18,2,birch leaves
 bleave,18,2,birch leaves
 bleaf,18,2,birch leaves
+18:3,18,3,jungle leaves
+jungleleaves,18,3,jungle leaves
+junglleaves,18,3,jungle leaves
+jnglleaves,18,3,jungle leaves
+jleaves,18,3,jungle leaves
 19,19,0,sponge
 19:0,19,0,sponge
 sponge,19,0,sponge
